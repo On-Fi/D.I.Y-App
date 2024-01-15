@@ -27,12 +27,12 @@ const OtherValues = styled.p`
 const Card = ({ project }) => (
   <StyledCard>
     <ProjectTitle>{project.title}</ProjectTitle>
-    <OtherValuesContainer>
-      <OtherValues>{project.time} hours</OtherValues>
-      <OtherValues>{project.priceCategory}</OtherValues>
-      <OtherValues>{project.category}</OtherValues>
-      <OtherValues>{project.difficulty}</OtherValues>
-    </OtherValuesContainer>
+    <ProjectValuesContainer>
+      <ProjectValues>{project.time} hours</ProjectValues>
+      <ProjectValues>{project.priceCategory}</ProjectValues>
+      <ProjectValues>{project.category}</ProjectValues>
+      <ProjectValues>{project.difficulty}</ProjectValues>
+    </ProjectValuesContainer>
   </StyledCard>
 );
 
