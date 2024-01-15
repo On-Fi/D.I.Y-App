@@ -27,7 +27,6 @@ const OtherValues = styled.p`
 const Card = ({ project }) => (
   <StyledCard>
     <ProjectTitle>{project.title}</ProjectTitle>
-    <br />
     <OtherValuesContainer>
       <OtherValues>{project.time} hours</OtherValues>
       <OtherValues>{project.priceCategory}</OtherValues>
