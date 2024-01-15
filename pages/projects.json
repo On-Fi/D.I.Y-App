@@ -1,0 +1,219 @@
+[
+  {
+    "name": "Project One",
+    "time": "1 Stunde",
+    "price": "10€",
+    "category": "wohnen",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Two",
+    "time": "2 Stunden",
+    "price": "20€",
+    "category": "garten",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Three",
+    "time": "3 Stunden",
+    "price": "30€",
+    "category": "wohnen",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Four",
+    "time": "4 Stunden",
+    "price": "40€",
+    "category": "garten",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Five",
+    "time": "5 Stunden",
+    "price": "50€",
+    "category": "wohnen",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Six",
+    "time": "6 Stunden",
+    "price": "60€",
+    "category": "garten",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Seven",
+    "time": "7 Stunden",
+    "price": "70€",
+    "category": "wohnen",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Eight",
+    "time": "8 Stunden",
+    "price": "80€",
+    "category": "garten",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Nine",
+    "time": "9 Stunden",
+    "price": "90€",
+    "category": "wohnen",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Ten",
+    "time": "10 Stunden",
+    "price": "100€",
+    "category": "garten",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Eleven",
+    "time": "11 Stunden",
+    "price": "110€",
+    "category": "wohnen",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Twelve",
+    "time": "12 Stunden",
+    "price": "120€",
+    "category": "garten",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Thirteen",
+    "time": "13 Stunden",
+    "price": "130€",
+    "category": "wohnen",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Fourteen",
+    "time": "14 Stunden",
+    "price": "140€",
+    "category": "garten",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Fifteen",
+    "time": "15 Stunden",
+    "price": "150€",
+    "category": "wohnen",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Sixteen",
+    "time": "16 Stunden",
+    "price": "160€",
+    "category": "garten",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Seventeen",
+    "time": "17 Stunden",
+    "price": "170€",
+    "category": "wohnen",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Eighteen",
+    "time": "18 Stunden",
+    "price": "180€",
+    "category": "garten",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Nineteen",
+    "time": "19 Stunden",
+    "price": "190€",
+    "category": "wohnen",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Twenty",
+    "time": "20 Stunden",
+    "price": "200€",
+    "category": "garten",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Twentyone",
+    "time": "21 Stunden",
+    "price": "210€",
+    "category": "wohnen",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Twentytwo",
+    "time": "22 Stunden",
+    "price": "220€",
+    "category": "garten",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Twentythree",
+    "time": "23 Stunden",
+    "price": "230€",
+    "category": "wohnen",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Twentyfour",
+    "time": "24 Stunden",
+    "price": "240€",
+    "category": "garten",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Twentyfive",
+    "time": "25 Stunden",
+    "price": "250€",
+    "category": "wohnen",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Twentysix",
+    "time": "26 Stunden",
+    "price": "260€",
+    "category": "garten",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Twentyseven",
+    "time": "27 Stunden",
+    "price": "270€",
+    "category": "wohnen",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Twentyeight",
+    "time": "28 Stunden",
+    "price": "280€",
+    "category": "garten",
+    "difficulty": "easy"
+  },
+  {
+    "name": "Project Twentynine",
+    "time": "29 Stunden",
+    "price": "290€",
+    "category": "wohnen",
+    "difficulty": "schwer"
+  },
+  {
+    "name": "Project Thirty",
+    "time": "30 Stunden",
+    "price": "300€",
+    "category": "garten",
+    "difficulty": "leicht"
+  },
+  {
+    "name": "Project Thirtyone",
+    "time": "31 Stunden",
+    "price": "300€",
+    "category": "garten",
+    "difficulty": "leicht"
+  }
+]
