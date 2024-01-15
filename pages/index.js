@@ -1,9 +1,5 @@
-import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import Card from "../components/Card";
-// import projects from "./projects.json"; // Das json kann bald weg
-import useSWR from "swr";
 import ProjectList from "@/components/ProjectList";
 
 const StyledH2 = styled.h2`
@@ -12,12 +8,12 @@ const StyledH2 = styled.h2`
   cursor: default;
 `;
 
-export default function HomePage() {
+export default function HomePage({ projects }) {
   return (
     <div>
       <Header />
       <StyledH2>All Projects</StyledH2>
-      <ProjectList />
+      <ProjectList projects={projects} />
     </div>
   );
 }

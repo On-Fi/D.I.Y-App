@@ -4,7 +4,6 @@ const StyledCard = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
   cursor: pointer;
 `;
 
@@ -12,16 +11,14 @@ const ProjectTitle = styled.h3`
   margin: 0;
 `;
 
-const OtherValuesContainer = styled.div`
+const ProjectValuesContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 6px;
+  gap: 20px;
 `;
 
-const OtherValues = styled.p`
+const ProjectValues = styled.p`
   margin: 0;
-  margin-right: 10px;
+  height: fit-content;
 `;
 
 const Card = ({ project }) => (
