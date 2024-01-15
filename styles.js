@@ -13,7 +13,6 @@ export default createGlobalStyle`
     overflow: auto;
     overscroll-behavior: none;
   }
-
   body {
     margin: 0;
     font-family: 'Comic Sans MS', sans-serif;
