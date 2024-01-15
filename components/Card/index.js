@@ -30,7 +30,7 @@ const Card = ({ project }) => (
     <ProjectTitle>{project.title}</ProjectTitle>
     <br />
     <OtherValuesContainer>
-      <OtherValues>{project.time}</OtherValues>
+      <OtherValues>{project.time} hours</OtherValues>
       <OtherValues>{project.priceCategory}</OtherValues>
       <OtherValues>{project.category}</OtherValues>
       <OtherValues>{project.difficulty}</OtherValues>
