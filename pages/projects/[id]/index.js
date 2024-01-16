@@ -10,7 +10,6 @@ export default function DetailPage() {
     data: project,
     isLoading,
     error,
-    mutate,
   } = useSWR(`/api/projects/${id}`, { fallbackData: [] });
 
   if (isLoading || error) return <h2>Loading...</h2>;

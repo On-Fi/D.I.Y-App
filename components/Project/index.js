@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ProjectInfoBox from "../ProjectInfoBox";
 import ShortFactsBox from "../ShortFactsBox";
-import { Component } from "react";
 
 const StyledBox = styled.div`
   background-color: #e8e8e8;
