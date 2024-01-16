@@ -15,7 +15,7 @@ export default async function handler(request, response) {
       await Project.create(projectData);
       return response.status(201).json({ status: "Project created" });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       response.status(400).json({ error: error.message });
     }
   } else {
