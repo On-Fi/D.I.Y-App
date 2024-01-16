@@ -42,7 +42,7 @@ export default function Form() {
   return (
     <>
       <StyledForm onSubmit={handleClick}>
-        <label for="title">Title: </label>
+        <label htmlFor="title">Title: </label>
         <StyledInput type="text" id="title" name="title"></StyledInput>
 
         <label for="category">Category: </label>
