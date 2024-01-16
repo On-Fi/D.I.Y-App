@@ -1,7 +1,5 @@
 import styled from "styled-components";
-
 import { useRouter } from "next/router";
-import useSWR from "swr";
 
 const StyledForm = styled.form`
   display: flex;
@@ -24,7 +22,7 @@ const StyledSelect = styled.select`
 export default function Form() {
   const router = useRouter();
 
-  async function handleClick(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
@@ -41,11 +39,11 @@ export default function Form() {
   }
   return (
     <>
-      <StyledForm onSubmit={handleClick}>
+      <StyledForm onSubmit={handleSubmit}>
         <label htmlFor="title">Title: </label>
         <StyledInput type="text" id="title" name="title"></StyledInput>
 
-        <label for="category">Category: </label>
+        <label htmlfor="category">Category: </label>
         <StyledSelect name="category" id="category">
           <option value="living">Living</option>
           <option value="garden">Garden</option>
@@ -57,7 +55,7 @@ export default function Form() {
           </option>
         </StyledSelect>
 
-        <label for="difficulty">Difficulty :</label>
+        <label htmlfor="difficulty">Difficulty :</label>
         <StyledSelect name="difficulty" id="difficulty">
           <option value="beginner">Beginner</option>
           <option value="advanced">Advanced</option>
@@ -68,10 +66,10 @@ export default function Form() {
           </option>
         </StyledSelect>
 
-        <label for="time">Duration: </label>
-        <StyledInput type="range" id="time" name="time" min="0" max="11" />
+        <label htmlfor="time">Duration: </label>
+        <StyledInput type="range" id="time" name="time" min="0" max="48" />
 
-        <label for="price">Price: </label>
+        <label htmlfor="price">Price: </label>
         <StyledSelect name="priceCategory" id="priceCategory">
           <option value="cheap">0-10 €</option>
           <option value="medium">10-50 €</option>
@@ -82,13 +80,13 @@ export default function Form() {
           </option>
         </StyledSelect>
 
-        <label for="tools">Tools: </label>
+        <label htmlfor="tools">Tools: </label>
         <StyledInput id="tools" name="tools"></StyledInput>
 
-        <label for="material">Materials: </label>
+        <label htmlfor="material">Materials: </label>
         <StyledInput id="material" name="material"></StyledInput>
 
-        <label for="instructions">Instructions: </label>
+        <label htmlfor="instructions">Instructions: </label>
         <StyledInput id="instructions" name="instructions"></StyledInput>
 
         <button type="submit">Save</button>

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Navbar = styled.nav`
   display: flex;
@@ -33,8 +34,12 @@ function NavigationBar() {
 
   return (
     <Navbar>
-      <NavLink onClick={() => router.push("/")}>Home</NavLink>
-      <NavLink onClick={() => router.push("/new-project")}>+</NavLink>
+      <Link href="/" passHref>
+        <NavLink>Home</NavLink>
+      </Link>
+      <Link href="/new-project-page" passHref>
+        <NavLink>+</NavLink>
+      </Link>
     </Navbar>
   );
 }
