@@ -1,6 +1,7 @@
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
+import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
   const URL = "/api/projects";
@@ -39,7 +40,9 @@ export default function App({ Component, pageProps }) {
         }}
       >
         <GlobalStyle />
-        <Component {...pageProps} projects={projects} />
+        <Layout>
+          <Component {...pageProps} projects={projects} />
+        </Layout>
       </SWRConfig>
     </>
   );

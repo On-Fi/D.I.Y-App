@@ -9,13 +9,17 @@ export default createGlobalStyle`
 
   html, body {
     height: 100%;
+   padding-bottom:30px;
+
     width: 100%;
     overflow: auto;
     overscroll-behavior: none;
+   
   }
-
   body {
     margin: 0;
     font-family: 'Comic Sans MS', sans-serif;
+    
+    
   }
 `;

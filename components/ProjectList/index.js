@@ -15,5 +15,7 @@ const StyledProjectList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 `;
