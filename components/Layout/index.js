@@ -2,12 +2,12 @@ import NavigationBar from "../NavigationBar";
 import Header from "../Header";
 import Wrapper from "../Wrapper";
 
-export default function Layout() {
+export default function Layout({children}) {
   return (
     <>
-      <Header></Header>
-      <Wrapper></Wrapper>
-      <NavigationBar></NavigationBar>
+      <Header />
+      <Wrapper>{children}</Wrapper>
+      <NavigationBar/ >
     </>
   );
 }
