@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
-import Wrapper from "@/components/Wrapper";
 
 const Subline = styled.h2`
   font-size: 2rem;

@@ -34,7 +34,7 @@ function NavigationBar() {
   return (
     <Navbar>
       <NavLink onClick={() => router.push("/")}>Home</NavLink>
-      <NavLink onClick={() => router.push("/new")}>+</NavLink>
+      <NavLink onClick={() => router.push("/new-project")}>+</NavLink>
     </Navbar>
   );
 }

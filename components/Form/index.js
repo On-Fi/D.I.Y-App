@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { mutate } from "swr";
+
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Wrapper from "@/components/Wrapper";
 
 const StyledForm = styled.form`
   display: flex;
@@ -22,7 +21,7 @@ const StyledSelect = styled.select`
   border-radius: 15px;
 `;
 
-export default function NewPoject() {
+export default function Form() {
   const router = useRouter();
   const { mutate } = useSWR("/api/projects");
 
@@ -42,7 +41,6 @@ export default function NewPoject() {
       router.push("/");
     }
   }
-
   return (
     <>
       <StyledForm onSubmit={handleClick}>
@@ -96,7 +94,9 @@ export default function NewPoject() {
         <StyledInput id="instructions" name="instructions"></StyledInput>
 
         <button type="submit">Save</button>
-        <button>Cancel</button>
+        <button type="button" onClick={() => router.push("/")}>
+          Cancel
+        </button>
       </StyledForm>
     </>
   );
