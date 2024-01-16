@@ -36,7 +36,6 @@ export default function Form() {
     });
 
     if (response.ok) {
-      mutate();
       router.push("/");
     }
   }
