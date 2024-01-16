@@ -41,10 +41,9 @@ export default function App({ Component, pageProps }) {
         }}
       >
         <GlobalStyle />
-        <Layout></Layout>
-        <Wrapper>
+        <Layout>
           <Component {...pageProps} projects={projects} />
-        </Wrapper>
+        </Layout>
       </SWRConfig>
     </>
   );
