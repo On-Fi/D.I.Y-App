@@ -23,7 +23,6 @@ const StyledSelect = styled.select`
 
 export default function Form() {
   const router = useRouter();
-  const { mutate } = useSWR("/api/projects");
 
   async function handleClick(event) {
     event.preventDefault();
