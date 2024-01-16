@@ -12,7 +12,7 @@ const Navbar = styled.nav`
   gap: 30px;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: #000;
   padding: 10px 20px;
   background-color: #90ee90;
@@ -34,12 +34,8 @@ function NavigationBar() {
 
   return (
     <Navbar>
-      <Link href="/" passHref>
-        <NavLink>Home</NavLink>
-      </Link>
-      <Link href="/new-project-page" passHref>
-        <NavLink>+</NavLink>
-      </Link>
+      <NavLink href="/">Home</NavLink>
+      <NavLink href="/new-project">+</NavLink>
     </Navbar>
   );
 }

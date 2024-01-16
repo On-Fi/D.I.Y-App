@@ -2,7 +2,6 @@ import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import Layout from "@/components/Layout";
-import Wrapper from "@/components/Wrapper";
 
 export default function App({ Component, pageProps }) {
   const URL = "/api/projects";
