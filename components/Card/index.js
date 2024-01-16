@@ -5,6 +5,7 @@ const StyledCard = styled.div`
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;
+  width: 85%;
 `;
 
 const ProjectTitle = styled.h3`
@@ -14,6 +15,7 @@ const ProjectTitle = styled.h3`
 const ProjectValuesContainer = styled.div`
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 `;
 
 const ProjectValues = styled.p`

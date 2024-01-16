@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import Header from "../components/Header";
 import ProjectList from "@/components/ProjectList";
-import NavigationBar from "@/components/NavigationBar";
+import Wrapper from "@/components/Wrapper";
 
 const Subline = styled.h2`
   font-size: 2rem;
@@ -11,11 +10,9 @@ const Subline = styled.h2`
 
 export default function HomePage({ projects }) {
   return (
-    <div>
-      <Header />
+    <>
       <Subline>All Projects</Subline>
       <ProjectList projects={projects} />
-      <NavigationBar />
-    </div>
+    </>
   );
 }
