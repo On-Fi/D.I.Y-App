@@ -6,7 +6,6 @@ const FactBox = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   padding: 5px;
-  // margin: 10px;
   border-radius: 20px;
 `;
 const ShortFact = styled.span`

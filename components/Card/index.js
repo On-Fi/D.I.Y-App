@@ -18,14 +18,6 @@ const ProjectTitle = styled.h3`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
 `;
 
 const Card = ({ project }) => (
