@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
+import useLocalStorageState from "use-local-storage-state";
 
 const Subline = styled.h2`
   font-size: 2rem;
@@ -8,10 +9,27 @@ const Subline = styled.h2`
 `;
 
 export default function HomePage({ projects }) {
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
+    defaultValue: "",
+  });
+
+  function handleToggleFavorite(id) {
+    if (favorites.includes(id)) {
+      setFavorites(
+        favorites.filter((favorite) => {
+          return favorite !== id;
+        })
+      );
+    } else setFavorites([...favorites, id]);
+  }
   return (
     <>
       <Subline>All Projects</Subline>
-      <ProjectList projects={projects} />
+      <ProjectList
+        projects={projects}
+        favorites={favorites}
+        onToggleFavorite={handleToggleFavorite}
+      />
     </>
   );
 }

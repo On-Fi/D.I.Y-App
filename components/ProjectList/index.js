@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import Card from "../Card";
 
-export default function ProjectList({ projects }) {
+export default function ProjectList({ projects, favorites, onToggleFavorite }) {
   return (
     <StyledProjectList>
       {projects.map((project) => (
-        <Card key={project._id} project={project} />
+        <Card
+          key={project._id}
+          project={project}
+          favorites={favorites}
+          onToggleFavorite={onToggleFavorite}
+        />
       ))}
     </StyledProjectList>
   );
