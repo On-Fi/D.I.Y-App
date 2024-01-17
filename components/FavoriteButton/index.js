@@ -11,7 +11,10 @@ export default function FavoriteButton({ id, favorites, onToggleFavorite }) {
   const isFavorite = favorites.includes(id);
   console.log(isFavorite);
   return (
-    <StyledFavoriteButton type="button" onClick={() => onToggleFavorite(id)}>
+    <StyledFavoriteButton
+      type="button"
+      onClick={(event) => onToggleFavorite(id, event)}
+    >
       {isFavorite ? <HeartFilled /> : <HeartEmpty />}
     </StyledFavoriteButton>
   );

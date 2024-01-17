@@ -13,7 +13,8 @@ export default function HomePage({ projects }) {
     defaultValue: "",
   });
 
-  function handleToggleFavorite(id) {
+  function handleToggleFavorite(id, event) {
+    event.preventDefault();
     if (favorites.includes(id)) {
       setFavorites(
         favorites.filter((favorite) => {

@@ -19,7 +19,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   width: 85%;
-  position: relative;
 `;
 
 const StyledTitleSection = styled.div`
