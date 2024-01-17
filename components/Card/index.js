@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Link from "next/link";
+import ShortFactsBox from "../ShortFactsBox";
 
 const StyledCard = styled.div`
   border: 1px solid #ddd;
@@ -6,32 +8,24 @@ const StyledCard = styled.div`
   padding: 20px;
   cursor: pointer;
   width: 85%;
+  margin: auto;
 `;
 
 const ProjectTitle = styled.h3`
   margin: 0;
 `;
 
-const ProjectValuesContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-`;
-
-const ProjectValues = styled.p`
-  margin: 0;
-  height: fit-content;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const Card = ({ project }) => (
   <StyledCard>
-    <ProjectTitle>{project.title}</ProjectTitle>
-    <ProjectValuesContainer>
-      <ProjectValues>{project.time} hours</ProjectValues>
-      <ProjectValues>{project.priceCategory}</ProjectValues>
-      <ProjectValues>{project.category}</ProjectValues>
-      <ProjectValues>{project.difficulty}</ProjectValues>
-    </ProjectValuesContainer>
+    <StyledLink key={project._id} href={`projects/${project._id}`}>
+      <ProjectTitle>{project.title}</ProjectTitle>
+      <ShortFactsBox project={project}></ShortFactsBox>
+    </StyledLink>
   </StyledCard>
 );
 
