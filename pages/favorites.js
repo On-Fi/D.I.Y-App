@@ -16,7 +16,7 @@ export default function FavoritesPage({
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
       ></ProjectList>
-      {onlyFavoriteProjects.length === 0 ? (
+      {!onlyFavoriteProjects.length ? (
         <p>You do not have any favorite projects yet</p>
       ) : (
         ""

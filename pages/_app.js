@@ -12,14 +12,9 @@ export default function App({ Component, pageProps }) {
   function handleToggleFavorite(id, event) {
     event.preventDefault();
     if (favorites.includes(id)) {
-      setFavorites(
-        favorites.filter((favorite) => {
-          return favorite !== id;
-        })
-      );
+      setFavorites(favorites.filter((favorite) => favorite !== id));
     } else setFavorites([...favorites, id]);
   }
-  const URL = "/api/projects";
 
   const fetcher = async (URL) => {
     const res = await fetch(URL);

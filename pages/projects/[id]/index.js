@@ -19,6 +19,6 @@ export default function DetailPage({ favorites, onToggleFavorite }) {
       project={project}
       favorites={favorites}
       onToggleFavorite={onToggleFavorite}
-    ></Project>
+    />
   );
 }
