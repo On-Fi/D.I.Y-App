@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Project from "@/components/Project";
 
-export default function DetailPage() {
+export default function DetailPage({ favorites, onToggleFavorite }) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -14,5 +14,11 @@ export default function DetailPage() {
 
   if (isLoading || error) return <h2>Loading...</h2>;
 
-  return <Project project={project}></Project>;
+  return (
+    <Project
+      project={project}
+      favorites={favorites}
+      onToggleFavorite={onToggleFavorite}
+    ></Project>
+  );
 }

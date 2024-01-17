@@ -7,7 +7,12 @@ const StyledFavoriteButton = styled.button`
   border: none;
 `;
 
-export default function FavoriteButton({ id, favorites, onToggleFavorite }) {
+export default function FavoriteButton({
+  id,
+  favorites,
+  onToggleFavorite,
+  size,
+}) {
   const isFavorite = favorites.includes(id);
   console.log(isFavorite);
   return (
@@ -15,7 +20,7 @@ export default function FavoriteButton({ id, favorites, onToggleFavorite }) {
       type="button"
       onClick={(event) => onToggleFavorite(id, event)}
     >
-      {isFavorite ? <HeartFilled /> : <HeartEmpty />}
+      {isFavorite ? <HeartFilled size={size} /> : <HeartEmpty size={size} />}
     </StyledFavoriteButton>
   );
 }

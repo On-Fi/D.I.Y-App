@@ -8,28 +8,28 @@ const Subline = styled.h2`
   cursor: default;
 `;
 
-export default function HomePage({ projects }) {
-  const [favorites, setFavorites] = useLocalStorageState("favorites", {
-    defaultValue: "",
-  });
+export default function HomePage({ projects, favorites, onToggleFavorite }) {
+  // const [favorites, setFavorites] = useLocalStorageState("favorites", {
+  //   defaultValue: "",
+  // });
 
-  function handleToggleFavorite(id, event) {
-    event.preventDefault();
-    if (favorites.includes(id)) {
-      setFavorites(
-        favorites.filter((favorite) => {
-          return favorite !== id;
-        })
-      );
-    } else setFavorites([...favorites, id]);
-  }
+  // function handleToggleFavorite(id, event) {
+  //   event.preventDefault();
+  //   if (favorites.includes(id)) {
+  //     setFavorites(
+  //       favorites.filter((favorite) => {
+  //         return favorite !== id;
+  //       })
+  //     );
+  //   } else setFavorites([...favorites, id]);
+  // }
   return (
     <>
       <Subline>All Projects</Subline>
       <ProjectList
         projects={projects}
         favorites={favorites}
-        onToggleFavorite={handleToggleFavorite}
+        onToggleFavorite={onToggleFavorite}
       />
     </>
   );
