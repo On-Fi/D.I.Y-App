@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Link from "next/link";
+import HeartFilled from "../FavoriteButton/HeartFilled";
 
 const Navbar = styled.nav`
   display: flex;
@@ -36,6 +37,9 @@ function NavigationBar() {
     <Navbar>
       <NavLink href="/">Home</NavLink>
       <NavLink href="/new-project">+</NavLink>
+      <NavLink href="/favorites">
+        <HeartFilled />
+      </NavLink>
     </Navbar>
   );
 }
