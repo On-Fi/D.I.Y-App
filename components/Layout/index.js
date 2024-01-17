@@ -3,7 +3,7 @@ import Header from "../Header";
 import styled from "styled-components";
 
 const StyleWrapper = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 `;
 
 export default function Layout({ children }) {

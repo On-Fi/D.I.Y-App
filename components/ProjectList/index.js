@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import Card from "../Card";
 
+const StyledProjectList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+`;
+
 export default function ProjectList({ projects, favorites, onToggleFavorite }) {
   return (
     <StyledProjectList>
@@ -15,12 +24,3 @@ export default function ProjectList({ projects, favorites, onToggleFavorite }) {
     </StyledProjectList>
   );
 }
-
-const StyledProjectList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-`;

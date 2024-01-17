@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import Link from "next/link";
 import HeartFilled from "../FavoriteButton/HeartFilled";
@@ -30,9 +29,7 @@ const NavLink = styled(Link)`
   }
 `;
 
-function NavigationBar() {
-  const router = useRouter();
-
+export default function NavigationBar() {
   return (
     <Navbar>
       <NavLink href="/">Home</NavLink>
@@ -43,5 +40,3 @@ function NavigationBar() {
     </Navbar>
   );
 }
-
-export default NavigationBar;

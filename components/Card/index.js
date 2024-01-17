@@ -26,7 +26,7 @@ const StyledTitleSection = styled.div`
   justify-content: space-between;
 `;
 
-function Card({ project, favorites, onToggleFavorite }) {
+export default function Card({ project, favorites, onToggleFavorite }) {
   return (
     <StyledLink key={project._id} href={`projects/${project._id}`}>
       <StyledCard>
@@ -43,4 +43,3 @@ function Card({ project, favorites, onToggleFavorite }) {
     </StyledLink>
   );
 }
-export default Card;

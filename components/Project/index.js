@@ -3,12 +3,6 @@ import ProjectInfoBox from "../ProjectInfoBox";
 import ShortFactsBox from "../ShortFactsBox";
 import FavoriteButton from "../FavoriteButton";
 
-const StyledBox = styled.div`
-  background-color: #e8e8e8;
-  border-radius: 20px;
-  padding: 5px;
-  margin: 10px;
-`;
 const ProjectHeader = styled.div`
   display: flex;
 `;

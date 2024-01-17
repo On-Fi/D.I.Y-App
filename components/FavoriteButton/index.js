@@ -14,7 +14,6 @@ export default function FavoriteButton({
   size,
 }) {
   const isFavorite = favorites.includes(id);
-  console.log(isFavorite);
   return (
     <StyledFavoriteButton
       type="button"

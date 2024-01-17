@@ -5,15 +5,9 @@ export default function FavoritesPage({
   favorites,
   onToggleFavorite,
 }) {
-  // const onlyFavoriteProjects = projects.filter((project) => {
-  //   ;
-  // });
-
   const onlyFavoriteProjects = projects.filter((project) =>
     favorites.includes(project._id)
   );
-
-  console.log(onlyFavoriteProjects);
   return (
     <>
       <h1>Your favorite projects</h1>
@@ -22,6 +16,11 @@ export default function FavoritesPage({
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
       ></ProjectList>
+      {onlyFavoriteProjects.length === 0 ? (
+        <p>You do not have any favorite projects yet</p>
+      ) : (
+        ""
+      )}
     </>
   );
 }

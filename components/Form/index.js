@@ -43,50 +43,58 @@ export default function Form() {
         <label htmlFor="title">Title: </label>
         <StyledInput type="text" id="title" name="title"></StyledInput>
 
-        <label htmlfor="category">Category: </label>
-        <StyledSelect name="category" id="category">
+        <label htmlFor="category">Category: </label>
+        <StyledSelect name="category" id="category" defaultValue="choose-here">
           <option value="living">Living</option>
           <option value="garden">Garden</option>
           <option value="fashion">Fashion</option>
           <option value="kitchen">Kitchen</option>
           <option value="bathroom">Bathroom</option>
-          <option value="" selected disabled hidden>
+          <option value="choose-here" disabled hidden>
             Choose here
           </option>
         </StyledSelect>
 
-        <label htmlfor="difficulty">Difficulty :</label>
-        <StyledSelect name="difficulty" id="difficulty">
+        <label htmlFor="difficulty">Difficulty :</label>
+        <StyledSelect
+          name="difficulty"
+          id="difficulty"
+          defaultValue="choose-here"
+        >
           <option value="beginner">Beginner</option>
           <option value="advanced">Advanced</option>
           <option value="expert">Expert</option>
 
-          <option value="" selected disabled hidden>
+          <option value="choose-here" disabled hidden>
             Choose here
           </option>
         </StyledSelect>
 
-        <label htmlfor="time">Duration: </label>
+        <label htmlFor="time">Duration: </label>
         <StyledInput type="range" id="time" name="time" min="0" max="48" />
 
-        <label htmlfor="price">Price: </label>
-        <StyledSelect name="priceCategory" id="priceCategory">
+        <label htmlFor="price">Price: </label>
+        <StyledSelect
+          name="priceCategory"
+          id="priceCategory"
+          defaultValue="choose-here"
+        >
           <option value="cheap">0-10 €</option>
           <option value="medium">10-50 €</option>
           <option value="expensive">50-150 €</option>
 
-          <option value="" selected disabled hidden>
+          <option value="choose-here" disabled hidden>
             Choose here
           </option>
         </StyledSelect>
 
-        <label htmlfor="tools">Tools: </label>
+        <label htmlFor="tools">Tools: </label>
         <StyledInput id="tools" name="tools"></StyledInput>
 
-        <label htmlfor="material">Materials: </label>
+        <label htmlFor="material">Materials: </label>
         <StyledInput id="material" name="material"></StyledInput>
 
-        <label htmlfor="instructions">Instructions: </label>
+        <label htmlFor="instructions">Instructions: </label>
         <StyledInput id="instructions" name="instructions"></StyledInput>
 
         <button type="submit">Save</button>
