@@ -2,9 +2,19 @@ import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import Layout from "@/components/Layout";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
-  const URL = "/api/projects";
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
+    defaultValue: "",
+  });
+
+  function handleToggleFavorite(id, event) {
+    event.preventDefault();
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter((favorite) => favorite !== id));
+    } else setFavorites([...favorites, id]);
+  }
 
   const fetcher = async (URL) => {
     const res = await fetch(URL);
@@ -41,7 +51,12 @@ export default function App({ Component, pageProps }) {
       >
         <GlobalStyle />
         <Layout>
-          <Component {...pageProps} projects={projects} />
+          <Component
+            {...pageProps}
+            projects={projects}
+            favorites={favorites}
+            onToggleFavorite={handleToggleFavorite}
+          />
         </Layout>
       </SWRConfig>
     </>

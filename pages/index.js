@@ -7,11 +7,15 @@ const Subline = styled.h2`
   cursor: default;
 `;
 
-export default function HomePage({ projects }) {
+export default function HomePage({ projects, favorites, onToggleFavorite }) {
   return (
     <>
-      <Subline>All Projects</Subline>
-      <ProjectList projects={projects} />
+      <Subline>All projects</Subline>
+      <ProjectList
+        projects={projects}
+        favorites={favorites}
+        onToggleFavorite={onToggleFavorite}
+      />
     </>
   );
 }
