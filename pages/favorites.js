@@ -9,7 +9,6 @@ export default function FavoritesPage({
     favorites.includes(project._id)
   );
 
-  console.log(projectsToDisplay);
   return (
     <>
       <h1>Your favorite projects</h1>

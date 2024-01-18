@@ -13,7 +13,6 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
   const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
 
   function handleFilter(filterData) {
-    console.log("filterData:", filterData);
     setProjectsToDisplay(
       projects.filter(
         (project) =>
@@ -23,15 +22,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
           filterData.time >= project.time
       )
     );
-
-    //   &&
-    //   &&
-    //   filterData.category.length ||
-    //      &&
-    //   filterData.time >= project.time
-    // );
   }
-  console.log("projectstoDisplay:", projectsToDisplay);
   return (
     <>
       <Subline>All projects</Subline>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FilterInput from "../FilterInput";
+import FilterCategory from "../FilterCategory";
 
 const StyledForm = styled.form`
   display: flex;
@@ -48,140 +48,22 @@ export default function FilterSection({ handleFilter }) {
       </StyledSubheading>
       <StyledFilterCategorySection>
         <StyledFilterCategory>
-          <label htmlFor="cheap">
-            <input
-              type="radio"
-              id="cheap"
-              name="priceCategory"
-              value="€"
-              required
-              onInvalid={(event) =>
-                event.target.setCustomValidity("Please select a price category")
-              }
-              onChange={(event) => event.target.setCustomValidity("")}
-            ></input>
-            €
-          </label>
-
-          <label htmlFor="medium">
-            <input
-              type="radio"
-              id="medium"
-              name="priceCategory"
-              value="€€"
-              required
-            ></input>
-            €€
-          </label>
-
-          <label htmlFor="expensive">
-            <input
-              type="radio"
-              id="expensive"
-              name="priceCategory"
-              value="€€€"
-              required
-            ></input>
-            €€€
-          </label>
+          <FilterCategory
+            category={"priceCategory"}
+            names={["€", "€€", "€€€"]}
+          ></FilterCategory>
         </StyledFilterCategory>
         <StyledFilterCategory>
-          <label htmlFor="beginner">
-            <input
-              type="radio"
-              id="beginner"
-              name="difficulty"
-              value="beginner"
-              required
-              onInvalid={(event) =>
-                event.target.setCustomValidity(
-                  "Please select a difficulty level"
-                )
-              }
-              onChange={(event) => event.target.setCustomValidity("")}
-            ></input>
-            beginner
-          </label>
-
-          <label htmlFor="advanced">
-            <input
-              type="radio"
-              id="advanced"
-              name="difficulty"
-              value="advanced"
-              required
-            ></input>
-            advanced
-          </label>
-
-          <label htmlFor="expert">
-            <input
-              type="radio"
-              id="expert"
-              name="difficulty"
-              value="expert"
-              required
-            ></input>
-            expert
-          </label>
+          <FilterCategory
+            category={"difficulty"}
+            names={["beginner", "advanced", "expert"]}
+          ></FilterCategory>
         </StyledFilterCategory>
         <StyledFilterCategory>
-          <label htmlFor="home">
-            <input
-              type="radio"
-              id="home"
-              name="category"
-              value="home"
-              required
-              onInvalid={(event) =>
-                event.target.setCustomValidity("Please select a category")
-              }
-              onChange={(event) => event.target.setCustomValidity("")}
-            ></input>
-            Home
-          </label>
-
-          <label htmlFor="garden">
-            <input
-              type="radio"
-              id="garden"
-              name="category"
-              value="garden"
-              required
-            ></input>
-            Garden
-          </label>
-
-          <label htmlFor="fashion">
-            <input
-              type="radio"
-              id="fashion"
-              name="category"
-              value="fashion"
-              required
-            ></input>
-            Fashion
-          </label>
-          <label htmlFor="kitchen">
-            <input
-              type="radio"
-              id="kitchen"
-              name="category"
-              value="kitchen"
-              required
-            ></input>
-            Kitchen
-          </label>
-          <label htmlFor="bathroom">
-            <input
-              type="radio"
-              id="bathroom"
-              name="category"
-              value="bathroom"
-              required
-            ></input>
-            Bathroom
-          </label>
+          <FilterCategory
+            category={"category"}
+            names={["home", "garden", "fashion", "kitchen", "bathroom"]}
+          ></FilterCategory>
         </StyledFilterCategory>
       </StyledFilterCategorySection>
       <label htmlFor="time">Duration: </label>
@@ -193,7 +75,6 @@ export default function FilterSection({ handleFilter }) {
         <span>48 hours</span>
       </StyledRangeInput>
       <button type="submit">Apply filter</button>
-      <button type="button">Reset</button>
     </StyledForm>
   );
 }
