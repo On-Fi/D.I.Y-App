@@ -10,10 +10,14 @@ const StyledProjectList = styled.ul`
   margin: 0;
 `;
 
-export default function ProjectList({ projects, favorites, onToggleFavorite }) {
+export default function ProjectList({
+  projectsToDisplay,
+  favorites,
+  onToggleFavorite,
+}) {
   return (
     <StyledProjectList>
-      {projects.map((project) => (
+      {projectsToDisplay.map((project) => (
         <Card
           key={project._id}
           project={project}
