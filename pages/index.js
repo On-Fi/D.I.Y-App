@@ -17,23 +17,29 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
     setProjectsToDisplay(
       projects.filter(
         (project) =>
-          (project.priceCategory === filterData.priceCategory) &
-          (project.difficulty === filterData.difficulty) &
-          (project.category.toLowerCase() === filterData.category) &
-          (filterData.time >= project.time)
+          project.priceCategory === filterData.priceCategory &&
+          project.difficulty === filterData.difficulty &&
+          filterData.category.includes(project.category.toLowerCase()) &&
+          filterData.time >= project.time
       )
     );
+
+    //   &&
+    //   &&
+    //   filterData.category.length ||
+    //      &&
+    //   filterData.time >= project.time
+    // );
   }
   console.log("projectstoDisplay:", projectsToDisplay);
   return (
     <>
       <Subline>All projects</Subline>
-      <FilterSection />
+      <FilterSection handleFilter={handleFilter} />
       <ProjectList
-        projects={projectsToDisplay}
+        projectsToDisplay={projectsToDisplay}
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
-        handleFilter={handleFilter}
       />
     </>
   );
