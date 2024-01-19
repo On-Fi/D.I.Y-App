@@ -35,13 +35,11 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           id="title"
           name="title"
           defaultValue={project.title}
-        ></StyledInput>
+        />
 
         <label htmlFor="category">Category: </label>
         <StyledSelect
-          defaultValue={
-            Object.keys(project).length === 0 ? "choose-here" : project.category
-          }
+          defaultValue={project.category || "choose-here"}
           name="category"
           id="category"
         >
@@ -56,11 +54,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         </StyledSelect>
         <label htmlFor="difficulty">Difficulty:</label>
         <StyledSelect
-          defaultValue={
-            Object.keys(project).length === 0
-              ? "choose-here"
-              : project.difficulty
-          }
+          defaultValue={project.difficulty || "choose-here"}
           name="difficulty"
           id="difficulty"
         >
@@ -79,17 +73,11 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           name="time"
           min="0"
           max="48"
-          defaultValue={
-            Object.keys(project).length === 0 ? "24" : project.difficulty
-          }
+          defaultValue={project.time || 24}
         />
         <label htmlFor="price">Price: </label>
         <StyledSelect
-          defaultValue={
-            Object.keys(project).length === 0
-              ? "choose-here"
-              : project.priceCategory
-          }
+          defaultValue={project.priceCategory || "choose-here"}
           name="priceCategory"
           id="priceCategory"
         >
@@ -102,23 +90,19 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           </option>
         </StyledSelect>
         <label htmlFor="tools">Tools:</label>
-        <StyledInput
-          id="tools"
-          name="tools"
-          defaultValue={project.tools}
-        ></StyledInput>
+        <StyledInput id="tools" name="tools" defaultValue={project.tools} />
         <label htmlFor="material">Material:</label>
         <StyledInput
           id="material"
           name="material"
           defaultValue={project.material}
-        ></StyledInput>
+        />
         <label htmlFor="instructions">Instructions:</label>
         <StyledInput
           id="instructions"
           name="instructions"
           defaultValue={project.instructions}
-        ></StyledInput>
+        />
         <button type="submit">
           {Object.keys(project).length === 0 ? "Save" : "Edit"}
         </button>

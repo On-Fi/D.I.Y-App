@@ -15,12 +15,10 @@ export default function DetailPage({ favorites, onToggleFavorite }) {
   if (isLoading || error) return <h2>Loading...</h2>;
 
   return (
-    <>
-      <Project
-        project={project}
-        favorites={favorites}
-        onToggleFavorite={onToggleFavorite}
-      />
-    </>
+    <Project
+      project={project}
+      favorites={favorites}
+      onToggleFavorite={onToggleFavorite}
+    />
   );
 }

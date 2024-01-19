@@ -7,6 +7,7 @@ export default function EditPage() {
   const router = useRouter();
 
   const { id } = router.query;
+
   const { data: project, isLoading } = useSWR(`/api/projects/${id}`);
   async function handleEditProject(projectData) {
     const response = await fetch(`/api/projects/${id}`, {
@@ -24,7 +25,7 @@ export default function EditPage() {
     router.push(`/projects/${id}`);
   }
 
-  if (!project || isLoading) {
+  if (!project || isLoading || !id) {
     return <p>is Loading...</p>;
   }
 
