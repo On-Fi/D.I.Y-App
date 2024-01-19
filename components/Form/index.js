@@ -19,24 +19,31 @@ const StyledSelect = styled.select`
   border-radius: 15px;
 `;
 
-export default function Form() {
-  const router = useRouter();
-
+export default function Form({ handleDings }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
-
-    const response = await fetch("/api/projects", {
-      method: "POST",
-      body: JSON.stringify(projectData),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.ok) {
-      router.push("/");
-    }
+    handleDings(projectData);
   }
+
+  // const router = useRouter();
+
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const projectData = Object.fromEntries(formData);
+
+  //   const response = await fetch("/api/projects", {
+  //     method: "POST",
+  //     body: JSON.stringify(projectData),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+
+  //   if (response.ok) {
+  //     router.push("/");
+  //   }
+  // }
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
@@ -55,7 +62,7 @@ export default function Form() {
           </option>
         </StyledSelect>
 
-        <label htmlFor="difficulty">Difficulty :</label>
+        <label htmlFor="difficulty">difficulty :</label>
         <StyledSelect
           name="difficulty"
           id="difficulty"
