@@ -7,19 +7,32 @@ export default function EditPage() {
   const router = useRouter();
 
   const { id } = router.query;
-  const { data: project } = useSWR(`/api/projects/${id}`);
+  const { data: project, isLoading } = useSWR(`/api/projects/${id}`);
   async function handleEditProject(projectData) {
     const response = await fetch(`/api/projects/${id}`, {
       method: "PATCH",
       body: JSON.stringify(projectData),
       headers: { "Content-Type": "application/json" },
     });
-
     if (response.ok) {
       mutate();
-      router.push(`/`);
+      router.push(`/projects/${id}`);
     }
   }
-  console.log("log in edit js:", project);
-  return <Form project={project} onSubmit={handleEditProject} />;
+
+  function handleCancel() {
+    router.push(`/projects/${id}`);
+  }
+
+  if (!project || isLoading) {
+    return <p>is Loading...</p>;
+  }
+
+  return (
+    <Form
+      project={project}
+      onSubmit={handleEditProject}
+      onCancel={handleCancel}
+    />
+  );
 }

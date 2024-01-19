@@ -15,5 +15,9 @@ export default function NewProjectPage() {
       router.push("/");
     }
   }
-  return <Form onSubmit={handleAddProject} />;
+  function handleCancel() {
+    router.push("/");
+  }
+
+  return <Form onSubmit={handleAddProject} onCancel={handleCancel} />;
 }

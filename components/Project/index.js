@@ -2,10 +2,26 @@ import styled from "styled-components";
 import ProjectInfoBox from "../ProjectInfoBox";
 import ShortFactsBox from "../ShortFactsBox";
 import FavoriteButton from "../FavoriteButton";
+import Link from "next/link";
 
 const ProjectHeader = styled.div`
   display: flex;
 `;
+
+const StyledButton = styled.button`
+  margin: 10px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: orange;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darkorange;
+  }
+`;
+
 export default function Project({ project, favorites, onToggleFavorite }) {
   return (
     <>
@@ -25,6 +41,9 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         title="Instructions"
         text={project.instructions}
       ></ProjectInfoBox>
+      <Link href={`${project._id}/edit`}>
+        <StyledButton>Edit</StyledButton>
+      </Link>
     </>
   );
 }
