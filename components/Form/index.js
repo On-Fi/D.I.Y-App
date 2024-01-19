@@ -45,11 +45,11 @@ export default function Form() {
 
         <label htmlFor="category">Category: </label>
         <StyledSelect name="category" id="category" defaultValue="choose-here">
-          <option value="living">Living</option>
-          <option value="garden">Garden</option>
-          <option value="fashion">Fashion</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
+          <option value="home">home</option>
+          <option value="garden">garden</option>
+          <option value="fashion">fashion</option>
+          <option value="kitchen">kitchen</option>
+          <option value="bathroom">bathroom</option>
           <option value="choose-here" disabled hidden>
             Choose here
           </option>
@@ -61,16 +61,16 @@ export default function Form() {
           id="difficulty"
           defaultValue="choose-here"
         >
-          <option value="beginner">Beginner</option>
-          <option value="advanced">Advanced</option>
-          <option value="expert">Expert</option>
+          <option value="beginner">beginner</option>
+          <option value="advanced">advanced</option>
+          <option value="expert">expert</option>
 
           <option value="choose-here" disabled hidden>
             Choose here
           </option>
         </StyledSelect>
 
-        <label htmlFor="time">Duration: </label>
+        <label htmlFor="time">duration: </label>
         <StyledInput type="range" id="time" name="time" min="0" max="48" />
 
         <label htmlFor="price">Price: </label>
@@ -79,25 +79,25 @@ export default function Form() {
           id="priceCategory"
           defaultValue="choose-here"
         >
-          <option value="cheap">0-10 €</option>
-          <option value="medium">10-50 €</option>
-          <option value="expensive">50-150 €</option>
+          <option value="€">0-10 €</option>
+          <option value="€€">10-50 €</option>
+          <option value="€€€">50-150 €</option>
 
           <option value="choose-here" disabled hidden>
             Choose here
           </option>
         </StyledSelect>
 
-        <label htmlFor="tools">Tools: </label>
+        <label htmlFor="tools">tools: </label>
         <StyledInput id="tools" name="tools"></StyledInput>
 
-        <label htmlFor="material">Materials: </label>
+        <label htmlFor="material">materials: </label>
         <StyledInput id="material" name="material"></StyledInput>
 
-        <label htmlFor="instructions">Instructions: </label>
+        <label htmlFor="instructions">instructions: </label>
         <StyledInput id="instructions" name="instructions"></StyledInput>
 
-        <button type="submit">Save</button>
+        <button type="submit">save</button>
         <button type="button" onClick={() => router.push("/")}>
           Cancel
         </button>
