@@ -5,9 +5,10 @@ import { mutate } from "swr";
 
 export default function EditPage() {
   const router = useRouter();
+
   const { id } = router.query;
-  const { projectData } = useSWR(`/api/projects/${id}`);
-  async function handleDings(projectData) {
+  const { data: project } = useSWR(`/api/projects/${id}`);
+  async function handleEditProject(projectData) {
     const response = await fetch(`/api/projects/${id}`, {
       method: "PATCH",
       body: JSON.stringify(projectData),
@@ -19,5 +20,6 @@ export default function EditPage() {
       router.push(`/`);
     }
   }
-  return <Form handleDings={handleDings} />;
+  console.log("log in edit js:", project);
+  return <Form project={project} onSubmit={handleEditProject} />;
 }

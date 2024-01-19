@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function NewProjectPage() {
   const router = useRouter();
 
-  async function handleDings(projectData) {
+  async function handleAddProject(projectData) {
     const response = await fetch("/api/projects", {
       method: "POST",
       body: JSON.stringify(projectData),
@@ -15,5 +15,5 @@ export default function NewProjectPage() {
       router.push("/");
     }
   }
-  return <Form handleDings={handleDings} />;
+  return <Form onSubmit={handleAddProject} />;
 }
