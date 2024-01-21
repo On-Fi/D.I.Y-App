@@ -1,5 +1,23 @@
 import Form from "@/components/Form";
+import { useRouter } from "next/router";
 
 export default function NewProjectPage() {
-  return <Form />;
+  const router = useRouter();
+
+  async function handleAddProject(projectData) {
+    const response = await fetch("/api/projects", {
+      method: "POST",
+      body: JSON.stringify(projectData),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
+  }
+  function handleCancel() {
+    router.push("/");
+  }
+
+  return <Form onSubmit={handleAddProject} onCancel={handleCancel} />;
 }

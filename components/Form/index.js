@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useRouter } from "next/router";
 
 const StyledForm = styled.form`
   display: flex;
@@ -19,86 +18,95 @@ const StyledSelect = styled.select`
   border-radius: 15px;
 `;
 
-export default function Form() {
-  const router = useRouter();
-
+export default function Form({ onSubmit, onCancel, project = {} }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
-
-    const response = await fetch("/api/projects", {
-      method: "POST",
-      body: JSON.stringify(projectData),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.ok) {
-      router.push("/");
-    }
+    onSubmit(projectData);
   }
+
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <label htmlFor="title">Title: </label>
-        <StyledInput type="text" id="title" name="title"></StyledInput>
+        <label htmlFor="title">Title:</label>
+        <StyledInput
+          type="text"
+          id="title"
+          name="title"
+          defaultValue={project.title}
+        />
 
         <label htmlFor="category">Category: </label>
-        <StyledSelect name="category" id="category" defaultValue="choose-here">
-          <option value="living">Living</option>
-          <option value="garden">Garden</option>
-          <option value="fashion">Fashion</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
-          <option value="choose-here" disabled hidden>
-            Choose here
-          </option>
-        </StyledSelect>
-
-        <label htmlFor="difficulty">Difficulty :</label>
         <StyledSelect
+          defaultValue={project.category || "choose-here"}
+          name="category"
+          id="category"
+        >
+          <option value="choose-here" disabled hidden>
+            choose here
+          </option>
+          <option value="home">home</option>
+          <option value="garden">garden</option>
+          <option value="fashion">fashion</option>
+          <option value="kitchen">kitchen</option>
+          <option value="bathroom">bathroom</option>
+        </StyledSelect>
+        <label htmlFor="difficulty">Difficulty:</label>
+        <StyledSelect
+          defaultValue={project.difficulty || "choose-here"}
           name="difficulty"
           id="difficulty"
-          defaultValue="choose-here"
         >
-          <option value="beginner">Beginner</option>
-          <option value="advanced">Advanced</option>
-          <option value="expert">Expert</option>
+          <option value="beginner">beginner</option>
+          <option value="advanced">advanced</option>
+          <option value="expert">expert</option>
 
           <option value="choose-here" disabled hidden>
-            Choose here
+            choose here
           </option>
         </StyledSelect>
-
         <label htmlFor="time">Duration: </label>
-        <StyledInput type="range" id="time" name="time" min="0" max="48" />
-
+        <StyledInput
+          type="range"
+          id="time"
+          name="time"
+          min="0"
+          max="48"
+          defaultValue={project.time || 24}
+        />
         <label htmlFor="price">Price: </label>
         <StyledSelect
+          defaultValue={project.priceCategory || "choose-here"}
           name="priceCategory"
           id="priceCategory"
-          defaultValue="choose-here"
         >
-          <option value="cheap">0-10 €</option>
-          <option value="medium">10-50 €</option>
-          <option value="expensive">50-150 €</option>
+          <option value="€">0-10 €</option>
+          <option value="€€">10-50 €</option>
+          <option value="€€€">50-150 €</option>
 
           <option value="choose-here" disabled hidden>
-            Choose here
+            choose here
           </option>
         </StyledSelect>
-
-        <label htmlFor="tools">Tools: </label>
-        <StyledInput id="tools" name="tools"></StyledInput>
-
-        <label htmlFor="material">Materials: </label>
-        <StyledInput id="material" name="material"></StyledInput>
-
-        <label htmlFor="instructions">Instructions: </label>
-        <StyledInput id="instructions" name="instructions"></StyledInput>
-
-        <button type="submit">Save</button>
-        <button type="button" onClick={() => router.push("/")}>
+        <label htmlFor="tools">Tools:</label>
+        <StyledInput id="tools" name="tools" defaultValue={project.tools} />
+        <label htmlFor="material">Material:</label>
+        <StyledInput
+          id="material"
+          name="material"
+          defaultValue={project.material}
+        />
+        <label htmlFor="instructions">Instructions:</label>
+        <StyledInput
+          id="instructions"
+          name="instructions"
+          defaultValue={project.instructions}
+        />
+        <button type="submit">
+          {Object.keys(project).length === 0 ? "Save" : "Edit"}
+        </button>
+        <button type="button" onClick={onCancel}>
           Cancel
         </button>
       </StyledForm>
