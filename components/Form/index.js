@@ -22,7 +22,7 @@ const StyledSelect = styled.select`
 
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
-  const [imageId, setImageId] = useState("sample"); // Hier kommt die publicId des Bildes rein, welches du als Vorschau anzeigen möchtest (sample ist hier ein Beispiel)
+  const [imageId, setImageId] = useState(project.image || "sample"); // Hier kommt die publicId des Bildes rein, welches du als Vorschau anzeigen möchtest (sample ist hier ein Beispiel)
 
   const uploadImage = async () => {
     // Erstellen eines neuen FormData-Objekts
@@ -76,13 +76,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           name="title"
           defaultValue={project.title}
         />
-        <Image
-          cloudName="dzxsogtiq"
-          publicId={imageId}
-          width="300"
-          crop="scale"
-          alt="beispiel image"
-        />
+        <Image src={imageId} width="300" crop="scale" alt="beispiel image" />
 
         <input
           type="file"
