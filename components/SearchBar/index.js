@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled.form`
   display: flex;
   margin: auto;
   margin-bottom: 20px;
