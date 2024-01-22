@@ -16,7 +16,7 @@ export default function EditPage() {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      mutate();
+      mutate("/api/projects", response);
       router.push(`/projects/${id}`);
     }
   }
