@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
+import SearchBar from "@/components/SearchBar";
 
 const Subline = styled.h2`
   font-size: 2rem;
@@ -23,9 +24,16 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
       )
     );
   }
+  function handleSearch(searchTerm) {
+    const filteredProjects = projects.filter((project) =>
+      project.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setProjectsToDisplay(filteredProjects);
+  }
   return (
     <>
       <Subline>All projects</Subline>
+      <SearchBar onSearch={handleSearch} />
       <FilterSection handleFilter={handleFilter} />
       <ProjectList
         projectsToDisplay={projectsToDisplay}
