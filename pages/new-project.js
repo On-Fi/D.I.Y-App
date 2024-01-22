@@ -1,5 +1,6 @@
 import Form from "@/components/Form";
 import { useRouter } from "next/router";
+import { mutate } from "swr";
 
 export default function NewProjectPage() {
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function NewProjectPage() {
     });
 
     if (response.ok) {
+      const res = await fetch("/api/projects");
+      mutate("/api/projects", res.json());
       router.push("/");
     }
   }
