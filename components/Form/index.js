@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { Image } from "cloudinary-react"; // npm install cloudinary
 
 const StyledForm = styled.form`
   display: flex;
@@ -19,10 +21,48 @@ const StyledSelect = styled.select`
 `;
 
 export default function Form({ onSubmit, onCancel, project = {} }) {
+  const [imageSelected, setImageSelected] = useState("");
+  const [imageId, setImageId] = useState("sample"); // Hier kommt die publicId des Bildes rein, welches du als Vorschau anzeigen möchtest (sample ist hier ein Beispiel)
+
+  const uploadImage = async () => {
+    // Erstellen eines neuen FormData-Objekts
+    const formData = new FormData();
+    // Die ausgewählte Bilddatei wird zum FormData Objekt hinzugefügt
+    formData.append("file", imageSelected);
+    // Das ausgewählte upload-preset wird zum FormData Objekt hinzugefügt (upload- preset istwas wie eine databse in MongDB)
+    formData.append("upload_preset", "diy-app"); // Hier kommt dein upload-preset rein "diy-app" ist hier mein upload-preset
+    try {
+      // Senden einer POST-Request an Cloudinary zum Hochladen des Bildes
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/dzxsogtiq/image/upload`, // Hier kommt dein CloudName rein (https://api.cloudinary.com/v1_1/deinCloudName/image/upload)
+        {
+          method: "POST", // Hier wird die Methode festgelegt
+          body: formData, // Hier wird das FormData-Objekt übergeben
+        }
+      );
+      // Hier wird die Antwort in ein JSON-Objekt umgewandelt
+      const image = await res.json();
+      // Das Set der publicId des hochgeladenen Bildes
+      setImageId(
+        `https://res.cloudinary.com/dzxsogtiq/image/upload/v1705938209/${image.public_id}.png`
+      );
+      // Hier wird die publicId des hochgeladenen Bildes "gesetet"
+    } catch (error) {
+      // Ausgabe von ein Fehler, wenn etwas schief geht
+      console.error(
+        "UPS! Etwas ist schief gelaufen. Bitte versuche es erneut."
+      );
+    }
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
+    console.log("erst:", projectData);
+    projectData.image = imageId;
+    console.log("dann:", projectData);
+    console.log(imageId);
     onSubmit(projectData);
   }
 
@@ -36,6 +76,21 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           name="title"
           defaultValue={project.title}
         />
+        <Image
+          cloudName="dzxsogtiq"
+          publicId={imageId}
+          width="300"
+          crop="scale"
+          alt="beispiel image"
+        />
+
+        <input
+          type="file"
+          name="image"
+          title="image"
+          onChange={(event) => setImageSelected(event.target.files[0])}
+        />
+        <button onClick={uploadImage}>Upload an Image</button>
 
         <label htmlFor="category">Category: </label>
         <StyledSelect
