@@ -12,7 +12,6 @@ const Subline = styled.h2`
 
 export default function HomePage({ projects, favorites, onToggleFavorite }) {
   const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
-  const [searchTerm, setSearchTerm] = useState("");
 
   function handleFilter(filterData) {
     setProjectsToDisplay(
@@ -25,7 +24,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
       )
     );
   }
-  function handleSearch() {
+  function handleSearch(searchTerm) {
     const filteredProjects = projects.filter((project) =>
       project.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -34,11 +33,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
   return (
     <>
       <Subline>All projects</Subline>
-      <SearchBar
-        searchTerm={searchTerm}
-        onSearchTermChange={setSearchTerm}
-        onSearch={handleSearch}
-      />
+      <SearchBar onSearch={handleSearch} />
       <FilterSection handleFilter={handleFilter} />
       <ProjectList
         projectsToDisplay={projectsToDisplay}

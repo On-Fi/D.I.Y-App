@@ -29,22 +29,17 @@ const SearchButton = styled.button`
     transform: scale(0.95);
   }
 `;
-export default function SearchBar({
-  searchTerm,
-  onSearchTermChange,
-  onSearch,
-}) {
+export default function SearchBar({ onSearch }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const searchTerm = event.target.elements.searchTerm.value;
+    onSearch(searchTerm);
+  }
+
   return (
-    <SearchBarContainer>
-      <SearchInput
-        type="text"
-        placeholder="..."
-        value={searchTerm}
-        onChange={(event) => onSearchTermChange(event.target.value)}
-      />
-      <SearchButton type="submit" onClick={onSearch}>
-        Search
-      </SearchButton>
+    <SearchBarContainer id="form" onSubmit={handleSubmit}>
+      <SearchInput type="text" name="searchTerm" placeholder="..." />
+      <SearchButton type="submit">Search</SearchButton>
     </SearchBarContainer>
   );
 }
