@@ -5,8 +5,11 @@ import FavoriteButton from "../FavoriteButton";
 import Link from "next/link";
 import { mutate } from "swr";
 import { useRouter } from "next/router";
+import Image from "next/image";
+
 const ProjectHeader = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const ButtonSection = styled.div`
@@ -56,6 +59,14 @@ export default function Project({ project, favorites, onToggleFavorite }) {
 
   return (
     <>
+      <Image
+        src={project.image}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
+        alt="image of the diy project"
+      />
       <ProjectHeader>
         <h1>{project.title}</h1>
         <FavoriteButton

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { Image } from "cloudinary-react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,18 +20,46 @@ const StyledSelect = styled.select`
   border-radius: 15px;
 `;
 
+const UploadPreview = styled(Image)`
+  width: 100px;
+`;
+
+const UploadSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
+  const [imageSelected, setImageSelected] = useState("");
+  const [imageId, setImageId] = useState(project.image || "/sample-image.png");
+
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "diy-app");
+    const response = await fetch("/api/images", {
+      method: "POST",
+      body: formData,
+      headers: { "Data-type": "application/json" },
+    });
+    const image = await response.json();
+    setImageId(image.url);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
+    projectData.image = imageId;
     onSubmit(projectData);
   }
 
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title">Title:*</label>
         <StyledInput
           type="text"
           id="title"
@@ -37,7 +67,28 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           defaultValue={project.title}
         />
 
-        <label htmlFor="category">Category: </label>
+        <label htmlFor="image">Image:</label>
+        <UploadSection>
+          <UploadPreview
+            src={imageId}
+            width="300"
+            crop="scale"
+            alt="beispiel image"
+          />
+          <div>
+            <input
+              type="file"
+              name="image"
+              title="image"
+              onChange={(event) => setImageSelected(event.target.files[0])}
+            />
+            <button type="button" onClick={uploadImage}>
+              Upload an Image
+            </button>
+          </div>
+        </UploadSection>
+
+        <label htmlFor="category">Category:* </label>
         <StyledSelect
           defaultValue={project.category || "choose-here"}
           name="category"
@@ -52,7 +103,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="kitchen">kitchen</option>
           <option value="bathroom">bathroom</option>
         </StyledSelect>
-        <label htmlFor="difficulty">Difficulty:</label>
+        <label htmlFor="difficulty">Difficulty:*</label>
         <StyledSelect
           defaultValue={project.difficulty || "choose-here"}
           name="difficulty"
@@ -66,7 +117,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             choose here
           </option>
         </StyledSelect>
-        <label htmlFor="time">Duration: </label>
+        <label htmlFor="time">Duration:* </label>
         <StyledInput
           type="range"
           id="time"
@@ -75,7 +126,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           max="48"
           defaultValue={project.time || 24}
         />
-        <label htmlFor="price">Price: </label>
+        <label htmlFor="price">Price:* </label>
         <StyledSelect
           defaultValue={project.priceCategory || "choose-here"}
           name="priceCategory"
@@ -89,7 +140,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             choose here
           </option>
         </StyledSelect>
-        <label htmlFor="tools">Tools:</label>
+        <label htmlFor="tools">Tools:*</label>
         <StyledInput id="tools" name="tools" defaultValue={project.tools} />
         <label htmlFor="material">Material:</label>
         <StyledInput
@@ -97,7 +148,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           name="material"
           defaultValue={project.material}
         />
-        <label htmlFor="instructions">Instructions:</label>
+        <label htmlFor="instructions">Instructions:*</label>
         <StyledInput
           id="instructions"
           name="instructions"
