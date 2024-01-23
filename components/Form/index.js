@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { Image } from "cloudinary-react"; // npm install cloudinary
+import { Image } from "cloudinary-react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -20,38 +20,39 @@ const StyledSelect = styled.select`
   border-radius: 15px;
 `;
 
+const UploadPreview = styled(Image)`
+  width: 100px;
+`;
+
+const UploadSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
-  const [imageId, setImageId] = useState(project.image || "sample"); // Hier kommt die publicId des Bildes rein, welches du als Vorschau anzeigen möchtest (sample ist hier ein Beispiel)
+  const [imageId, setImageId] = useState(project.image || "/sample-image.png");
 
   const uploadImage = async () => {
-    // Erstellen eines neuen FormData-Objekts
     const formData = new FormData();
-    // Die ausgewählte Bilddatei wird zum FormData Objekt hinzugefügt
     formData.append("file", imageSelected);
-    // Das ausgewählte upload-preset wird zum FormData Objekt hinzugefügt (upload- preset istwas wie eine databse in MongDB)
-    formData.append("upload_preset", "diy-app"); // Hier kommt dein upload-preset rein "diy-app" ist hier mein upload-preset
+    formData.append("upload_preset", "diy-app");
     try {
-      // Senden einer POST-Request an Cloudinary zum Hochladen des Bildes
       const res = await fetch(
-        `https://api.cloudinary.com/v1_1/dzxsogtiq/image/upload`, // Hier kommt dein CloudName rein (https://api.cloudinary.com/v1_1/deinCloudName/image/upload)
+        `https://api.cloudinary.com/v1_1/dzxsogtiq/image/upload`,
         {
-          method: "POST", // Hier wird die Methode festgelegt
-          body: formData, // Hier wird das FormData-Objekt übergeben
+          method: "POST",
+          body: formData,
         }
       );
-      // Hier wird die Antwort in ein JSON-Objekt umgewandelt
       const image = await res.json();
-      // Das Set der publicId des hochgeladenen Bildes
       setImageId(
         `https://res.cloudinary.com/dzxsogtiq/image/upload/v1705938209/${image.public_id}.png`
       );
-      // Hier wird die publicId des hochgeladenen Bildes "gesetet"
     } catch (error) {
-      // Ausgabe von ein Fehler, wenn etwas schief geht
-      console.error(
-        "UPS! Etwas ist schief gelaufen. Bitte versuche es erneut."
-      );
+      console.error("Something went wrong, please try again.");
     }
   };
 
@@ -59,34 +60,43 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
-    console.log("erst:", projectData);
     projectData.image = imageId;
-    console.log("dann:", projectData);
-    console.log(imageId);
     onSubmit(projectData);
   }
 
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title">Title:*</label>
         <StyledInput
           type="text"
           id="title"
           name="title"
           defaultValue={project.title}
         />
-        <Image src={imageId} width="300" crop="scale" alt="beispiel image" />
 
-        <input
-          type="file"
-          name="image"
-          title="image"
-          onChange={(event) => setImageSelected(event.target.files[0])}
-        />
-        <button onClick={uploadImage}>Upload an Image</button>
+        <label htmlFor="image">Image:</label>
+        <UploadSection>
+          <UploadPreview
+            src={imageId}
+            width="300"
+            crop="scale"
+            alt="beispiel image"
+          />
+          <div>
+            <input
+              type="file"
+              name="image"
+              title="image"
+              onChange={(event) => setImageSelected(event.target.files[0])}
+            />
+            <button type="button" onClick={uploadImage}>
+              Upload an Image
+            </button>
+          </div>
+        </UploadSection>
 
-        <label htmlFor="category">Category: </label>
+        <label htmlFor="category">Category:* </label>
         <StyledSelect
           defaultValue={project.category || "choose-here"}
           name="category"
@@ -101,7 +111,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="kitchen">kitchen</option>
           <option value="bathroom">bathroom</option>
         </StyledSelect>
-        <label htmlFor="difficulty">Difficulty:</label>
+        <label htmlFor="difficulty">Difficulty:*</label>
         <StyledSelect
           defaultValue={project.difficulty || "choose-here"}
           name="difficulty"
@@ -115,7 +125,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             choose here
           </option>
         </StyledSelect>
-        <label htmlFor="time">Duration: </label>
+        <label htmlFor="time">Duration:* </label>
         <StyledInput
           type="range"
           id="time"
@@ -124,7 +134,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           max="48"
           defaultValue={project.time || 24}
         />
-        <label htmlFor="price">Price: </label>
+        <label htmlFor="price">Price:* </label>
         <StyledSelect
           defaultValue={project.priceCategory || "choose-here"}
           name="priceCategory"
@@ -138,7 +148,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             choose here
           </option>
         </StyledSelect>
-        <label htmlFor="tools">Tools:</label>
+        <label htmlFor="tools">Tools:*</label>
         <StyledInput id="tools" name="tools" defaultValue={project.tools} />
         <label htmlFor="material">Material:</label>
         <StyledInput
@@ -146,7 +156,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           name="material"
           defaultValue={project.material}
         />
-        <label htmlFor="instructions">Instructions:</label>
+        <label htmlFor="instructions">Instructions:*</label>
         <StyledInput
           id="instructions"
           name="instructions"
