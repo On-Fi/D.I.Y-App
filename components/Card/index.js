@@ -31,7 +31,10 @@ const StyledTitleSection = styled.div`
   justify-content: space-between;
 `;
 
-const ProjectImage = styled(Image)``;
+const ProjectImage = styled(Image)`
+  width: 100%;
+  height: auto;
+`;
 
 export default function Card({ project, favorites, onToggleFavorite }) {
   return (
@@ -42,9 +45,8 @@ export default function Card({ project, favorites, onToggleFavorite }) {
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: "100%", height: "auto" }}
           alt="image of the diy project"
-        ></ProjectImage>
+        />
         <StyledCardContent>
           <StyledTitleSection>
             <ProjectTitle>{project.title}</ProjectTitle>
@@ -52,9 +54,9 @@ export default function Card({ project, favorites, onToggleFavorite }) {
               id={project._id}
               favorites={favorites}
               onToggleFavorite={onToggleFavorite}
-            ></FavoriteButton>
+            />
           </StyledTitleSection>
-          <ShortFactsBox project={project}></ShortFactsBox>
+          <ShortFactsBox project={project} />
         </StyledCardContent>
       </StyledCard>
     </StyledLink>

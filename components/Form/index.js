@@ -39,21 +39,13 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const formData = new FormData();
     formData.append("file", imageSelected);
     formData.append("upload_preset", "diy-app");
-    try {
-      const res = await fetch(
-        `https://api.cloudinary.com/v1_1/dzxsogtiq/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const image = await res.json();
-      setImageId(
-        `https://res.cloudinary.com/dzxsogtiq/image/upload/v1705938209/${image.public_id}.png`
-      );
-    } catch (error) {
-      console.error("Something went wrong, please try again.");
-    }
+    const response = await fetch("/api/images", {
+      method: "POST",
+      body: formData,
+      headers: { "Data-type": "application/json" },
+    });
+    const image = await response.json();
+    setImageId(image.url);
   };
 
   async function handleSubmit(event) {
