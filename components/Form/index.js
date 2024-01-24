@@ -31,11 +31,16 @@ const UploadSection = styled.div`
   gap: 30px;
 `;
 
+const StyledStep = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
-  const [steps, setSteps] = useState([""]);
-  console.log(steps);
+  const [steps, setSteps] = useState(project.instructions || [""]);
+
   const uploadImage = async () => {
     const formData = new FormData();
     formData.append("file", imageSelected);
@@ -55,7 +60,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const projectData = Object.fromEntries(formData);
     projectData.image = imageId;
     projectData.instructions = steps;
-    console.log(projectData);
+
     onSubmit(projectData);
   }
 
@@ -64,8 +69,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   }
 
   function handleInput(event, index) {
-    console.log(event);
-    console.log(index);
     setSteps(steps.map((step, i) => (i === index ? event : step)));
   }
 
@@ -162,19 +165,17 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           defaultValue={project.material}
         />
         <label htmlFor="instructions">Instructions:*</label>
-        {/* <StyledInput
-          id="instructions"
-          name="instructions"
-          defaultValue={project.instructions}
-        /> */}
+
         {steps.map((step, index) => (
-          <StyledInput
-            key={index}
-            id="instructions"
-            name="instructions"
-            defaultValue={step}
-            onInput={(event) => handleInput(event.target.value, index)}
-          ></StyledInput>
+          <StyledStep key={index}>
+            <label>Step {index + 1} </label>
+            <StyledInput
+              id="instructions"
+              name="instructions"
+              defaultValue={step}
+              onInput={(event) => handleInput(event.target.value, index)}
+            ></StyledInput>
+          </StyledStep>
         ))}
         <button type="button" onClick={handleAddStep}>
           add step
