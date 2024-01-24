@@ -86,9 +86,9 @@ export default function Project({ project, favorites, onToggleFavorite }) {
       <ProjectInfoBox title="Material" text={project.material}></ProjectInfoBox>
       <ProjectInfoBox title="Instructions">
         {project.instructions.map((step, index) => (
-          <StyledInstructionStep key={index}>
+          <StyledInstructionStep key={step.id}>
             <p>{index + 1}.</p>
-            <p>{step}</p>
+            <p>{step.text}</p>
           </StyledInstructionStep>
         ))}
       </ProjectInfoBox>

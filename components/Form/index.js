@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
+import { v4 as uuidv4 } from "uuid";
 
 const StyledForm = styled.form`
   display: flex;
@@ -39,7 +40,9 @@ const StyledStep = styled.div`
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
-  const [steps, setSteps] = useState(project.instructions || [""]);
+  const [steps, setSteps] = useState(
+    project.instructions || [{ id: uuidv4(), text: "" }]
+  );
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -65,11 +68,13 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   }
 
   function handleAddStep() {
-    setSteps([...steps, ""]);
+    setSteps([...steps, { id: uuidv4(), text: "" }]);
   }
 
-  function handleInput(event, index) {
-    setSteps(steps.map((step, i) => (i === index ? event : step)));
+  function handleInput(text, id) {
+    setSteps(
+      steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+    );
   }
 
   return (
@@ -167,13 +172,13 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         <label htmlFor="instructions">Instructions:*</label>
 
         {steps.map((step, index) => (
-          <StyledStep key={index}>
+          <StyledStep key={step.id}>
             <label>Step {index + 1} </label>
             <StyledInput
               id="instructions"
               name="instructions"
-              defaultValue={step}
-              onInput={(event) => handleInput(event.target.value, index)}
+              defaultValue={step.text}
+              onInput={(event) => handleInput(event.target.value, step.id)}
             ></StyledInput>
           </StyledStep>
         ))}
