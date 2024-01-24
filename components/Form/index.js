@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
-import { v4 as uuidv4 } from "uuid";
 
 const StyledForm = styled.form`
   display: flex;
@@ -55,6 +54,8 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
     projectData.image = imageId;
+    projectData.instructions = steps;
+    console.log(projectData);
     onSubmit(projectData);
   }
 

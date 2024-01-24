@@ -11,7 +11,7 @@ const projectSchema = new Schema({
   priceCategory: { type: String, required: true },
   tools: { type: String, required: true },
   material: { type: String, required: true },
-  instructions: { type: String, required: true },
+  instructions: { type: Array, required: true },
 });
 
 const Project =

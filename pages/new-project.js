@@ -6,6 +6,7 @@ export default function NewProjectPage() {
   const router = useRouter();
 
   async function handleAddProject(projectData) {
+    console.log("new project:", projectData);
     const response = await fetch("/api/projects", {
       method: "POST",
       body: JSON.stringify(projectData),
