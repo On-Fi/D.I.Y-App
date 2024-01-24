@@ -46,6 +46,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledInstructionStep = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
 export default function Project({ project, favorites, onToggleFavorite }) {
   const router = useRouter();
   const handleDelete = async () => {
@@ -79,10 +84,14 @@ export default function Project({ project, favorites, onToggleFavorite }) {
       <ShortFactsBox project={project}></ShortFactsBox>
       <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox>
       <ProjectInfoBox title="Material" text={project.material}></ProjectInfoBox>
-      <ProjectInfoBox
-        title="Instructions"
-        text={project.instructions}
-      ></ProjectInfoBox>
+      <ProjectInfoBox title="Instructions">
+        {project.instructions.map((step, index) => (
+          <StyledInstructionStep key={step.id}>
+            <p>{index + 1}.</p>
+            <p>{step.text}</p>
+          </StyledInstructionStep>
+        ))}
+      </ProjectInfoBox>
       <ButtonSection>
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
 

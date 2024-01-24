@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
+import { v4 as uuidv4 } from "uuid";
 
 const StyledForm = styled.form`
   display: flex;
@@ -31,9 +32,17 @@ const UploadSection = styled.div`
   gap: 30px;
 `;
 
+const StyledStep = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
+  const [steps, setSteps] = useState(
+    project.instructions || [{ id: uuidv4(), text: "" }]
+  );
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -53,7 +62,19 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const formData = new FormData(event.target);
     const projectData = Object.fromEntries(formData);
     projectData.image = imageId;
+    projectData.instructions = steps;
+
     onSubmit(projectData);
+  }
+
+  function handleAddStep() {
+    setSteps([...steps, { id: uuidv4(), text: "" }]);
+  }
+
+  function handleInput(text, id) {
+    setSteps(
+      steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+    );
   }
 
   return (
@@ -149,11 +170,21 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           defaultValue={project.material}
         />
         <label htmlFor="instructions">Instructions:*</label>
-        <StyledInput
-          id="instructions"
-          name="instructions"
-          defaultValue={project.instructions}
-        />
+
+        {steps.map((step, index) => (
+          <StyledStep key={step.id}>
+            <label>Step {index + 1} </label>
+            <StyledInput
+              id="instructions"
+              name="instructions"
+              defaultValue={step.text}
+              onInput={(event) => handleInput(event.target.value, step.id)}
+            ></StyledInput>
+          </StyledStep>
+        ))}
+        <button type="button" onClick={handleAddStep}>
+          add step
+        </button>
         <button type="submit">
           {Object.keys(project).length === 0 ? "Save" : "Edit"}
         </button>

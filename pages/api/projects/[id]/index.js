@@ -18,7 +18,6 @@ export default async function handler(request, response) {
       .status(200)
       .json({ status: "Project successfully updated" });
   } else if (request.method === "DELETE") {
-    console.log("about to delete");
     await Project.findByIdAndDelete(request.query.id);
     return response.status(200).json({ status: "Project deleted" });
   } else {
