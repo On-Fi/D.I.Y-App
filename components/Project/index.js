@@ -85,14 +85,12 @@ export default function Project({ project, favorites, onToggleFavorite }) {
       <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox>
       <ProjectInfoBox title="Material" text={project.material}></ProjectInfoBox>
       <ProjectInfoBox title="Instructions">
-        {project.instructions.map((step, index) => {
-          return (
-            <StyledInstructionStep key={index}>
-              <p>{index + 1}.</p>
-              <p>{step}</p>
-            </StyledInstructionStep>
-          );
-        })}
+        {project.instructions.map((step, index) => (
+          <StyledInstructionStep key={index}>
+            <p>{index + 1}.</p>
+            <p>{step}</p>
+          </StyledInstructionStep>
+        ))}
       </ProjectInfoBox>
       <ButtonSection>
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
