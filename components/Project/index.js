@@ -51,6 +51,8 @@ const StyledInstructionStep = styled.div`
   gap: 10px;
 `;
 
+const ToolList = styled.ul``;
+
 export default function Project({ project, favorites, onToggleFavorite }) {
   const router = useRouter();
   const handleDelete = async () => {
@@ -82,8 +84,27 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         ></FavoriteButton>
       </ProjectHeader>
       <ShortFactsBox project={project}></ShortFactsBox>
-      <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox>
-      <ProjectInfoBox title="Material" text={project.material}></ProjectInfoBox>
+      {/* <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox> */}
+      <ProjectInfoBox title="Tools">
+        <ToolList>
+          {project.tools.map((tool) => (
+            <li key={tool.id}>{tool.name}</li>
+          ))}
+        </ToolList>
+      </ProjectInfoBox>
+
+      <ProjectInfoBox title="Material">
+        <ToolList>
+          {project.material.map((item) => (
+            <StyledInstructionStep key={item.id}>
+              <li>
+                {item.amount} x {item.name}
+              </li>
+            </StyledInstructionStep>
+          ))}
+        </ToolList>
+      </ProjectInfoBox>
+
       <ProjectInfoBox title="Instructions">
         {project.instructions.map((step, index) => (
           <StyledInstructionStep key={step.id}>

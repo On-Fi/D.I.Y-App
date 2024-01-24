@@ -37,11 +37,21 @@ const StyledStep = styled.div`
   gap: 10px;
 `;
 
+const MaterialInput = styled.div`
+  display: flex;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
   const [steps, setSteps] = useState(
     project.instructions || [{ id: uuidv4(), text: "" }]
+  );
+  const [tools, setTools] = useState(
+    project.tools || [{ id: uuidv4(), name: "" }]
+  );
+  const [material, setMaterial] = useState(
+    project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
 
   const uploadImage = async () => {
@@ -63,6 +73,8 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const projectData = Object.fromEntries(formData);
     projectData.image = imageId;
     projectData.instructions = steps;
+    projectData.tools = tools;
+    projectData.material = material;
 
     onSubmit(projectData);
   }
@@ -71,9 +83,36 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     setSteps([...steps, { id: uuidv4(), text: "" }]);
   }
 
-  function handleInput(text, id) {
+  function handleInstructionInput(text, id) {
     setSteps(
       steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+    );
+  }
+
+  function handleAddTool() {
+    setTools([...tools, { id: uuidv4(), name: "" }]);
+  }
+
+  function handleToolInput(name, id) {
+    setTools(
+      tools.map((tool) => (tool.id === id ? { ...tool, name: name } : tool))
+    );
+  }
+
+  function handleAddMaterial() {
+    setMaterial([...material, { id: uuidv4(), amount: "", name: "" }]);
+  }
+
+  function handleMaterialAmountInput(amount, id) {
+    setMaterial(
+      material.map((item) =>
+        item.id === id ? { ...item, amount: amount } : item
+      )
+    );
+  }
+  function handleMaterialNameInput(name, id) {
+    setMaterial(
+      material.map((item) => (item.id === id ? { ...item, name: name } : item))
     );
   }
 
@@ -161,14 +200,52 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             choose here
           </option>
         </StyledSelect>
+
         <label htmlFor="tools">Tools:*</label>
-        <StyledInput id="tools" name="tools" defaultValue={project.tools} />
-        <label htmlFor="material">Material:</label>
-        <StyledInput
-          id="material"
-          name="material"
-          defaultValue={project.material}
-        />
+        {tools.map((tool) => (
+          <StyledInput
+            key={tool.id}
+            id="tool"
+            name="tool"
+            defaultValue={tool.name}
+            placeholder='e.g. "hammer"'
+            onInput={(event) => handleToolInput(event.target.value, tool.id)}
+          ></StyledInput>
+        ))}
+        <button type="button" onClick={handleAddTool}>
+          add tool
+        </button>
+
+        <label htmlFor="tools">Material:*</label>
+        {material.map((item) => (
+          <MaterialInput key={item.id}>
+            <StyledInput
+              type="number"
+              min="1"
+              id="material"
+              name="material"
+              placeholder="e.g. 5"
+              defaultValue={item.amount}
+              onInput={(event) =>
+                handleMaterialAmountInput(event.target.value, item.id)
+              }
+            />
+            <StyledInput
+              key={item.id}
+              id="material"
+              name="material"
+              defaultValue={item.name}
+              placeholder="nails"
+              onInput={(event) =>
+                handleMaterialNameInput(event.target.value, item.id)
+              }
+            />
+          </MaterialInput>
+        ))}
+        <button type="button" onClick={handleAddMaterial}>
+          add material
+        </button>
+
         <label htmlFor="instructions">Instructions:*</label>
 
         {steps.map((step, index) => (
@@ -178,7 +255,9 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               id="instructions"
               name="instructions"
               defaultValue={step.text}
-              onInput={(event) => handleInput(event.target.value, step.id)}
+              onInput={(event) =>
+                handleInstructionInput(event.target.value, step.id)
+              }
             ></StyledInput>
           </StyledStep>
         ))}
