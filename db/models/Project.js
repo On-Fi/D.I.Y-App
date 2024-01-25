@@ -9,8 +9,8 @@ const projectSchema = new Schema({
   difficulty: { type: String, required: true },
   time: { type: Number, required: true },
   priceCategory: { type: String, required: true },
-  tools: { type: String, required: true },
-  material: { type: String, required: true },
+  tools: { type: Array, required: true },
+  material: { type: Array, required: true },
   instructions: { type: Array, required: true },
 });
 

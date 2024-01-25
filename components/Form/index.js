@@ -37,11 +37,21 @@ const StyledStep = styled.div`
   gap: 10px;
 `;
 
+const MaterialInput = styled.div`
+  display: flex;
+`;
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
   const [steps, setSteps] = useState(
     project.instructions || [{ id: uuidv4(), text: "" }]
+  );
+  const [tools, setTools] = useState(
+    project.tools || [{ id: uuidv4(), name: "" }]
+  );
+  const [material, setMaterial] = useState(
+    project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
 
   const uploadImage = async () => {
@@ -63,17 +73,65 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     const projectData = Object.fromEntries(formData);
     projectData.image = imageId;
     projectData.instructions = steps;
-
+    projectData.tools = tools;
+    projectData.material = material;
     onSubmit(projectData);
   }
 
   function handleAddStep() {
-    setSteps([...steps, { id: uuidv4(), text: "" }]);
+    const lastStep = steps[steps.length - 1];
+    if (!lastStep || lastStep.text.trim() !== "") {
+      setSteps([...steps, { id: uuidv4(), text: "" }]);
+    } else {
+      alert("Please fill in the previous step first.");
+    }
   }
 
-  function handleInput(text, id) {
-    setSteps(
-      steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+  function handleInstructionInput(text, id) {
+    if (text !== "") {
+      setSteps(
+        steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+      );
+    } else {
+      setSteps(steps.filter((step) => step.text.trim() !== ""));
+    }
+  }
+
+  function handleAddTool() {
+    const lastTool = tools[tools.length - 1];
+    if (!lastTool || lastTool.name.trim() !== "") {
+      setTools([...tools, { id: uuidv4(), name: "" }]);
+    } else {
+      alert("Please fill in the previous tool first.");
+    }
+  }
+
+  function handleToolInput(name, id) {
+    setTools(
+      tools.map((tool) => (tool.id === id ? { ...tool, name: name } : tool))
+    );
+  }
+
+  function handleAddMaterial() {
+    const lastMaterial = material[material.length - 1];
+    if (!lastMaterial || lastMaterial.name.trim() !== "") {
+      setMaterial([...material, { id: uuidv4(), name: "" }]);
+    } else {
+      alert("Please fill in the previous item first.");
+    }
+  }
+
+  function handleMaterialAmountInput(amount, id) {
+    setMaterial(
+      material.map((item) =>
+        item.id === id ? { ...item, amount: amount } : item
+      )
+    );
+  }
+
+  function handleMaterialNameInput(name, id) {
+    setMaterial(
+      material.map((item) => (item.id === id ? { ...item, name: name } : item))
     );
   }
 
@@ -86,6 +144,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           id="title"
           name="title"
           defaultValue={project.title}
+          required
         />
 
         <label htmlFor="image">Image:</label>
@@ -111,11 +170,12 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
 
         <label htmlFor="category">Category:* </label>
         <StyledSelect
-          defaultValue={project.category || "choose-here"}
+          defaultValue={project.category || ""}
           name="category"
           id="category"
+          required
         >
-          <option value="choose-here" disabled hidden>
+          <option value="" disabled hidden>
             choose here
           </option>
           <option value="home">home</option>
@@ -124,20 +184,22 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="kitchen">kitchen</option>
           <option value="bathroom">bathroom</option>
         </StyledSelect>
+
         <label htmlFor="difficulty">Difficulty:*</label>
         <StyledSelect
-          defaultValue={project.difficulty || "choose-here"}
+          defaultValue={project.difficulty || ""}
           name="difficulty"
           id="difficulty"
+          required
         >
+          <option value="" disabled hidden>
+            choose here
+          </option>
           <option value="beginner">beginner</option>
           <option value="advanced">advanced</option>
           <option value="expert">expert</option>
-
-          <option value="choose-here" disabled hidden>
-            choose here
-          </option>
         </StyledSelect>
+
         <label htmlFor="time">Duration:* </label>
         <StyledInput
           type="range"
@@ -147,30 +209,72 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           max="48"
           defaultValue={project.time || 24}
         />
+
         <label htmlFor="price">Price:* </label>
         <StyledSelect
-          defaultValue={project.priceCategory || "choose-here"}
+          defaultValue={project.priceCategory || ""}
           name="priceCategory"
           id="priceCategory"
+          placeholder="choose here"
+          required
         >
+          <option value="" disabled hidden>
+            choose here
+          </option>
           <option value="€">0-10 €</option>
           <option value="€€">10-50 €</option>
           <option value="€€€">50-150 €</option>
-
-          <option value="choose-here" disabled hidden>
-            choose here
-          </option>
         </StyledSelect>
-        <label htmlFor="tools">Tools:*</label>
-        <StyledInput id="tools" name="tools" defaultValue={project.tools} />
-        <label htmlFor="material">Material:</label>
-        <StyledInput
-          id="material"
-          name="material"
-          defaultValue={project.material}
-        />
-        <label htmlFor="instructions">Instructions:*</label>
 
+        <label htmlFor="tools">Tools:*</label>
+        {tools.map((tool) => (
+          <StyledInput
+            key={tool.id}
+            id="tool"
+            name="tool"
+            defaultValue={tool.name}
+            placeholder='e.g. "hammer"'
+            onInput={(event) => handleToolInput(event.target.value, tool.id)}
+            required
+          ></StyledInput>
+        ))}
+        <button type="button" onClick={handleAddTool}>
+          add tool
+        </button>
+
+        <label htmlFor="tools">Material:*</label>
+        {material.map((item) => (
+          <MaterialInput key={item.id}>
+            <StyledInput
+              type="number"
+              min="1"
+              id="material"
+              name="material"
+              placeholder="e.g. 5"
+              defaultValue={item.amount}
+              onInput={(event) =>
+                handleMaterialAmountInput(event.target.value, item.id)
+              }
+              required
+            />
+            <StyledInput
+              key={item.id}
+              id="material"
+              name="material"
+              defaultValue={item.name}
+              placeholder="nails"
+              onInput={(event) =>
+                handleMaterialNameInput(event.target.value, item.id)
+              }
+              required
+            />
+          </MaterialInput>
+        ))}
+        <button type="button" onClick={handleAddMaterial}>
+          add material
+        </button>
+
+        <label htmlFor="instructions">Instructions:*</label>
         {steps.map((step, index) => (
           <StyledStep key={step.id}>
             <label>Step {index + 1} </label>
@@ -178,13 +282,17 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               id="instructions"
               name="instructions"
               defaultValue={step.text}
-              onInput={(event) => handleInput(event.target.value, step.id)}
+              onInput={(event) =>
+                handleInstructionInput(event.target.value, step.id)
+              }
+              required
             ></StyledInput>
           </StyledStep>
         ))}
         <button type="button" onClick={handleAddStep}>
           add step
         </button>
+
         <button type="submit">
           {Object.keys(project).length === 0 ? "Save" : "Edit"}
         </button>

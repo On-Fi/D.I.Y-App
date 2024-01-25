@@ -46,10 +46,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledInstructionStep = styled.div`
+const StyledInstructionStep = styled.li`
   display: flex;
   gap: 10px;
 `;
+
+const ToolList = styled.ul``;
 
 export default function Project({ project, favorites, onToggleFavorite }) {
   const router = useRouter();
@@ -72,6 +74,7 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         style={{ width: "100%", height: "auto" }}
         alt="image of the diy project"
       />
+
       <ProjectHeader>
         <h1>{project.title}</h1>
         <FavoriteButton
@@ -81,9 +84,27 @@ export default function Project({ project, favorites, onToggleFavorite }) {
           size={40}
         ></FavoriteButton>
       </ProjectHeader>
+
       <ShortFactsBox project={project}></ShortFactsBox>
-      <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox>
-      <ProjectInfoBox title="Material" text={project.material}></ProjectInfoBox>
+
+      <ProjectInfoBox title="Tools">
+        <ToolList>
+          {project.tools.map((tool) => (
+            <li key={tool.id}>{tool.name}</li>
+          ))}
+        </ToolList>
+      </ProjectInfoBox>
+
+      <ProjectInfoBox title="Material">
+        <ToolList>
+          {project.material.map((item) => (
+            <StyledInstructionStep key={item.id}>
+              {item.amount} x {item.name}
+            </StyledInstructionStep>
+          ))}
+        </ToolList>
+      </ProjectInfoBox>
+
       <ProjectInfoBox title="Instructions">
         {project.instructions.map((step, index) => (
           <StyledInstructionStep key={step.id}>
@@ -92,9 +113,9 @@ export default function Project({ project, favorites, onToggleFavorite }) {
           </StyledInstructionStep>
         ))}
       </ProjectInfoBox>
+
       <ButtonSection>
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-
         <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
       </ButtonSection>
     </>
