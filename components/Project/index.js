@@ -46,7 +46,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledInstructionStep = styled.div`
+const StyledInstructionStep = styled.li`
   display: flex;
   gap: 10px;
 `;
@@ -99,9 +99,7 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         <ToolList>
           {project.material.map((item) => (
             <StyledInstructionStep key={item.id}>
-              <li>
-                {item.amount} x {item.name}
-              </li>
+              {item.amount} x {item.name}
             </StyledInstructionStep>
           ))}
         </ToolList>
