@@ -144,6 +144,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           id="title"
           name="title"
           defaultValue={project.title}
+          required
         />
 
         <label htmlFor="image">Image:</label>
@@ -169,11 +170,12 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
 
         <label htmlFor="category">Category:* </label>
         <StyledSelect
-          defaultValue={project.category || "choose-here"}
+          defaultValue={project.category || ""}
           name="category"
           id="category"
+          required
         >
-          <option value="choose-here" disabled hidden>
+          <option value="" disabled hidden>
             choose here
           </option>
           <option value="home">home</option>
@@ -185,16 +187,17 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
 
         <label htmlFor="difficulty">Difficulty:*</label>
         <StyledSelect
-          defaultValue={project.difficulty || "choose-here"}
+          defaultValue={project.difficulty || ""}
           name="difficulty"
           id="difficulty"
+          required
         >
+          <option value="" disabled hidden>
+            choose here
+          </option>
           <option value="beginner">beginner</option>
           <option value="advanced">advanced</option>
           <option value="expert">expert</option>
-          <option value="choose-here" disabled hidden>
-            choose here
-          </option>
         </StyledSelect>
 
         <label htmlFor="time">Duration:* </label>
@@ -209,16 +212,18 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
 
         <label htmlFor="price">Price:* </label>
         <StyledSelect
-          defaultValue={project.priceCategory || "choose-here"}
+          defaultValue={project.priceCategory || ""}
           name="priceCategory"
           id="priceCategory"
+          placeholder="choose here"
+          required
         >
+          <option value="" disabled hidden>
+            choose here
+          </option>
           <option value="€">0-10 €</option>
           <option value="€€">10-50 €</option>
           <option value="€€€">50-150 €</option>
-          <option value="choose-here" disabled hidden>
-            choose here
-          </option>
         </StyledSelect>
 
         <label htmlFor="tools">Tools:*</label>
