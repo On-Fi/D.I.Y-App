@@ -21,7 +21,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
 
   useEffect(() => {
     handleFilter(filter);
-  }, [filter]);
+  });
 
   function handleFilter() {
     const filteredByTime = filter.time

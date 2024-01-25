@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FilterCategory from "../FilterCategory";
+import { useState } from "react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -39,15 +40,11 @@ export default function FilterSection({
   handlePriceCategoryFilter,
   handleCategoryFilter,
 }) {
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   const formData = new FormData(event.target);
-  //   const filterData = Object.fromEntries(formData);
-  //   handleFilter(filterData);
-  // }
+  const [time, setTime] = useState(8);
 
   function onTimeFilter(event) {
     handleTimeFilter(event.target.value);
+    setTime(event.target.value);
   }
 
   function onDifficultyFilter(event) {
@@ -89,7 +86,7 @@ export default function FilterSection({
           ></FilterCategory>
         </StyledFilterCategory>
       </StyledFilterCategorySection>
-      <label htmlFor="time">Duration: </label>
+      <label htmlFor="time">Duration: {time} hours</label>
       <input
         type="range"
         id="time"
