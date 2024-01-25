@@ -74,6 +74,7 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         style={{ width: "100%", height: "auto" }}
         alt="image of the diy project"
       />
+
       <ProjectHeader>
         <h1>{project.title}</h1>
         <FavoriteButton
@@ -83,8 +84,9 @@ export default function Project({ project, favorites, onToggleFavorite }) {
           size={40}
         ></FavoriteButton>
       </ProjectHeader>
+
       <ShortFactsBox project={project}></ShortFactsBox>
-      {/* <ProjectInfoBox title="Tools" text={project.tools}></ProjectInfoBox> */}
+
       <ProjectInfoBox title="Tools">
         <ToolList>
           {project.tools.map((tool) => (
@@ -113,9 +115,9 @@ export default function Project({ project, favorites, onToggleFavorite }) {
           </StyledInstructionStep>
         ))}
       </ProjectInfoBox>
+
       <ButtonSection>
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-
         <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
       </ButtonSection>
     </>

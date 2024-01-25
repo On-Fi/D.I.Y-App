@@ -75,22 +75,35 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     projectData.instructions = steps;
     projectData.tools = tools;
     projectData.material = material;
-
     onSubmit(projectData);
   }
 
   function handleAddStep() {
-    setSteps([...steps, { id: uuidv4(), text: "" }]);
+    const lastStep = steps[steps.length - 1];
+    if (!lastStep || lastStep.text.trim() !== "") {
+      setSteps([...steps, { id: uuidv4(), text: "" }]);
+    } else {
+      alert("Please fill in the previous step first.");
+    }
   }
 
   function handleInstructionInput(text, id) {
-    setSteps(
-      steps.map((step) => (step.id === id ? { ...step, text: text } : step))
-    );
+    if (text !== "") {
+      setSteps(
+        steps.map((step) => (step.id === id ? { ...step, text: text } : step))
+      );
+    } else {
+      setSteps(steps.filter((step) => step.text.trim() !== ""));
+    }
   }
 
   function handleAddTool() {
-    setTools([...tools, { id: uuidv4(), name: "" }]);
+    const lastTool = tools[tools.length - 1];
+    if (!lastTool || lastTool.name.trim() !== "") {
+      setTools([...tools, { id: uuidv4(), name: "" }]);
+    } else {
+      alert("Please fill in the previous tool first.");
+    }
   }
 
   function handleToolInput(name, id) {
@@ -100,7 +113,12 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   }
 
   function handleAddMaterial() {
-    setMaterial([...material, { id: uuidv4(), amount: "", name: "" }]);
+    const lastMaterial = material[material.length - 1];
+    if (!lastMaterial || lastMaterial.name.trim() !== "") {
+      setMaterial([...material, { id: uuidv4(), name: "" }]);
+    } else {
+      alert("Please fill in the previous item first.");
+    }
   }
 
   function handleMaterialAmountInput(amount, id) {
@@ -110,6 +128,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
       )
     );
   }
+
   function handleMaterialNameInput(name, id) {
     setMaterial(
       material.map((item) => (item.id === id ? { ...item, name: name } : item))
@@ -163,6 +182,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="kitchen">kitchen</option>
           <option value="bathroom">bathroom</option>
         </StyledSelect>
+
         <label htmlFor="difficulty">Difficulty:*</label>
         <StyledSelect
           defaultValue={project.difficulty || "choose-here"}
@@ -172,11 +192,11 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="beginner">beginner</option>
           <option value="advanced">advanced</option>
           <option value="expert">expert</option>
-
           <option value="choose-here" disabled hidden>
             choose here
           </option>
         </StyledSelect>
+
         <label htmlFor="time">Duration:* </label>
         <StyledInput
           type="range"
@@ -186,6 +206,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           max="48"
           defaultValue={project.time || 24}
         />
+
         <label htmlFor="price">Price:* </label>
         <StyledSelect
           defaultValue={project.priceCategory || "choose-here"}
@@ -195,7 +216,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           <option value="€">0-10 €</option>
           <option value="€€">10-50 €</option>
           <option value="€€€">50-150 €</option>
-
           <option value="choose-here" disabled hidden>
             choose here
           </option>
@@ -210,6 +230,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             defaultValue={tool.name}
             placeholder='e.g. "hammer"'
             onInput={(event) => handleToolInput(event.target.value, tool.id)}
+            required
           ></StyledInput>
         ))}
         <button type="button" onClick={handleAddTool}>
@@ -229,6 +250,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               onInput={(event) =>
                 handleMaterialAmountInput(event.target.value, item.id)
               }
+              required
             />
             <StyledInput
               key={item.id}
@@ -239,6 +261,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               onInput={(event) =>
                 handleMaterialNameInput(event.target.value, item.id)
               }
+              required
             />
           </MaterialInput>
         ))}
@@ -247,7 +270,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         </button>
 
         <label htmlFor="instructions">Instructions:*</label>
-
         {steps.map((step, index) => (
           <StyledStep key={step.id}>
             <label>Step {index + 1} </label>
@@ -258,12 +280,14 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               onInput={(event) =>
                 handleInstructionInput(event.target.value, step.id)
               }
+              required
             ></StyledInput>
           </StyledStep>
         ))}
         <button type="button" onClick={handleAddStep}>
           add step
         </button>
+
         <button type="submit">
           {Object.keys(project).length === 0 ? "Save" : "Edit"}
         </button>
