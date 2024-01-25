@@ -33,48 +33,76 @@ const StyledRangeInput = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
 `;
-export default function FilterSection({ handleFilter }) {
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const filterData = Object.fromEntries(formData);
-    handleFilter(filterData);
+export default function FilterSection({
+  handleTimeFilter,
+  handleDifficultyFilter,
+  handlePriceCategoryFilter,
+  handleCategoryFilter,
+}) {
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const filterData = Object.fromEntries(formData);
+  //   handleFilter(filterData);
+  // }
+
+  function onTimeFilter(event) {
+    handleTimeFilter(event.target.value);
+  }
+
+  function onDifficultyFilter(event) {
+    handleDifficultyFilter(event.target.value);
+  }
+
+  function onPriceCategoryFilter(event) {
+    handlePriceCategoryFilter(event.target.value);
+  }
+
+  function onCategoryFilter(event) {
+    handleCategoryFilter(event.target.value);
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <StyledSubheading>
-        Please choose a filter for each category
-      </StyledSubheading>
+    <StyledForm>
       <StyledFilterCategorySection>
         <StyledFilterCategory>
           <FilterCategory
             category={"priceCategory"}
             names={["€", "€€", "€€€"]}
+            onChangeFunction={onPriceCategoryFilter}
           ></FilterCategory>
         </StyledFilterCategory>
+
         <StyledFilterCategory>
           <FilterCategory
             category={"difficulty"}
             names={["beginner", "advanced", "expert"]}
+            onChangeFunction={onDifficultyFilter}
           ></FilterCategory>
         </StyledFilterCategory>
+
         <StyledFilterCategory>
           <FilterCategory
             category={"category"}
             names={["home", "garden", "fashion", "kitchen", "bathroom"]}
+            onChangeFunction={onCategoryFilter}
           ></FilterCategory>
         </StyledFilterCategory>
       </StyledFilterCategorySection>
       <label htmlFor="time">Duration: </label>
-
-      <input type="range" id="time" name="time" min="1" max="48" />
+      <input
+        type="range"
+        id="time"
+        name="time"
+        min="1"
+        max="48"
+        onChange={onTimeFilter}
+      />
       <StyledRangeInput>
         <span>1 hour</span>
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <button type="submit">Apply filter</button>
     </StyledForm>
   );
 }

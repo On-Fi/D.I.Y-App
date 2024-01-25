@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "@/components/SearchBar";
 
 const Subline = styled.h2`
@@ -12,20 +12,58 @@ const Subline = styled.h2`
 
 export default function HomePage({ projects, favorites, onToggleFavorite }) {
   const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
+  const [filter, setFilter] = useState({
+    time: null,
+    difficulty: null,
+    category: null,
+    priceCategory: null,
+  });
 
-  function handleFilter(filterData) {
-    setProjectsToDisplay(
-      projects.filter(
-        (project) =>
-          project.priceCategory === filterData.priceCategory &&
-          project.difficulty === filterData.difficulty &&
-          filterData.category.includes(project.category.toLowerCase()) &&
-          filterData.time >= project.time
-      )
-    );
+  useEffect(() => {
+    handleFilter(filter);
+  }, [filter]);
+
+  function handleFilter() {
+    const filteredByTime = filter.time
+      ? projects.filter((project) => project.time <= filter.time)
+      : projects;
+
+    const filteredByCategory = filter.category
+      ? filteredByTime.filter((project) => project.category === filter.category)
+      : filteredByTime;
+
+    const filteredByPriceCategory = filter.priceCategory
+      ? filteredByCategory.filter(
+          (project) => project.priceCategory === filter.priceCategory
+        )
+      : filteredByCategory;
+
+    const filteredByDifficulty = filter.difficulty
+      ? filteredByPriceCategory.filter(
+          (project) => project.difficulty === filter.difficulty
+        )
+      : filteredByPriceCategory;
+    setProjectsToDisplay(filteredByDifficulty);
   }
+
+  function handleTimeFilter(time) {
+    setFilter({ ...filter, time: time });
+  }
+
+  function handleCategoryFilter(category) {
+    setFilter({ ...filter, category: category });
+  }
+
+  function handlePriceCategoryFilter(priceCategory) {
+    setFilter({ ...filter, priceCategory: priceCategory });
+  }
+
+  function handleDifficultyFilter(difficulty) {
+    setFilter({ ...filter, difficulty: difficulty });
+  }
+
   function handleSearch(searchTerm) {
-    const filteredProjects = projects.filter((project) =>
+    const filteredProjects = projectsToDisplay.filter((project) =>
       project.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setProjectsToDisplay(filteredProjects);
@@ -34,7 +72,12 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
     <>
       <Subline>All projects</Subline>
       <SearchBar onSearch={handleSearch} />
-      <FilterSection handleFilter={handleFilter} />
+      <FilterSection
+        handleTimeFilter={handleTimeFilter}
+        handleDifficultyFilter={handleDifficultyFilter}
+        handleCategoryFilter={handleCategoryFilter}
+        handlePriceCategoryFilter={handlePriceCategoryFilter}
+      />
       <ProjectList
         projectsToDisplay={projectsToDisplay}
         favorites={favorites}

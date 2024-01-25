@@ -1,4 +1,4 @@
-export default function FilterCategory({ category, names }) {
+export default function FilterCategory({ category, names, onChangeFunction }) {
   return (
     <>
       {names.map((name) => (
@@ -9,6 +9,7 @@ export default function FilterCategory({ category, names }) {
             name={category}
             value={name}
             required
+            onChange={onChangeFunction}
           ></input>
           {name}
         </label>
