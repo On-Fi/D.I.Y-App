@@ -41,7 +41,10 @@ export default function FilterSection({
   handleCategoryFilter,
   onResetFilter,
 }) {
-  const [time, setTime] = useState(8);
+  const [time, setTime] = useState(24);
+  const [priceCategory, setPriceCategory] = useState(null);
+  const [difficulty, setDifficulty] = useState(null); 
+  const [category, setCategory] = useState(null); 
 
   function onTimeFilter(event) {
     handleTimeFilter(event.target.value);
@@ -50,14 +53,26 @@ export default function FilterSection({
 
   function onDifficultyFilter(event) {
     handleDifficultyFilter(event.target.value);
+    setDifficulty(event.target.value);
   }
 
   function onPriceCategoryFilter(event) {
     handlePriceCategoryFilter(event.target.value);
+    setPriceCategory(event.target.value);
   }
 
   function onCategoryFilter(event) {
     handleCategoryFilter(event.target.value);
+    setCategory(event.target.value);
+  }
+
+  function handleResetFilter() {
+    onResetFilter();
+    setTime(24); 
+    setPriceCategory(null); 
+    setPriceCategory(null); 
+    setDifficulty(null); 
+    setCategory(null);
   }
 
   return (
@@ -68,6 +83,7 @@ export default function FilterSection({
             category={"priceCategory"}
             names={["€", "€€", "€€€"]}
             onChangeFunction={onPriceCategoryFilter}
+            selectedValue={priceCategory} 
           ></FilterCategory>
         </StyledFilterCategory>
 
@@ -76,6 +92,7 @@ export default function FilterSection({
             category={"difficulty"}
             names={["beginner", "advanced", "expert"]}
             onChangeFunction={onDifficultyFilter}
+            selectedValue={difficulty}
           ></FilterCategory>
         </StyledFilterCategory>
 
@@ -84,6 +101,7 @@ export default function FilterSection({
             category={"category"}
             names={["home", "garden", "fashion", "kitchen", "bathroom"]}
             onChangeFunction={onCategoryFilter}
+            selectedValue={category}
           ></FilterCategory>
         </StyledFilterCategory>
       </StyledFilterCategorySection>
@@ -94,6 +112,7 @@ export default function FilterSection({
         name="time"
         min="1"
         max="48"
+        value={time}
         onChange={onTimeFilter}
       />
       <StyledRangeInput>
@@ -101,7 +120,7 @@ export default function FilterSection({
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <button type="button" onClick={onResetFilter}>
+      <button type="button" onClick={handleResetFilter}>
         Reset filter
       </button>
     </StyledForm>
