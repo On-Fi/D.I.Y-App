@@ -10,14 +10,16 @@ const Subline = styled.h2`
   cursor: default;
 `;
 
+const initialFilter = {
+  time: null,
+  difficulty: null,
+  category: null,
+  priceCategory: null,
+};
+
 export default function HomePage({ projects, favorites, onToggleFavorite }) {
   const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
-  const [filter, setFilter] = useState({
-    time: null,
-    difficulty: null,
-    category: null,
-    priceCategory: null,
-  });
+  const [filter, setFilter] = useState(initialFilter);
 
   useEffect(() => {
     handleFilter(filter);
@@ -44,6 +46,10 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
         )
       : filteredByPriceCategory;
     setProjectsToDisplay(filteredByDifficulty);
+  }
+
+  function handleResetFilter() {
+    setFilter(initialFilter);
   }
 
   function handleTimeFilter(time) {
@@ -77,6 +83,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
         handleDifficultyFilter={handleDifficultyFilter}
         handleCategoryFilter={handleCategoryFilter}
         handlePriceCategoryFilter={handlePriceCategoryFilter}
+        onResetFilter={handleResetFilter}
       />
       <ProjectList
         projectsToDisplay={projectsToDisplay}

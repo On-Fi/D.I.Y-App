@@ -39,6 +39,7 @@ export default function FilterSection({
   handleDifficultyFilter,
   handlePriceCategoryFilter,
   handleCategoryFilter,
+  onResetFilter,
 }) {
   const [time, setTime] = useState(8);
 
@@ -100,6 +101,9 @@ export default function FilterSection({
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
+      <button type="button" onClick={onResetFilter}>
+        Reset filter
+      </button>
     </StyledForm>
   );
 }
