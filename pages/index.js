@@ -10,31 +10,71 @@ const Subline = styled.h2`
   cursor: default;
 `;
 
-export default function HomePage({ projects, favorites, onToggleFavorite }) {
-  const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
+const initialFilter = {
+  time: 24,
+  difficulty: null,
+  category: null,
+  priceCategory: null,
+  searchTerm: null,
+};
 
-  function handleFilter(filterData) {
-    setProjectsToDisplay(
-      projects.filter(
-        (project) =>
-          project.priceCategory === filterData.priceCategory &&
-          project.difficulty === filterData.difficulty &&
-          filterData.category.includes(project.category.toLowerCase()) &&
-          filterData.time >= project.time
-      )
-    );
+export default function HomePage({ projects, favorites, onToggleFavorite }) {
+  const [filters, setFilters] = useState(initialFilter);
+  const projectsToDisplay = updateProjectsToDisplay(filters);
+
+  function handleFilter(value, name) {
+    setFilters({ ...filters, [name]: value });
   }
+
   function handleSearch(searchTerm) {
-    const filteredProjects = projects.filter((project) =>
-      project.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setProjectsToDisplay(filteredProjects);
+    setFilters({ ...filters, searchTerm: searchTerm });
   }
+
+  function updateProjectsToDisplay() {
+    const filteredByTime = filters.time
+      ? projects.filter((project) => project.time <= filters.time)
+      : projects;
+
+    const filteredByCategory = filters.category
+      ? filteredByTime.filter(
+          (project) => project.category === filters.category
+        )
+      : filteredByTime;
+
+    const filteredByPriceCategory = filters.priceCategory
+      ? filteredByCategory.filter(
+          (project) => project.priceCategory === filters.priceCategory
+        )
+      : filteredByCategory;
+
+    const filteredByDifficulty = filters.difficulty
+      ? filteredByPriceCategory.filter(
+          (project) => project.difficulty === filters.difficulty
+        )
+      : filteredByPriceCategory;
+
+    const filteredBySearchTerm = filters.searchTerm
+      ? filteredByDifficulty.filter((project) =>
+          project.title.toLowerCase().includes(filters.searchTerm.toLowerCase())
+        )
+      : filteredByDifficulty;
+
+    return filteredBySearchTerm;
+  }
+
+  function handleResetFilter() {
+    setFilters(initialFilter);
+  }
+
   return (
     <>
       <Subline>All projects</Subline>
-      <SearchBar onSearch={handleSearch} />
-      <FilterSection handleFilter={handleFilter} />
+      <SearchBar onSearch={handleSearch} filters={filters} />
+      <FilterSection
+        onResetFilter={handleResetFilter}
+        filters={filters}
+        handleFilter={handleFilter}
+      />
       <ProjectList
         projectsToDisplay={projectsToDisplay}
         favorites={favorites}

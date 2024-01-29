@@ -175,7 +175,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           id="category"
           required
         >
-          <option value="" disabled hidden>
+          <option value="" disabled selected>
             choose here
           </option>
           <option value="home">home</option>

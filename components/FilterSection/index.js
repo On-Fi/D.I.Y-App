@@ -12,11 +12,6 @@ const StyledForm = styled.form`
   border-radius: 10px;
 `;
 
-const StyledSubheading = styled.p`
-  text-align: center;
-  font-weight: 600;
-  margin: 0;
-`;
 const StyledFilterCategorySection = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,48 +28,63 @@ const StyledRangeInput = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
 `;
-export default function FilterSection({ handleFilter }) {
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const filterData = Object.fromEntries(formData);
-    handleFilter(filterData);
+export default function FilterSection({
+  onResetFilter,
+  filters,
+  handleFilter,
+}) {
+  function onFilter(event) {
+    handleFilter(event.target.value, event.target.name);
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <StyledSubheading>
-        Please choose a filter for each category
-      </StyledSubheading>
+    <StyledForm>
       <StyledFilterCategorySection>
         <StyledFilterCategory>
           <FilterCategory
             category={"priceCategory"}
             names={["€", "€€", "€€€"]}
+            onChange={onFilter}
+            selectedValue={filters.priceCategory}
           ></FilterCategory>
         </StyledFilterCategory>
+
         <StyledFilterCategory>
           <FilterCategory
             category={"difficulty"}
             names={["beginner", "advanced", "expert"]}
+            onChange={onFilter}
+            selectedValue={filters.difficulty}
           ></FilterCategory>
         </StyledFilterCategory>
+
         <StyledFilterCategory>
           <FilterCategory
             category={"category"}
             names={["home", "garden", "fashion", "kitchen", "bathroom"]}
+            onChange={onFilter}
+            selectedValue={filters.category}
           ></FilterCategory>
         </StyledFilterCategory>
       </StyledFilterCategorySection>
-      <label htmlFor="time">Duration: </label>
-
-      <input type="range" id="time" name="time" min="1" max="48" />
+      <label htmlFor="time">Duration: {filters.time} hours</label>
+      <input
+        type="range"
+        id="time"
+        name="time"
+        min="1"
+        max="48"
+        value={filters.time || 24}
+        onChange={onFilter}
+      />
       <StyledRangeInput>
         <span>1 hour</span>
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <button type="submit">Apply filter</button>
+      <button type="button" onClick={onResetFilter}>
+        Reset filter
+      </button>
     </StyledForm>
   );
 }
