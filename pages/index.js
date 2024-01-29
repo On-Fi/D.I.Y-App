@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 
 const Subline = styled.h2`
@@ -11,79 +11,69 @@ const Subline = styled.h2`
 `;
 
 const initialFilter = {
-  time: null,
+  time: 24,
   difficulty: null,
   category: null,
   priceCategory: null,
+  searchTerm: null,
 };
 
 export default function HomePage({ projects, favorites, onToggleFavorite }) {
-  const [projectsToDisplay, setProjectsToDisplay] = useState(projects);
-  const [filter, setFilter] = useState(initialFilter);
+  const [filters, setFilters] = useState(initialFilter);
+  const projectsToDisplay = updateProjectsToDisplay(filters);
 
-  useEffect(() => {
-    handleFilter(filter);
-  }, [filter]);
-
-  function handleFilter() {
-    const filteredByTime = filter.time
-      ? projects.filter((project) => project.time <= filter.time)
-      : projects;
-
-    const filteredByCategory = filter.category
-      ? filteredByTime.filter((project) => project.category === filter.category)
-      : filteredByTime;
-
-    const filteredByPriceCategory = filter.priceCategory
-      ? filteredByCategory.filter(
-          (project) => project.priceCategory === filter.priceCategory
-        )
-      : filteredByCategory;
-
-    const filteredByDifficulty = filter.difficulty
-      ? filteredByPriceCategory.filter(
-          (project) => project.difficulty === filter.difficulty
-        )
-      : filteredByPriceCategory;
-    setProjectsToDisplay(filteredByDifficulty);
-  }
-
-  function handleResetFilter() {
-    setFilter(initialFilter);
-  }
-
-  function handleTimeFilter(time) {
-    setFilter({ ...filter, time: time });
-  }
-
-  function handleCategoryFilter(category) {
-    setFilter({ ...filter, category: category });
-  }
-
-  function handlePriceCategoryFilter(priceCategory) {
-    setFilter({ ...filter, priceCategory: priceCategory });
-  }
-
-  function handleDifficultyFilter(difficulty) {
-    setFilter({ ...filter, difficulty: difficulty });
+  function handleFilter(value, name) {
+    setFilters({ ...filters, [name]: value });
   }
 
   function handleSearch(searchTerm) {
-    const filteredProjects = projectsToDisplay.filter((project) =>
-      project.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setProjectsToDisplay(filteredProjects);
+    setFilters({ ...filters, searchTerm: searchTerm });
   }
+
+  function updateProjectsToDisplay() {
+    const filteredByTime = filters.time
+      ? projects.filter((project) => project.time <= filters.time)
+      : projects;
+
+    const filteredByCategory = filters.category
+      ? filteredByTime.filter(
+          (project) => project.category === filters.category
+        )
+      : filteredByTime;
+
+    const filteredByPriceCategory = filters.priceCategory
+      ? filteredByCategory.filter(
+          (project) => project.priceCategory === filters.priceCategory
+        )
+      : filteredByCategory;
+
+    const filteredByDifficulty = filters.difficulty
+      ? filteredByPriceCategory.filter(
+          (project) => project.difficulty === filters.difficulty
+        )
+      : filteredByPriceCategory;
+
+    const filteredBySearchTerm = filters.searchTerm
+      ? filteredByDifficulty.filter((project) =>
+          project.title.toLowerCase().includes(filters.searchTerm.toLowerCase())
+        )
+      : filteredByDifficulty;
+
+    return filteredBySearchTerm;
+  }
+
+  function handleResetFilter() {
+    setFilters(initialFilter);
+  }
+
   return (
     <>
       <Subline>All projects</Subline>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} filters={filters} />
       <FilterSection
-        handleTimeFilter={handleTimeFilter}
-        handleDifficultyFilter={handleDifficultyFilter}
-        handleCategoryFilter={handleCategoryFilter}
-        handlePriceCategoryFilter={handlePriceCategoryFilter}
         onResetFilter={handleResetFilter}
+        filters={filters}
+        handleFilter={handleFilter}
       />
       <ProjectList
         projectsToDisplay={projectsToDisplay}

@@ -1,4 +1,9 @@
-export default function FilterCategory({ category, names, onChangeFunction, selectedValue}) {
+export default function FilterCategory({
+  category,
+  names,
+  onChange,
+  selectedValue,
+}) {
   return (
     <>
       {names.map((name) => (
@@ -9,8 +14,8 @@ export default function FilterCategory({ category, names, onChangeFunction, sele
             name={category}
             value={name}
             required
-            onChange={onChangeFunction}
-            checked={selectedValue === name} 
+            onChange={onChange}
+            checked={selectedValue === name}
           ></input>
           {name}
         </label>

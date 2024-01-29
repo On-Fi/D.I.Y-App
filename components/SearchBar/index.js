@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { useEffect } from "react";
+import { useState } from "react";
+
 const SearchBarContainer = styled.form`
   display: flex;
   margin: auto;
@@ -29,16 +32,27 @@ const SearchButton = styled.button`
     transform: scale(0.95);
   }
 `;
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, filters }) {
   function handleSubmit(event) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
     onSearch(searchTerm);
   }
 
+  const [rerenderKey, setRerenderKey] = useState(0);
+
+  useEffect(() => {
+    setRerenderKey((prevKey) => prevKey + 1);
+  }, [filters]);
+
   return (
-    <SearchBarContainer id="form" onSubmit={handleSubmit}>
-      <SearchInput type="text" name="searchTerm" placeholder="..." />
+    <SearchBarContainer id="form" onSubmit={handleSubmit} key={rerenderKey}>
+      <SearchInput
+        type="text"
+        name="searchTerm"
+        placeholder="..."
+        defaultValue={filters.searchTerm || ""}
+      />
       <SearchButton type="submit">Search</SearchButton>
     </SearchBarContainer>
   );
