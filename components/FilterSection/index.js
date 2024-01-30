@@ -2,6 +2,7 @@ import styled from "styled-components";
 import FilterCategory from "../FilterCategory";
 import { useState } from "react";
 import FilterIcon from "./FilterIcon";
+import Button from "../Button";
 
 const StyledForm = styled.form`
   display: flex;
@@ -45,6 +46,7 @@ const StyledRangeInput = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
 `;
+
 export default function FilterSection({
   onResetFilter,
   filters,
@@ -107,9 +109,9 @@ export default function FilterSection({
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <button type="button" onClick={onResetFilter}>
+      <Button type="button" onClick={onResetFilter}>
         Reset filter
-      </button>
+      </Button>
     </StyledForm>
     </>
   );
