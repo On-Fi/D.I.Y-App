@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import FilterCategory from "../FilterCategory";
+import { useState } from "react";
+import FilterIcon from "./FilterIcon";
 
 const StyledForm = styled.form`
   display: flex;
@@ -10,6 +12,21 @@ const StyledForm = styled.form`
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+
+  &.hidden {
+    display: none;
+  }
+`;
+
+const FilterButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: auto;
+  margin-bottom: 10px;
+  align-items: center;
+  border: none;
+  background-color: rgba(217, 217, 217, 0.24);
 `;
 
 const StyledFilterCategorySection = styled.div`
@@ -36,9 +53,17 @@ export default function FilterSection({
   function onFilter(event) {
     handleFilter(event.target.value, event.target.name);
   }
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
+  function handleExpandFilter() {
+    setIsCollapsed(!isCollapsed);
+  }
   return (
-    <StyledForm>
+    <>
+    <FilterButton onClick={handleExpandFilter}>
+        <FilterIcon />
+      </FilterButton>
+    <StyledForm className={isCollapsed ? "hidden" : ""}>
       <StyledFilterCategorySection>
         <StyledFilterCategory>
           <FilterCategory
@@ -86,5 +111,6 @@ export default function FilterSection({
         Reset filter
       </button>
     </StyledForm>
+    </>
   );
 }
