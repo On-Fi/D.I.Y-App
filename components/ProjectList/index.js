@@ -8,6 +8,7 @@ const StyledProjectList = styled.ul`
   align-items: center;
   padding: 0;
   margin: 0;
+  margin-top: 20px;
 `;
 
 export default function ProjectList({

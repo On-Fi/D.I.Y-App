@@ -6,7 +6,7 @@ import FilterIcon from "./FilterIcon";
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: lightgrey;
+  background-color:  #f5f5f5;
   width: 85%;
   margin: auto;
   padding: 20px;
@@ -23,10 +23,10 @@ const FilterButton = styled.button`
   flex-direction: column;
   width: 85%;
   margin: auto;
-  margin-bottom: 10px;
+  border-radius: 10px;
   align-items: center;
   border: none;
-  background-color: rgba(217, 217, 217, 0.24);
+  background-color: #f5f5f5;
 `;
 
 const StyledFilterCategorySection = styled.div`
