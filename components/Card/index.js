@@ -5,8 +5,9 @@ import FavoriteButton from "../FavoriteButton";
 import Image from "next/image";
 
 const StyledCard = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #C4B8AA; 
+  background-color: #C4B8AA;
+  border-radius: 12px;
   cursor: pointer;
   margin: auto;
   overflow: hidden;
@@ -18,6 +19,7 @@ const StyledCardContent = styled.div`
 
 const ProjectTitle = styled.h3`
   margin: 0;
+  color: #FFF;
 `;
 
 const StyledLink = styled(Link)`

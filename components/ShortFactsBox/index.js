@@ -9,10 +9,9 @@ const FactBox = styled.div`
   border-radius: 20px;
 `;
 const ShortFact = styled.span`
-  background-color: #858f87;
+  background-color: #FFF;
   border-radius: 20px;
   padding: 5px;
-  color: white;
   padding-left: 10px;
   padding-right: 10px;
 `;
