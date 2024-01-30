@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MagnifyingGlassIcon from "./MagnifyingGlassIcon";
 
 const SearchBarContainer = styled.form`
