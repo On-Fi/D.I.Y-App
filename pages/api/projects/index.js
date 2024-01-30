@@ -16,7 +16,7 @@ export default async function handler(request, response) {
     try {
       const projectData = request.body;
 
-      await Project.create(projectData);
+      await Project.create({ ...projectData, author: session.user.email });
 
       return response.status(201).json({ status: "Project created" });
     } catch (error) {

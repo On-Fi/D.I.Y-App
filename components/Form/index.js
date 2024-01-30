@@ -77,7 +77,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     projectData.instructions = steps;
     projectData.tools = tools;
     projectData.material = material;
-    projectData.author = session.user.email;
 
     onSubmit(projectData);
   }

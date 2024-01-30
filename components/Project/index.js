@@ -118,10 +118,10 @@ export default function Project({ project, favorites, onToggleFavorite }) {
 
       <ButtonSection>
         {session && session.user.email === project.author && (
-          <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-        )}
-        {session && session.user.email === project.author && (
-          <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
+          <>
+            <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+            <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
+          </>
         )}
       </ButtonSection>
     </>
