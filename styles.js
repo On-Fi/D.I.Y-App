@@ -18,8 +18,7 @@ export default createGlobalStyle`
   }
   body {
     margin: 0;
-    font-family: 'Comic Sans MS', sans-serif;
-    
+    font-family: 'gill sans', sans-serif;
     
   }
 `;

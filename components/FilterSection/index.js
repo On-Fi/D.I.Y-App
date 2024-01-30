@@ -1,15 +1,29 @@
 import styled from "styled-components";
 import FilterCategory from "../FilterCategory";
+import { useState } from "react";
+import FilterIcon from "./FilterIcon";
+import Button from "../Button";
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: lightgrey;
+  background-color:  #f5f5f5;
   width: 85%;
   margin: auto;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+`;
+
+const FilterButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: auto;
+  border-radius: 10px;
+  align-items: center;
+  border: none;
+  background-color: #f5f5f5;
 `;
 
 const StyledFilterCategorySection = styled.div`
@@ -28,6 +42,7 @@ const StyledRangeInput = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
 `;
+
 export default function FilterSection({
   onResetFilter,
   filters,
@@ -36,9 +51,17 @@ export default function FilterSection({
   function onFilter(event) {
     handleFilter(event.target.value, event.target.name);
   }
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
+  function handleExpandFilter() {
+    setIsCollapsed(!isCollapsed);
+  }
   return (
-    <StyledForm>
+    <>
+    <FilterButton onClick={handleExpandFilter}>
+        <FilterIcon />
+      </FilterButton>
+      { !isCollapsed && <StyledForm> 
       <StyledFilterCategorySection>
         <StyledFilterCategory>
           <FilterCategory
@@ -82,9 +105,10 @@ export default function FilterSection({
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <button type="button" onClick={onResetFilter}>
+      <Button type="button" onClick={onResetFilter}>
         Reset filter
-      </button>
-    </StyledForm>
+      </Button>
+    </StyledForm> }
+    </>
   );
 }

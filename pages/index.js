@@ -1,15 +1,8 @@
-import styled from "styled-components";
 import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import LoginButton from "@/components/Login-Button";
-
-const Subline = styled.h2`
-  font-size: 2rem;
-  margin-left: 20px;
-  cursor: default;
-`;
 
 const initialFilter = {
   time: 24,
@@ -69,8 +62,6 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
 
   return (
     <>
-      <Subline>All projects</Subline>
-
       <SearchBar onSearch={handleSearch} filters={filters} />
       <FilterSection
         onResetFilter={handleResetFilter}
