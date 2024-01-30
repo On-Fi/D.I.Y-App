@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const projectSchema = new Schema({
+  author: { type: String, required: true },
   title: { type: String, required: true },
   image: { type: String, required: false },
   category: { type: String, required: true },

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
+import { useSession } from "next-auth/react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -53,6 +54,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   const [material, setMaterial] = useState(
     project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
+  const { data: session } = useSession();
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -75,6 +77,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     projectData.instructions = steps;
     projectData.tools = tools;
     projectData.material = material;
+
     onSubmit(projectData);
   }
 

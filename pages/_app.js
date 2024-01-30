@@ -3,6 +3,7 @@ import { SWRConfig } from "swr";
 import useSWR from "swr";
 import Layout from "@/components/Layout";
 import useLocalStorageState from "use-local-storage-state";
+import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {
@@ -44,21 +45,24 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <SWRConfig
-        value={{
-          fetcher,
-        }}
-      >
-        <GlobalStyle />
-        <Layout>
-          <Component
-            {...pageProps}
-            projects={projects}
-            favorites={favorites}
-            onToggleFavorite={handleToggleFavorite}
-          />
-        </Layout>
-      </SWRConfig>
+      <SessionProvider session={pageProps.session}>
+        <SWRConfig
+          value={{
+            fetcher,
+          }}
+        >
+          <GlobalStyle />
+          <Layout>
+            <Component
+              {...pageProps}
+              projects={projects}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
+            />
+          </Layout>
+        </SWRConfig>
+      </SessionProvider>
+      ;
     </>
   );
 }

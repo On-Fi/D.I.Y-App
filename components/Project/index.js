@@ -6,6 +6,7 @@ import Link from "next/link";
 import { mutate } from "swr";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const ProjectHeader = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const ToolList = styled.ul``;
 
 export default function Project({ project, favorites, onToggleFavorite }) {
   const router = useRouter();
+  const { data: session } = useSession();
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       await fetch(`/api/projects/${project._id}`, { method: "DELETE" });
@@ -115,8 +117,12 @@ export default function Project({ project, favorites, onToggleFavorite }) {
       </ProjectInfoBox>
 
       <ButtonSection>
-        <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-        <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
+        {session && session.user.email === project.author && (
+          <>
+            <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+            <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
+          </>
+        )}
       </ButtonSection>
     </>
   );

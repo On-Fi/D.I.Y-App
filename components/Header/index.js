@@ -5,7 +5,7 @@ const StyledHeader = styled.header`
   justify-content: center;
   position: sticky;
   top: 0;
-  background-color: #fada5e;
+  background-color: #e8b100;
   padding: 3px;
   cursor: default;
 `;
