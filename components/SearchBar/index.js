@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useState } from "react";
+import MagnifyingGlassIcon from "./MagnifyingGlassIcon";
 
 const SearchBarContainer = styled.form`
   display: flex;
   margin: auto;
+  margin-top: 20px;
   margin-bottom: 20px;
+  height: 45px;
   width: 85%;
   gap: 2px;
 `;
@@ -13,7 +16,7 @@ const SearchInput = styled.input`
   flex: auto;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   &:focus {
     outline: 3px solid #90ee90;
   }
@@ -21,9 +24,9 @@ const SearchInput = styled.input`
 const SearchButton = styled.button`
   padding: 10px 20px;
   border: none;
-  background-color: #90ee90;
-  color: #000;
-  border-radius: 4px;
+  background-color: #F9C858;
+  color: #FFF;
+  border-radius: 20px;
   cursor: pointer;
   &:hover {
     background-color: #77dd77;
@@ -53,7 +56,7 @@ export default function SearchBar({ onSearch, filters }) {
         placeholder="..."
         defaultValue={filters.searchTerm || ""}
       />
-      <SearchButton type="submit">Search</SearchButton>
+      <SearchButton type="submit"><MagnifyingGlassIcon/></SearchButton>
     </SearchBarContainer>
   );
 }
