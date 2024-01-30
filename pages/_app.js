@@ -4,7 +4,6 @@ import useSWR from "swr";
 import Layout from "@/components/Layout";
 import useLocalStorageState from "use-local-storage-state";
 import { SessionProvider } from "next-auth/react";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {

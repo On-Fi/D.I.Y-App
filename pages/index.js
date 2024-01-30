@@ -4,8 +4,6 @@ import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import LoginButton from "@/components/Login-Button";
-import NextAuth from "next-auth/next";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 const Subline = styled.h2`
   font-size: 2rem;
@@ -24,7 +22,6 @@ const initialFilter = {
 export default function HomePage({ projects, favorites, onToggleFavorite }) {
   const [filters, setFilters] = useState(initialFilter);
   const projectsToDisplay = updateProjectsToDisplay(filters);
-  const { data: session } = useSession();
 
   function handleFilter(value, name) {
     setFilters({ ...filters, [name]: value });
@@ -73,8 +70,8 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
   return (
     <>
       <Subline>All projects</Subline>
-      <LoginButton />
-      {session && <SearchBar onSearch={handleSearch} filters={filters} />}
+
+      <SearchBar onSearch={handleSearch} filters={filters} />
       <FilterSection
         onResetFilter={handleResetFilter}
         filters={filters}
@@ -85,6 +82,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
       />
+      <LoginButton />
     </>
   );
 }
