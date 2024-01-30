@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import HeartFilled from "../FavoriteButton/HeartFilled";
 import { useSession, signIn } from "next-auth/react";
 import HomeIcon from "./HomeIcon";
 import PlusIcon from "./PlusIcon";
@@ -61,7 +60,7 @@ export default function NavigationBar() {
     <Navbar>
       <NavLink href="/"><HomeIcon/></NavLink>
       {session ? (
-        <NavLink href="/new-project">+</NavLink>
+        <NavLink href="/new-project"><PlusIcon/></NavLink>
       ) : (
         <NavButton onClick={() => signIn()}><PlusIcon/></NavButton>
       )}

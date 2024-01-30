@@ -13,10 +13,6 @@ const StyledForm = styled.form`
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-
-  &.hidden {
-    display: none;
-  }
 `;
 
 const FilterButton = styled.button`
@@ -65,7 +61,7 @@ export default function FilterSection({
     <FilterButton onClick={handleExpandFilter}>
         <FilterIcon />
       </FilterButton>
-    <StyledForm className={isCollapsed ? "hidden" : ""}>
+      { !isCollapsed && <StyledForm> 
       <StyledFilterCategorySection>
         <StyledFilterCategory>
           <FilterCategory
@@ -112,7 +108,7 @@ export default function FilterSection({
       <Button type="button" onClick={onResetFilter}>
         Reset filter
       </Button>
-    </StyledForm>
+    </StyledForm> }
     </>
   );
 }
