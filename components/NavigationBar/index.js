@@ -8,7 +8,7 @@ import UserIcon from "./UserIcon";
 const Navbar = styled.nav`
   display: flex;
   background-color: #626964;
-  padding: 11px;
+  padding: 3px;
   position: absolute;
   width: 100%;
   bottom: 0;
