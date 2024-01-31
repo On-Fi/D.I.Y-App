@@ -35,24 +35,23 @@ const NavLink = styled(Link)`
 `;
 
 const NavLinkPlus = styled(NavLink)`
-background-color: #F9C858;
-border-radius: 50%;
-padding: 15px 20px;
+  background-color: #f9c858;
+  border-radius: 50%;
+  padding: 15px 20px;
 `;
-
 
 const NavButton = styled.button`
   color: #000;
   border: none;
   padding: 15px 20px;
-  background-color: #F9C858;;
+  background-color: #f9c858;
   border-radius: 50%;
   transition: all 0.3s ease;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    background-color:#505451;
+    background-color: #505451;
   }
 
   &:active {
@@ -65,15 +64,21 @@ export default function NavigationBar() {
 
   return (
     <Navbar>
-      <NavLink href="/"><HomeIcon/></NavLink>
+      <NavLink href="/">
+        <HomeIcon />
+      </NavLink>
       {session ? (
-        <NavLinkPlus href="/new-project"><PlusIcon/></NavLinkPlus>
+        <NavLinkPlus href="/new-project">
+          <PlusIcon />
+        </NavLinkPlus>
       ) : (
-        <NavButton onClick={() => signIn()}><PlusIcon/></NavButton>
+        <NavButton onClick={() => signIn()}>
+          <PlusIcon />
+        </NavButton>
       )}
 
-      <NavLink href="/favorites">
-      <UserIcon/>
+      <NavLink href="/profile">
+        <UserIcon />
       </NavLink>
     </Navbar>
   );

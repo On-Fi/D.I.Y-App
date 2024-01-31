@@ -5,8 +5,8 @@ import FavoriteButton from "../FavoriteButton";
 import Image from "next/image";
 
 const StyledCard = styled.div`
-  border: 1px solid #C4B8AA; 
-  background-color: #C4B8AA;
+  border: 1px solid #c4b8aa;
+  background-color: #c4b8aa;
   border-radius: 12px;
   cursor: pointer;
   margin: auto;
@@ -19,7 +19,7 @@ const StyledCardContent = styled.div`
 
 const ProjectTitle = styled.h3`
   margin: 0;
-  color: #FFF;
+  color: #fff;
 `;
 
 const StyledLink = styled(Link)`
@@ -38,7 +38,12 @@ const ProjectImage = styled(Image)`
   height: auto;
 `;
 
-export default function Card({ project, favorites, onToggleFavorite }) {
+export default function Card({
+  project,
+  favorites = "",
+  onToggleFavorite = "",
+  children,
+}) {
   return (
     <StyledLink key={project._id} href={`projects/${project._id}`}>
       <StyledCard>
@@ -60,6 +65,7 @@ export default function Card({ project, favorites, onToggleFavorite }) {
           </StyledTitleSection>
           <ShortFactsBox project={project} />
         </StyledCardContent>
+        {children}
       </StyledCard>
     </StyledLink>
   );
