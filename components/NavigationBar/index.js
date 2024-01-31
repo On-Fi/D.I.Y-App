@@ -8,7 +8,7 @@ import UserIcon from "./UserIcon";
 const Navbar = styled.nav`
   display: flex;
   background-color: #626964;
-  padding: 11px;
+  padding: 3px;
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -33,6 +33,13 @@ const NavLink = styled(Link)`
     transform: scale(0.95);
   }
 `;
+
+const NavLinkPlus = styled(NavLink)`
+background-color: #F9C858;
+border-radius: 50%;
+padding: 15px 20px;
+`;
+
 
 const NavButton = styled.button`
   color: #000;
@@ -60,7 +67,7 @@ export default function NavigationBar() {
     <Navbar>
       <NavLink href="/"><HomeIcon/></NavLink>
       {session ? (
-        <NavLink href="/new-project"><PlusIcon/></NavLink>
+        <NavLinkPlus href="/new-project"><PlusIcon/></NavLinkPlus>
       ) : (
         <NavButton onClick={() => signIn()}><PlusIcon/></NavButton>
       )}

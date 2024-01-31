@@ -7,22 +7,23 @@ const FactBox = styled.div`
   gap: 10px;
   padding: 5px;
   border-radius: 20px;
+  justify-content: center;
 `;
 const ShortFact = styled.span`
-  background-color: #FFF;
+  background-color: ${props => props.color };
   border-radius: 20px;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
 `;
 
-export default function ShortFactsBox({ project }) {
+export default function ShortFactsBox({ project, color="#FFFF" }) {
   return (
     <FactBox>
-      <ShortFact>{project.time} hours</ShortFact>
-      <ShortFact>{project.priceCategory}</ShortFact>
-      <ShortFact>{project.category}</ShortFact>
-      <ShortFact>{project.difficulty}</ShortFact>
+      <ShortFact color= {color}>{project.time} hours</ShortFact>
+      <ShortFact color= {color}>{project.priceCategory}</ShortFact>
+      <ShortFact color= {color}>{project.category}</ShortFact>
+      <ShortFact color= {color}>{project.difficulty}</ShortFact>
     </FactBox>
   );
 }

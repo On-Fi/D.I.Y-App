@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 const ProjectHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 10px;
 `;
 
 const ButtonSection = styled.div`
@@ -49,10 +50,47 @@ const StyledLink = styled(Link)`
 
 const StyledInstructionStep = styled.li`
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  border-bottom: 1px solid #ccc;
 `;
 
-const ToolList = styled.ul``;
+const InstructionInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 10px;
+`;
+
+const ToolList = styled.ul`
+width: 80%;
+margin: auto;
+padding-left: 0;
+list-style: none;
+`;
+
+const ToolListItem = styled.li`
+display: flex;
+padding-bottom: 5px;
+gap: 10px;
+`;
+
+const MaterialList = styled.ul`
+margin: auto;
+padding-left: 0;
+list-style: none;
+`;
+
+const MaterialListItem = styled.li`
+display: flex;
+padding-bottom: 5px;
+`;
+
+const AmountSpan = styled.span`
+color: #858f87;  
+width: 10%; 
+text-align: center;
+`;
 
 export default function Project({ project, favorites, onToggleFavorite }) {
   const router = useRouter();
@@ -87,34 +125,35 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         ></FavoriteButton>
       </ProjectHeader>
 
-      <ShortFactsBox project={project}></ShortFactsBox>
+      <ShortFactsBox color="#C4B8AA" project={project}></ShortFactsBox>
 
       <ProjectInfoBox title="Tools">
         <ToolList>
           {project.tools.map((tool) => (
-            <li key={tool.id}>{tool.name}</li>
+            <ToolListItem key={tool.id}>{tool.name}</ToolListItem>
           ))}
         </ToolList>
       </ProjectInfoBox>
 
       <ProjectInfoBox title="Material">
-        <ToolList>
+        <MaterialList>
           {project.material.map((item) => (
-            <StyledInstructionStep key={item.id}>
-              {item.amount} x {item.name}
-            </StyledInstructionStep>
+            <MaterialListItem key={item.id}>
+             <AmountSpan> {item.amount} </AmountSpan> <span>{item.name} </span>
+            </MaterialListItem>
           ))}
-        </ToolList>
+        </MaterialList>
       </ProjectInfoBox>
 
-      <ProjectInfoBox title="Instructions">
+      <InstructionInfoBox>
+       <h2>Instructions :</h2>
         {project.instructions.map((step, index) => (
           <StyledInstructionStep key={step.id}>
             <p>{index + 1}.</p>
             <p>{step.text}</p>
           </StyledInstructionStep>
         ))}
-      </ProjectInfoBox>
+      </InstructionInfoBox>
 
       <ButtonSection>
         {session && session.user.email === project.author && (

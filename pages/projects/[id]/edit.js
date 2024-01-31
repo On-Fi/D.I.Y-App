@@ -2,6 +2,13 @@ import Form from "@/components/Form";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { mutate } from "swr";
+import styled from "styled-components";
+
+const EditProjectTitle = styled.h2`
+  text-align: center;
+  font-size: 1.5 rem;
+  padding-top: 20px;
+`;
 
 export default function EditPage() {
   const router = useRouter();
@@ -30,10 +37,13 @@ export default function EditPage() {
   }
 
   return (
+    <>
+    <EditProjectTitle>Edit project</EditProjectTitle>
     <Form
       project={project}
       onSubmit={handleEditProject}
       onCancel={handleCancel}
     />
+    </>
   );
 }

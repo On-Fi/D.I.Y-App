@@ -2,7 +2,10 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
-import { useSession } from "next-auth/react";
+import Button from "../Button";
+import { Comfortaa } from "next/font/google";
+
+const comfortaa = Comfortaa({ subsets: ["latin"] });
 
 const StyledForm = styled.form`
   display: flex;
@@ -13,13 +16,18 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
-  border: 1px solid lightgrey;
-  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-bottom: 20px;
 `;
 
 const StyledSelect = styled.select`
-  border: 1px solid lightgrey;
-  border-radius: 15px;
+  padding: 10px;
+  font-family: ${comfortaa.style.fontFamily}; 
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-bottom: 20px;
 `;
 
 const UploadPreview = styled(Image)`
@@ -42,6 +50,13 @@ const MaterialInput = styled.div`
   display: flex;
 `;
 
+const UploadButtonSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  `;
+
+
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
@@ -54,7 +69,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   const [material, setMaterial] = useState(
     project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
-  const { data: session } = useSession();
+
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -158,17 +173,18 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             crop="scale"
             alt="beispiel image"
           />
-          <div>
-            <input
+          <UploadButtonSection>
+            <input 
               type="file"
               name="image"
               title="image"
               onChange={(event) => setImageSelected(event.target.files[0])}
             />
+            <label htmlFor="fileInput">Choose a file</label>
             <button type="button" onClick={uploadImage}>
               Upload an Image
             </button>
-          </div>
+          </UploadButtonSection>
         </UploadSection>
 
         <label htmlFor="category">Category:* </label>
@@ -241,9 +257,9 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             required
           ></StyledInput>
         ))}
-        <button type="button" onClick={handleAddTool}>
+        <Button color="secondary" type="button" onClick={handleAddTool}>
           add tool
-        </button>
+        </Button>
 
         <label htmlFor="tools">Material:*</label>
         {material.map((item) => (
@@ -273,9 +289,9 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             />
           </MaterialInput>
         ))}
-        <button type="button" onClick={handleAddMaterial}>
+        <Button color="secondary" type="button" onClick={handleAddMaterial}>
           add material
-        </button>
+        </Button>
 
         <label htmlFor="instructions">Instructions:*</label>
         {steps.map((step, index) => (
@@ -292,16 +308,16 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             ></StyledInput>
           </StyledStep>
         ))}
-        <button type="button" onClick={handleAddStep}>
+        <Button color="secondary" type="button" onClick={handleAddStep}>
           add step
-        </button>
+        </Button>
 
-        <button type="submit">
+        <Button type="submit">
           {Object.keys(project).length === 0 ? "Save" : "Edit"}
-        </button>
-        <button type="button" onClick={onCancel}>
+        </Button>
+        <Button color="secondary" type="button" onClick={onCancel}>
           Cancel
-        </button>
+        </Button>
       </StyledForm>
     </>
   );

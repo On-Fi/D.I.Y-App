@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import { Comfortaa} from "next/font/google";
+
+const comfortaa = Comfortaa({ subsets: ["latin"] });
 
 export default createGlobalStyle`
   *,
@@ -18,7 +21,7 @@ export default createGlobalStyle`
   }
   body {
     margin: 0;
-    font-family: 'gill sans', sans-serif;
+    font-family: ${comfortaa.style.fontFamily}; 
     
   }
 `;

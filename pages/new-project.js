@@ -1,6 +1,13 @@
 import Form from "@/components/Form";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 import { mutate } from "swr";
+
+const NewProjectTitle = styled.h2`
+  text-align: center;
+  font-size: 1.5 rem;
+  padding-top: 20px;
+`;
 
 export default function NewProjectPage() {
   const router = useRouter();
@@ -22,5 +29,8 @@ export default function NewProjectPage() {
     router.push("/");
   }
 
-  return <Form onSubmit={handleAddProject} onCancel={handleCancel} />;
+  return <>
+  <NewProjectTitle>Add a new project</NewProjectTitle>
+  <Form onSubmit={handleAddProject} onCancel={handleCancel} />;
+  </>
 }
