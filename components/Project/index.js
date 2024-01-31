@@ -84,8 +84,12 @@ list-style: none;
 const MaterialListItem = styled.li`
 display: flex;
 padding-bottom: 5px;
+`;
 
-.amount { color: #858f87;  width: 10%; text-align: center;}
+const AmountSpan = styled.span`
+color: #858f87;  
+width: 10%; 
+text-align: center;
 `;
 
 export default function Project({ project, favorites, onToggleFavorite }) {
@@ -135,7 +139,7 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         <MaterialList>
           {project.material.map((item) => (
             <MaterialListItem key={item.id}>
-             <span className="amount"> {item.amount} </span> <span>{item.name} </span>
+             <AmountSpan> {item.amount} </AmountSpan> <span>{item.name} </span>
             </MaterialListItem>
           ))}
         </MaterialList>

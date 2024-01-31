@@ -32,13 +32,14 @@ const NavLink = styled(Link)`
   &:active {
     transform: scale(0.95);
   }
-
-  &.plusbutton {
-    background-color: #F9C858;
-    border-radius: 50%;
-    padding: 15px 20px;
-  }
 `;
+
+const NavLinkPlus = styled(NavLink)`
+background-color: #F9C858;
+border-radius: 50%;
+padding: 15px 20px;
+`;
+
 
 const NavButton = styled.button`
   color: #000;
@@ -66,7 +67,7 @@ export default function NavigationBar() {
     <Navbar>
       <NavLink href="/"><HomeIcon/></NavLink>
       {session ? (
-        <NavLink href="/new-project" className="plusbutton"><PlusIcon/></NavLink>
+        <NavLinkPlus href="/new-project"><PlusIcon/></NavLinkPlus>
       ) : (
         <NavButton onClick={() => signIn()}><PlusIcon/></NavButton>
       )}

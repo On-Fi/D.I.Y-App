@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
-import { useSession } from "next-auth/react";
 import Button from "../Button";
 import { Comfortaa } from "next/font/google";
 
@@ -51,18 +50,6 @@ const MaterialInput = styled.div`
   display: flex;
 `;
 
-const StyledFileInput = styled.input.attrs({
-  type: "file",
-})`
-  display: none;
-
-  + label {
-    padding: 10px;
-    background-color: #f9c858;
-    border-radius: 20px;
-  }
-`;
-
 const UploadButtonSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -82,7 +69,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   const [material, setMaterial] = useState(
     project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
-  const { data: session } = useSession();
+
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -187,16 +174,16 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             alt="beispiel image"
           />
           <UploadButtonSection>
-            <StyledFileInput id="fileInput"
+            <input 
               type="file"
               name="image"
               title="image"
               onChange={(event) => setImageSelected(event.target.files[0])}
             />
             <label htmlFor="fileInput">Choose a file</label>
-            <Button type="button" onClick={uploadImage}>
+            <button type="button" onClick={uploadImage}>
               Upload an Image
-            </Button>
+            </button>
           </UploadButtonSection>
         </UploadSection>
 
