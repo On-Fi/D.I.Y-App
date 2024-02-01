@@ -73,7 +73,6 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
       />
-      <LoginButton />
     </>
   );
 }

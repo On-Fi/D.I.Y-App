@@ -40,12 +40,12 @@ const ProjectImage = styled(Image)`
 
 export default function Card({
   project,
-  favorites = "",
-  onToggleFavorite = "",
+  favorites = null,
+  onToggleFavorite = null,
   children,
 }) {
   return (
-    <StyledLink key={project._id} href={`projects/${project._id}`}>
+    <StyledLink key={project._id} href={`/projects/${project._id}`}>
       <StyledCard>
         <ProjectImage
           src={project.image}
@@ -57,11 +57,13 @@ export default function Card({
         <StyledCardContent>
           <StyledTitleSection>
             <ProjectTitle>{project.title}</ProjectTitle>
-            <FavoriteButton
-              id={project._id}
-              favorites={favorites}
-              onToggleFavorite={onToggleFavorite}
-            />
+            {favorites ? (
+              <FavoriteButton
+                id={project._id}
+                favorites={favorites}
+                onToggleFavorite={onToggleFavorite}
+              />
+            ) : null}
           </StyledTitleSection>
           <ShortFactsBox project={project} />
         </StyledCardContent>

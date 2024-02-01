@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
-import Button from "@/components/Button";
 import Link from "next/link";
 import LoginButton from "@/components/Login-Button";
 
@@ -63,7 +62,7 @@ export default function Profile() {
           using your GitHub Account:
         </LoginText>
         <ProfileNavigation>
-          <LoginButton />{" "}
+          <LoginButton />
           <StyledLink href="../favorites">Show my Favorites</StyledLink>
         </ProfileNavigation>
       </>
@@ -86,7 +85,7 @@ export default function Profile() {
       <ProfileNavigation>
         <StyledLink href="profile/my-projects">Show my Projects</StyledLink>
         <StyledLink href="../favorites">Show my Favorites</StyledLink>
-        <LoginButton />{" "}
+        <LoginButton />
       </ProfileNavigation>
     </>
   );
