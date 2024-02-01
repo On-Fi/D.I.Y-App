@@ -33,8 +33,13 @@ export default function EditPage() {
     router.push(`/projects/${id}`);
   }
 
-  if (!project || isLoading || !id) {
+  if (isLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (!project) {
+    router.push("/404");
+    return;
   }
 
   return (

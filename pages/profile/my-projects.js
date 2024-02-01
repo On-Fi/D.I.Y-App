@@ -6,6 +6,7 @@ import PencilIcon from "@/components/Card/PencilIcon";
 import TrashIcon from "@/components/Card/TrashIcon";
 import { mutate } from "swr";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   width: 90%;
@@ -27,7 +28,9 @@ const StyledLink = styled(Link)`
 
 export default function MyProjects({ projects }) {
   const { data: session } = useSession();
+  const router = useRouter();
   if (!session) {
+    router.push("/404");
     return;
   }
   const myProjects = projects.filter(
