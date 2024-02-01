@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const { data: projects, error, isLoading } = useSWR("/api/projects", fetcher);
+  const { data: articles } = useSWR("/api/articles", fetcher);
 
   if (error)
     return (
@@ -59,6 +60,7 @@ export default function App({ Component, pageProps }) {
               projects={projects}
               favorites={favorites}
               onToggleFavorite={handleToggleFavorite}
+              articles={articles}
             />
           </Layout>
         </SWRConfig>
