@@ -24,7 +24,7 @@ const StyledInput = styled.input`
 
 const StyledSelect = styled.select`
   padding: 10px;
-  font-family: ${comfortaa.style.fontFamily}; 
+  font-family: ${comfortaa.style.fontFamily};
   border: 1px solid #ccc;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -54,8 +54,7 @@ const UploadButtonSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  `;
-
+`;
 
 export default function Form({ onSubmit, onCancel, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
@@ -69,7 +68,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
   const [material, setMaterial] = useState(
     project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
-
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -174,7 +172,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             alt="beispiel image"
           />
           <UploadButtonSection>
-            <input 
+            <input
               type="file"
               name="image"
               title="image"
@@ -312,9 +310,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
           add step
         </Button>
 
-        <Button type="submit">
-          {Object.keys(project).length === 0 ? "Save" : "Edit"}
-        </Button>
+        <Button type="submit">Save</Button>
         <Button color="secondary" type="button" onClick={onCancel}>
           Cancel
         </Button>

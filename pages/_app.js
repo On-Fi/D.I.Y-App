@@ -7,7 +7,7 @@ import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {
-    defaultValue: "",
+    defaultValue: [],
   });
 
   function handleToggleFavorite(id, event) {
