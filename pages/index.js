@@ -2,7 +2,6 @@ import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
-import LoginButton from "@/components/Login-Button";
 
 const initialFilter = {
   time: 24,

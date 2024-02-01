@@ -13,7 +13,12 @@ export default function DetailPage({ favorites, onToggleFavorite }) {
     error,
   } = useSWR(`/api/projects/${id}`, { fallbackData: [] });
 
-  if (isLoading || error) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
+
+  if (error || !project) {
+    router.push("/404");
+    return;
+  }
 
   return (
     <Project

@@ -63,7 +63,6 @@ export default function App({ Component, pageProps }) {
           </Layout>
         </SWRConfig>
       </SessionProvider>
-      ;
     </>
   );
 }
