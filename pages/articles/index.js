@@ -17,12 +17,14 @@
 //     );
 //   }
 
+import ArticleCard from "@/components/ArticleCard";
+
 export default function KnowledgeOverview({ articles }) {
   console.log("hier:", articles);
   return (
     <div>
       {articles.map((article) => {
-        return <p key={article._id}>{article.title}</p>;
+        return <ArticleCard key={article._id} article={article}></ArticleCard>;
       })}
     </div>
   );
