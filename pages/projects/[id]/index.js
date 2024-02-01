@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Project from "@/components/Project";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function DetailPage({ favorites, onToggleFavorite }) {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function DetailPage({ favorites, onToggleFavorite }) {
     error,
   } = useSWR(`/api/projects/${id}`, { fallbackData: [] });
 
-  if (isLoading || error) return <h2>Loading...</h2>;
+  if (isLoading || error) return <LoadingSpinner />;
 
   return (
     <Project

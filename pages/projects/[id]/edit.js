@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { mutate } from "swr";
 import styled from "styled-components";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const EditProjectTitle = styled.h2`
   text-align: center;
@@ -33,17 +34,17 @@ export default function EditPage() {
   }
 
   if (!project || isLoading || !id) {
-    return <p>is Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (
     <>
-    <EditProjectTitle>Edit project</EditProjectTitle>
-    <Form
-      project={project}
-      onSubmit={handleEditProject}
-      onCancel={handleCancel}
-    />
+      <EditProjectTitle>Edit project</EditProjectTitle>
+      <Form
+        project={project}
+        onSubmit={handleEditProject}
+        onCancel={handleCancel}
+      />
     </>
   );
 }
