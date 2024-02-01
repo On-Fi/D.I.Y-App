@@ -1,9 +1,8 @@
-import Image from "next/image";
 import styled from "styled-components";
 
 const StyledArticleCard = styled.div`
 padding: 10px;
-  margin: 10px;
+  // margin: 10px;
   background-color: #858f87;
   color: white;
   border-radius: 10px;

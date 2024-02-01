@@ -4,6 +4,7 @@ import { useSession, signIn } from "next-auth/react";
 import HomeIcon from "./HomeIcon";
 import PlusIcon from "./PlusIcon";
 import UserIcon from "./UserIcon";
+import LightBulbIcon from "./LightbulbIcon";
 
 const Navbar = styled.nav`
   display: flex;
@@ -34,12 +35,6 @@ const NavLink = styled(Link)`
   }
 `;
 
-const NavLinkPlus = styled(NavLink)`
-  background-color: #f9c858;
-  border-radius: 50%;
-  padding: 15px 20px;
-`;
-
 const NavButton = styled.button`
   color: #000;
   border: none;
@@ -68,14 +63,18 @@ export default function NavigationBar() {
         <HomeIcon />
       </NavLink>
       {session ? (
-        <NavLinkPlus href="/new-project">
+        <NavLink href="/new-project">
           <PlusIcon />
-        </NavLinkPlus>
+        </NavLink>
       ) : (
         <NavButton onClick={() => signIn()}>
           <PlusIcon />
         </NavButton>
       )}
+
+      <NavLink href="/articles">
+        <LightBulbIcon />
+      </NavLink>
 
       <NavLink href="/profile">
         <UserIcon />
