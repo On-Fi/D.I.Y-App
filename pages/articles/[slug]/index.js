@@ -6,7 +6,6 @@ import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import styled from "styled-components";
 import BackArrowIcon from "@/components/ArticleCard/BackArrowIcon";
-import Card from "@/components/Card";
 import ProjectList from "@/components/ProjectList";
 
 const ArticleImage = styled(Image)`
