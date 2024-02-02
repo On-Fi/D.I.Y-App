@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledArticleCard = styled.div`
 padding: 10px;
@@ -15,11 +16,21 @@ padding: 10px;
 }
 `;
 
+const ArticleLink = styled(Link)`
+  text-decoration: none;
+  color: #FFFFF;
+`;
+
 export default function ArticleCard({ article }) {
   return (
+    <>
+    <ArticleLink href={`/articles/${article.slug}`}>
     <StyledArticleCard image={article.image}>
       <h3>{article.title}</h3>
       <p>{article.body.slice(0, 100)}...</p>
     </StyledArticleCard>
+    </ArticleLink>
+    </>
   );
 }
+

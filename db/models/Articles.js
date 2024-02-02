@@ -7,6 +7,7 @@ const articleSchema = new Schema({
   image: { type: String },
   category: { type: String },
   body: { type: String },
+  slug: { type: String }, 
 });
 
 const Article =
