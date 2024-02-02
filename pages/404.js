@@ -32,7 +32,6 @@ const Frame = styled.div`
 export default function Custom404({ projects }) {
   const randomIndex = Math.floor(Math.random() * projects.length);
   const randomProject = projects[randomIndex];
-  console.log(randomProject);
 
   return (
     <Frame>
