@@ -1,10 +1,9 @@
-import ArticleCard from "@/components/ArticleCard";
+import ArticleCardList from "@/components/ArticleCardList";
 import styled from "styled-components";
 
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 90%;
   margin: auto;
   margin-top: 20px;
@@ -19,9 +18,7 @@ export default function KnowledgeOverview({ articles }) {
         Get some more insights about various crafting topics and become the
         worlds greatest woodworm 🐛
       </p>
-      {articles.map((article) => {
-        return <ArticleCard key={article._id} article={article}></ArticleCard>;
-      })}
+      <ArticleCardList articles={articles} />
     </Frame>
   );
 }

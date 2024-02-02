@@ -7,7 +7,7 @@ import { mutate } from "swr";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import ArticleCard from "../ArticleCard";
+import ArticleCardList from "../ArticleCardList";
 
 const ProjectHeader = styled.div`
   display: flex;
@@ -93,14 +93,6 @@ const AmountSpan = styled.span`
   text-align: center;
 `;
 
-const ArticleCardList = styled.div`
-  width: 90%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 export default function Project({
   project,
   favorites,
@@ -128,7 +120,6 @@ export default function Project({
         style={{ width: "100%", height: "auto" }}
         alt="image of the diy project"
       />
-
       <ProjectHeader>
         <h1>{project.title}</h1>
         <FavoriteButton
@@ -138,9 +129,7 @@ export default function Project({
           size={40}
         ></FavoriteButton>
       </ProjectHeader>
-
       <ShortFactsBox color="#C4B8AA" project={project}></ShortFactsBox>
-
       <ProjectInfoBox title="Tools">
         <ToolList>
           {project.tools.map((tool) => (
@@ -148,7 +137,6 @@ export default function Project({
           ))}
         </ToolList>
       </ProjectInfoBox>
-
       <ProjectInfoBox title="Material">
         <MaterialList>
           {project.material.map((item) => (
@@ -158,7 +146,6 @@ export default function Project({
           ))}
         </MaterialList>
       </ProjectInfoBox>
-
       <InstructionInfoBox>
         <h2>Instructions :</h2>
         {project.instructions.map((step, index) => (
@@ -168,14 +155,8 @@ export default function Project({
           </StyledInstructionStep>
         ))}
       </InstructionInfoBox>
-
-      <ArticleCardList>
-        <h2>Related Articles:</h2>
-        {articles.map((article) => (
-          <ArticleCard key={article._id} article={article} />
-        ))}
-      </ArticleCardList>
-
+      <h2>Related Articles:</h2>
+      <ArticleCardList articles={articles} />
       <ButtonSection>
         {session && session.user.email === project.author && (
           <>
