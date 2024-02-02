@@ -3,7 +3,7 @@ import useSWR from "swr";
 import Project from "@/components/Project";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-export default function DetailPage({ favorites, onToggleFavorite }) {
+export default function DetailPage({ favorites, onToggleFavorite, articles }) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -20,11 +20,16 @@ export default function DetailPage({ favorites, onToggleFavorite }) {
     return;
   }
 
+  const articlesWithSameCategory = articles.filter(
+    (article) => article.category === project.category
+  );
+
   return (
     <Project
       project={project}
       favorites={favorites}
       onToggleFavorite={onToggleFavorite}
+      articles={articlesWithSameCategory}
     />
   );
 }
