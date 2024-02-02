@@ -23,6 +23,14 @@ const StyledSubheading = styled.h3`
   margin-top: 40px;
 `;
 
+const BackToArticleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export default function ArticlePage({ projects }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -46,9 +54,10 @@ export default function ArticlePage({ projects }) {
 
   return (
     <div>
-      <Link href="/articles">
+      <BackToArticleLink href="/articles">
         <BackArrowIcon />
-      </Link>
+        <span>All articles</span>
+      </BackToArticleLink>
       <ArticleImage
         src={article.image}
         alt={article.title}

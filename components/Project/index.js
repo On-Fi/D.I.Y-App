@@ -7,6 +7,7 @@ import { mutate } from "swr";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import ArticleCard from "../ArticleCard";
 
 const ProjectHeader = styled.div`
   display: flex;
@@ -63,36 +64,49 @@ const InstructionInfoBox = styled.div`
 `;
 
 const ToolList = styled.ul`
-width: 80%;
-margin: auto;
-padding-left: 0;
-list-style: none;
+  width: 80%;
+  margin: auto;
+  padding-left: 0;
+  list-style: none;
 `;
 
 const ToolListItem = styled.li`
-display: flex;
-padding-bottom: 5px;
-gap: 10px;
+  display: flex;
+  padding-bottom: 5px;
+  gap: 10px;
 `;
 
 const MaterialList = styled.ul`
-margin: auto;
-padding-left: 0;
-list-style: none;
+  margin: auto;
+  padding-left: 0;
+  list-style: none;
 `;
 
 const MaterialListItem = styled.li`
-display: flex;
-padding-bottom: 5px;
+  display: flex;
+  padding-bottom: 5px;
 `;
 
 const AmountSpan = styled.span`
-color: #858f87;  
-width: 10%; 
-text-align: center;
+  color: #858f87;
+  width: 10%;
+  text-align: center;
 `;
 
-export default function Project({ project, favorites, onToggleFavorite }) {
+const ArticleCardList = styled.div`
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export default function Project({
+  project,
+  favorites,
+  onToggleFavorite,
+  articles,
+}) {
   const router = useRouter();
   const { data: session } = useSession();
   const handleDelete = async () => {
@@ -139,14 +153,14 @@ export default function Project({ project, favorites, onToggleFavorite }) {
         <MaterialList>
           {project.material.map((item) => (
             <MaterialListItem key={item.id}>
-             <AmountSpan> {item.amount} </AmountSpan> <span>{item.name} </span>
+              <AmountSpan> {item.amount} </AmountSpan> <span>{item.name} </span>
             </MaterialListItem>
           ))}
         </MaterialList>
       </ProjectInfoBox>
 
       <InstructionInfoBox>
-       <h2>Instructions :</h2>
+        <h2>Instructions :</h2>
         {project.instructions.map((step, index) => (
           <StyledInstructionStep key={step.id}>
             <p>{index + 1}.</p>
@@ -154,6 +168,13 @@ export default function Project({ project, favorites, onToggleFavorite }) {
           </StyledInstructionStep>
         ))}
       </InstructionInfoBox>
+
+      <ArticleCardList>
+        <h2>Related Articles:</h2>
+        {articles.map((article) => (
+          <ArticleCard key={article._id} article={article} />
+        ))}
+      </ArticleCardList>
 
       <ButtonSection>
         {session && session.user.email === project.author && (
