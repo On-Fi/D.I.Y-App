@@ -13,7 +13,6 @@ const Navbar = styled.nav`
   position: absolute;
   width: 100%;
   bottom: 0;
-  gap: 30px;
   justify-content: space-between;
   align-items: center;
 `;
