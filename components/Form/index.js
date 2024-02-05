@@ -63,7 +63,32 @@ const UploadButtonSection = styled.div`
   gap: 10px;
 `;
 
-export default function Form({ onSubmit, onCancel, theme, color = "primary",  project = {} }) {
+const RadioInput = styled.input`
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid ${(props) => themes[props.theme].primaryButtonColor};
+  border-radius: 50%;
+  margin-right: 5px;
+  outline: none;
+  &:checked {
+    background-color: ${(props) => themes[props.theme].primaryButtonColor};
+  }
+`;
+
+const RadioInputContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+export default function Form({
+  onSubmit,
+  onCancel,
+  theme,
+  color = "primary",
+  project = {},
+}) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
   const [steps, setSteps] = useState(
@@ -162,7 +187,8 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
     <>
       <StyledForm onSubmit={handleSubmit}>
         <label htmlFor="title">Title:*</label>
-        <StyledInput theme={theme}
+        <StyledInput
+          theme={theme}
           type="text"
           id="title"
           name="title"
@@ -192,7 +218,8 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
         </UploadSection>
 
         <label htmlFor="category">Category:* </label>
-        <StyledSelect theme={theme}
+        <StyledSelect
+          theme={theme}
           defaultValue={project.category || ""}
           name="category"
           id="category"
@@ -208,23 +235,85 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
           <option value="bathroom">bathroom</option>
         </StyledSelect>
 
+        {/* <label htmlFor="difficulty">Difficulty:*</label>
+        <RadioInputContainer>
+          <label>
+            <RadioInput
+              theme={theme}
+              type="radio"
+              value="beginner"
+              name="difficulty"
+              id="beginner"
+              required
+              defaultChecked={project.difficulty === "beginner"}
+            />
+            beginner
+          </label>
+          <label>
+            <RadioInput
+              theme={theme}
+              type="radio"
+              value="advanced"
+              name="difficulty"
+              id="advanced"
+              required
+              defaultChecked={project.difficulty === "advanced"}
+            />
+            advanced
+          </label>
+          <label>
+            <RadioInput
+              theme={theme}
+              type="radio"
+              value="expert"
+              name="difficulty"
+              id="expert"
+              required
+              defaultChecked={project.difficulty === "expert"}
+            />
+            expert
+          </label>
+        </RadioInputContainer> */}
+
         <label htmlFor="difficulty">Difficulty:*</label>
-        <StyledSelect theme={theme}
-          defaultValue={project.difficulty || ""}
-          name="difficulty"
-          id="difficulty"
-          required
-        >
-          <option value="" disabled hidden>
-            choose here
-          </option>
-          <option value="beginner">beginner</option>
-          <option value="advanced">advanced</option>
-          <option value="expert">expert</option>
-        </StyledSelect>
+        <RadioInputContainer>
+          {["beginner", "advanced", "expert"].map((entry) => (
+            <label key={entry}>
+              <RadioInput
+                theme={theme}
+                type="radio"
+                value={entry}
+                name="difficulty"
+                id={entry}
+                required
+                defaultChecked={project.difficulty === entry}
+              />
+              {entry}
+            </label>
+          ))}
+        </RadioInputContainer>
+
+        <label htmlFor="priceCategory">Price category:*</label>
+        <RadioInputContainer>
+          {["€", "€€", "€€€"].map((entry) => (
+            <label key={entry}>
+              <RadioInput
+                theme={theme}
+                type="radio"
+                value={entry}
+                name="priceCategory"
+                id={entry}
+                required
+                defaultChecked={project.priceCategory === entry}
+              />
+              {entry}
+            </label>
+          ))}
+        </RadioInputContainer>
 
         <label htmlFor="time">Duration:* </label>
-        <StyledInput theme={theme}
+        <StyledInput
+          theme={theme}
           type="range"
           id="time"
           name="time"
@@ -233,25 +322,10 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
           defaultValue={project.time || 24}
         />
 
-        <label htmlFor="price">Price:* </label>
-        <StyledSelect theme={theme}
-          defaultValue={project.priceCategory || ""}
-          name="priceCategory"
-          id="priceCategory"
-          placeholder="choose here"
-          required
-        >
-          <option value="" disabled hidden>
-            choose here
-          </option>
-          <option value="€">0-10 €</option>
-          <option value="€€">10-50 €</option>
-          <option value="€€€">50-150 €</option>
-        </StyledSelect>
-
         <label htmlFor="tools">Tools:*</label>
         {tools.map((tool) => (
-          <StyledInput theme={theme}
+          <StyledInput
+            theme={theme}
             key={tool.id}
             id="tool"
             name="tool"
@@ -261,14 +335,20 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
             required
           ></StyledInput>
         ))}
-        <Button theme={theme} color="secondary" type="button" onClick={handleAddTool}>
+        <Button
+          theme={theme}
+          color="secondary"
+          type="button"
+          onClick={handleAddTool}
+        >
           add tool
         </Button>
 
         <label htmlFor="tools">Material:*</label>
         {material.map((item) => (
           <MaterialInput key={item.id}>
-            <StyledInput theme={theme}
+            <StyledInput
+              theme={theme}
               type="number"
               min="1"
               id="material"
@@ -280,7 +360,8 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
               }
               required
             />
-            <StyledInput theme={theme}
+            <StyledInput
+              theme={theme}
               key={item.id}
               id="material"
               name="material"
@@ -293,7 +374,12 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
             />
           </MaterialInput>
         ))}
-        <Button theme={theme} color="secondary" type="button" onClick={handleAddMaterial}>
+        <Button
+          theme={theme}
+          color="secondary"
+          type="button"
+          onClick={handleAddMaterial}
+        >
           add material
         </Button>
 
@@ -301,7 +387,8 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
         {steps.map((step, index) => (
           <StyledStep key={step.id}>
             <label>Step {index + 1} </label>
-            <StyledInput theme={theme}
+            <StyledInput
+              theme={theme}
               id="instructions"
               name="instructions"
               defaultValue={step.text}
@@ -312,12 +399,24 @@ export default function Form({ onSubmit, onCancel, theme, color = "primary",  pr
             ></StyledInput>
           </StyledStep>
         ))}
-        <Button theme={theme} color="secondary" type="button" onClick={handleAddStep}>
+        <Button
+          theme={theme}
+          color="secondary"
+          type="button"
+          onClick={handleAddStep}
+        >
           add step
         </Button>
 
-        <Button theme={theme} type="submit">Save</Button>
-        <Button theme={theme} color="secondary" type="button" onClick={onCancel}>
+        <Button theme={theme} type="submit">
+          Save
+        </Button>
+        <Button
+          theme={theme}
+          color="secondary"
+          type="button"
+          onClick={onCancel}
+        >
           Cancel
         </Button>
       </StyledForm>
