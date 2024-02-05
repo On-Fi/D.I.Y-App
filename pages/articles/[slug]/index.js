@@ -31,7 +31,7 @@ const BackToArticleLink = styled(Link)`
   gap: 10px;
 `;
 
-export default function ArticlePage({ projects }) {
+export default function ArticlePage({ projects, theme }) {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -41,7 +41,7 @@ export default function ArticlePage({ projects }) {
     error,
   } = useSWR(`/api/articles/${slug}`, { fallbackData: [] });
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner theme={theme} />;
 
   if (error || !article) {
     router.push("/404");
@@ -70,7 +70,7 @@ export default function ArticlePage({ projects }) {
         <ReactMarkdown>{article.body}</ReactMarkdown>
       </ArticleTextContent>
       <StyledSubheading>Related Projects:</StyledSubheading>
-      <ProjectList projectsToDisplay={projectsOfSameCategory} />
+      <ProjectList theme={theme} projectsToDisplay={projectsOfSameCategory} />
 
       <Link href="/articles">
         <BackArrowIcon />

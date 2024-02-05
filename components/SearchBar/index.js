@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import MagnifyingGlassIcon from "./MagnifyingGlassIcon";
+import themes from "@/components/Themes";
 
 const SearchBarContainer = styled.form`
   display: flex;
@@ -17,24 +18,21 @@ const SearchInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 20px;
   &:focus {
-    outline: 3px solid #90ee90;
+    outline: 3px solid ${(props) => themes[props.theme].primaryButtonColor};
   }
 `;
 const SearchButton = styled.button`
   padding: 10px 20px;
   border: none;
-  background-color: #F9C858;
+  background-color: ${(props) => themes[props.theme].primaryButtonColor};
   color: #FFF;
   border-radius: 20px;
   cursor: pointer;
-  &:hover {
-    background-color: #77dd77;
-  }
   &:active {
     transform: scale(0.95);
   }
 `;
-export default function SearchBar({ onSearch, filters }) {
+export default function SearchBar({ onSearch, filters, theme }) {
   function handleSubmit(event) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
@@ -48,14 +46,14 @@ export default function SearchBar({ onSearch, filters }) {
   }, [filters]);
 
   return (
-    <SearchBarContainer id="form" onSubmit={handleSubmit} key={rerenderKey}>
-      <SearchInput
+    <SearchBarContainer theme={theme}  id="form" onSubmit={handleSubmit} key={rerenderKey}>
+      <SearchInput theme={theme} 
         type="text"
         name="searchTerm"
         placeholder="..."
         defaultValue={filters.searchTerm || ""}
       />
-      <SearchButton type="submit"><MagnifyingGlassIcon/></SearchButton>
+      <SearchButton theme={theme} type="submit"><MagnifyingGlassIcon theme={theme} /></SearchButton>
     </SearchBarContainer>
   );
 }

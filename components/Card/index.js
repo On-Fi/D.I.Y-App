@@ -3,10 +3,11 @@ import Link from "next/link";
 import ShortFactsBox from "../ShortFactsBox";
 import FavoriteButton from "../FavoriteButton";
 import Image from "next/image";
+import themes from "@/components/Themes";
 
 const StyledCard = styled.div`
-  border: 1px solid #c4b8aa;
-  background-color: #c4b8aa;
+  border: 1px solid none;
+  background-color: ${(props) => themes[props.theme].cardColor};
   border-radius: 12px;
   cursor: pointer;
   margin: auto;
@@ -19,7 +20,7 @@ const StyledCardContent = styled.div`
 
 const ProjectTitle = styled.h3`
   margin: 0;
-  color: #fff;
+  color: ${(props) => themes[props.theme].primaryButtonTextColor};
 `;
 
 const StyledLink = styled(Link)`
@@ -43,10 +44,11 @@ export default function Card({
   favorites = null,
   onToggleFavorite = null,
   children,
+  theme,
 }) {
   return (
     <StyledLink key={project._id} href={`/projects/${project._id}`}>
-      <StyledCard>
+      <StyledCard theme={theme}>
         <ProjectImage
           src={project.image}
           width={0}
@@ -56,16 +58,16 @@ export default function Card({
         />
         <StyledCardContent>
           <StyledTitleSection>
-            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectTitle theme={theme}>{project.title}</ProjectTitle>
             {favorites ? (
-              <FavoriteButton
+              <FavoriteButton theme={theme}
                 id={project._id}
                 favorites={favorites}
                 onToggleFavorite={onToggleFavorite}
               />
             ) : null}
           </StyledTitleSection>
-          <ShortFactsBox project={project} />
+          <ShortFactsBox theme={theme} project={project} />
         </StyledCardContent>
         {children}
       </StyledCard>

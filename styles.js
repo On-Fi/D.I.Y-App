@@ -17,7 +17,7 @@ export default createGlobalStyle`
     width: 100%;
     overflow: auto;
     overscroll-behavior: none;
-   
+    background-color: var(--color-${props => props.theme});
   }
   body {
     margin: 0;

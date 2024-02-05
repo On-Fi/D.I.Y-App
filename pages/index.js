@@ -11,7 +11,7 @@ const initialFilter = {
   searchTerm: null,
 };
 
-export default function HomePage({ projects, favorites, onToggleFavorite }) {
+export default function HomePage({ projects, favorites, onToggleFavorite, theme }) {
   const [filters, setFilters] = useState(initialFilter);
   const projectsToDisplay = updateProjectsToDisplay(filters);
 
@@ -61,13 +61,13 @@ export default function HomePage({ projects, favorites, onToggleFavorite }) {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} filters={filters} />
-      <FilterSection
+      <SearchBar theme={theme} onSearch={handleSearch} filters={filters} />
+      <FilterSection theme={theme} 
         onResetFilter={handleResetFilter}
         filters={filters}
         handleFilter={handleFilter}
       />
-      <ProjectList
+      <ProjectList theme={theme}
         projectsToDisplay={projectsToDisplay}
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}

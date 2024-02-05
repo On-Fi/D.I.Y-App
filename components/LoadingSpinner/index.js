@@ -1,4 +1,6 @@
-export default function LoadingSpinner() {
+import themes from "@/components/Themes";
+
+export default function LoadingSpinner({theme}) {
   return (
     <svg
       style={{
@@ -24,7 +26,7 @@ export default function LoadingSpinner() {
           ry="8.5"
           width="10"
           height="17"
-          fill="#DBD8D6"
+          fill={themes[theme].secondaryButtonColor}
         >
           <animate
             attributeName="opacity"
@@ -44,7 +46,7 @@ export default function LoadingSpinner() {
           ry="8.5"
           width="10"
           height="17"
-          fill="#C4B8AA"
+          fill={themes[theme].cardColor}
         >
           <animate
             attributeName="opacity"

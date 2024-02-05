@@ -29,7 +29,7 @@ const Frame = styled.div`
   margin-top: 40px;
 `;
 
-export default function Custom404({ projects }) {
+export default function Custom404({ projects, theme }) {
   const randomIndex = Math.floor(Math.random() * projects.length);
   const randomProject = projects[randomIndex];
 
@@ -46,11 +46,11 @@ export default function Custom404({ projects }) {
         Sorry! It seems like we can&apos;t find the project you&apos;re looking
         for.
       </p>
-      <StyledLink color="primary" href="/">
+      <StyledLink theme={theme}  color = "primary" href="/">
         Browse all projects instead
       </StyledLink>
       <h3>Our suggestion</h3>
-      <Card project={randomProject}></Card>
+      <Card theme={theme} project={randomProject}></Card>
     </Frame>
   );
 }
