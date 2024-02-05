@@ -6,12 +6,12 @@ const StyleWrapper = styled.div`
   margin-bottom: 40px;
 `;
 
-export default function Layout({ children }) {
+export default function Layout({ children, theme, changeTheme}) {
   return (
     <>
-      <Header />
-      <StyleWrapper>{children}</StyleWrapper>
-      <NavigationBar />
+    <Header theme={theme} />
+   <StyleWrapper>{children}</StyleWrapper>
+   <NavigationBar theme={theme} changeTheme={changeTheme} />
     </>
   );
 }

@@ -4,6 +4,7 @@ import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
 import { Comfortaa } from "next/font/google";
+import themes from "@/components/Themes";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 
@@ -20,6 +21,9 @@ const StyledInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 20px;
   margin-bottom: 20px;
+  &:focus {
+    outline: 2px solid ${(props) => themes[props.theme].primaryButtonColor};
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -28,6 +32,9 @@ const StyledSelect = styled.select`
   border: 1px solid #ccc;
   border-radius: 20px;
   margin-bottom: 20px;
+  &:focus {
+    outline: 2px solid ${(props) => themes[props.theme].primaryButtonColor};
+  }
 `;
 
 const UploadPreview = styled(Image)`
@@ -56,7 +63,7 @@ const UploadButtonSection = styled.div`
   gap: 10px;
 `;
 
-export default function Form({ onSubmit, onCancel, project = {} }) {
+export default function Form({ onSubmit, onCancel, theme, color = "primary",  project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
   const [steps, setSteps] = useState(
@@ -155,7 +162,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
     <>
       <StyledForm onSubmit={handleSubmit}>
         <label htmlFor="title">Title:*</label>
-        <StyledInput
+        <StyledInput theme={theme}
           type="text"
           id="title"
           name="title"
@@ -178,7 +185,6 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               title="image"
               onChange={(event) => setImageSelected(event.target.files[0])}
             />
-            <label htmlFor="fileInput">Choose a file</label>
             <button type="button" onClick={uploadImage}>
               Upload an Image
             </button>
@@ -186,7 +192,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         </UploadSection>
 
         <label htmlFor="category">Category:* </label>
-        <StyledSelect
+        <StyledSelect theme={theme}
           defaultValue={project.category || ""}
           name="category"
           id="category"
@@ -203,7 +209,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         </StyledSelect>
 
         <label htmlFor="difficulty">Difficulty:*</label>
-        <StyledSelect
+        <StyledSelect theme={theme}
           defaultValue={project.difficulty || ""}
           name="difficulty"
           id="difficulty"
@@ -218,7 +224,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         </StyledSelect>
 
         <label htmlFor="time">Duration:* </label>
-        <StyledInput
+        <StyledInput theme={theme}
           type="range"
           id="time"
           name="time"
@@ -228,7 +234,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         />
 
         <label htmlFor="price">Price:* </label>
-        <StyledSelect
+        <StyledSelect theme={theme}
           defaultValue={project.priceCategory || ""}
           name="priceCategory"
           id="priceCategory"
@@ -245,7 +251,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
 
         <label htmlFor="tools">Tools:*</label>
         {tools.map((tool) => (
-          <StyledInput
+          <StyledInput theme={theme}
             key={tool.id}
             id="tool"
             name="tool"
@@ -255,14 +261,14 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             required
           ></StyledInput>
         ))}
-        <Button color="secondary" type="button" onClick={handleAddTool}>
+        <Button theme={theme} color="secondary" type="button" onClick={handleAddTool}>
           add tool
         </Button>
 
         <label htmlFor="tools">Material:*</label>
         {material.map((item) => (
           <MaterialInput key={item.id}>
-            <StyledInput
+            <StyledInput theme={theme}
               type="number"
               min="1"
               id="material"
@@ -274,7 +280,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
               }
               required
             />
-            <StyledInput
+            <StyledInput theme={theme}
               key={item.id}
               id="material"
               name="material"
@@ -287,7 +293,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             />
           </MaterialInput>
         ))}
-        <Button color="secondary" type="button" onClick={handleAddMaterial}>
+        <Button theme={theme} color="secondary" type="button" onClick={handleAddMaterial}>
           add material
         </Button>
 
@@ -295,7 +301,7 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
         {steps.map((step, index) => (
           <StyledStep key={step.id}>
             <label>Step {index + 1} </label>
-            <StyledInput
+            <StyledInput theme={theme}
               id="instructions"
               name="instructions"
               defaultValue={step.text}
@@ -306,12 +312,12 @@ export default function Form({ onSubmit, onCancel, project = {} }) {
             ></StyledInput>
           </StyledStep>
         ))}
-        <Button color="secondary" type="button" onClick={handleAddStep}>
+        <Button theme={theme} color="secondary" type="button" onClick={handleAddStep}>
           add step
         </Button>
 
-        <Button type="submit">Save</Button>
-        <Button color="secondary" type="button" onClick={onCancel}>
+        <Button theme={theme} type="submit">Save</Button>
+        <Button theme={theme} color="secondary" type="button" onClick={onCancel}>
           Cancel
         </Button>
       </StyledForm>

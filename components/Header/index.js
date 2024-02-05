@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AppLogo from "./AppLogo";
+import themes from "../Themes";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -9,10 +10,10 @@ const StyledHeader = styled.header`
   justify-content: center;
   position: sticky;
   top: 0;
-  background-color: #FFF;
+  background-color: ${(props) => themes[props.theme].headerBackgroundColor};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 3px;
-  cursor: default;
+  padding-top: 0px;
 `;
 
 const StyledAppName = styled.h1`
@@ -21,9 +22,9 @@ const StyledAppName = styled.h1`
   font-weight: 200;
 `;  
 
-const Header = () => (
-  <StyledHeader>
-    <AppLogo />
+const Header = ({ theme }) => (
+  <StyledHeader theme={theme}>
+    <AppLogo theme={theme} />
     <StyledAppName >woodworm</StyledAppName >
   </StyledHeader>
 );

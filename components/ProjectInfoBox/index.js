@@ -12,9 +12,9 @@ const SectionTitles = styled.h2`
   font-size: 1.2rem;
 `;
 
-export default function ProjectInfoBox({ title, text, children }) {
+export default function ProjectInfoBox({ title, text, children, theme  }) {
   return (
-    <StyledBox>
+    <StyledBox theme={theme}>
       <SectionTitles>{title} :</SectionTitles>
       <p>{text}</p>
       {children}

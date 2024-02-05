@@ -11,7 +11,7 @@ const EditProjectTitle = styled.h2`
   padding-top: 20px;
 `;
 
-export default function EditPage() {
+export default function EditPage({theme, color}) {
   const router = useRouter();
 
   const { id } = router.query;
@@ -34,7 +34,7 @@ export default function EditPage() {
   }
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner theme={theme}/>;
   }
 
   if (!project) {
@@ -49,6 +49,8 @@ export default function EditPage() {
         project={project}
         onSubmit={handleEditProject}
         onCancel={handleCancel}
+        theme={theme}
+        color={color}
       />
     </>
   );

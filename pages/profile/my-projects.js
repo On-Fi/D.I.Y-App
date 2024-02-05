@@ -7,6 +7,7 @@ import TrashIcon from "@/components/Card/TrashIcon";
 import { mutate } from "swr";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import themes from "@/components/Themes";
 
 const Container = styled.div`
   width: 90%;
@@ -24,9 +25,10 @@ const StyledLink = styled(Link)`
   padding: 10px;
   background-color: #f9c858;
   border-radius: 20px;
+  background-color: ${(props) => themes[props.theme].primaryButtonColor};
 `;
 
-export default function MyProjects({ projects }) {
+export default function MyProjects({ projects, theme,}) {
   const { data: session } = useSession();
   const router = useRouter();
   if (!session) {
@@ -51,16 +53,16 @@ export default function MyProjects({ projects }) {
       <h2>My projects</h2>
       {myProjects.map((project) => (
         <>
-          <Card key={project._id} project={project}>
-            <ButtonSection>
-              <StyledLink href={`/projects/${project._id}/edit`}>
-                <PencilIcon />
+          <Card theme={theme} key={project._id} project={project}>
+            <ButtonSection theme={theme}>
+              <StyledLink theme={theme} href={`/projects/${project._id}/edit`}>
+                <PencilIcon theme={theme} />
               </StyledLink>
-              <Button
+              <Button theme={theme}
                 type="button"
                 onClick={(event) => handleDelete(project._id, event)}
               >
-                <TrashIcon />
+                <TrashIcon theme={theme} />
               </Button>
             </ButtonSection>
           </Card>

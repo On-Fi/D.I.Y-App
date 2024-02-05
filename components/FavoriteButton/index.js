@@ -12,14 +12,15 @@ export default function FavoriteButton({
   favorites,
   onToggleFavorite,
   size,
+  theme,
 }) {
   const isFavorite = favorites.includes(id);
   return (
-    <StyledFavoriteButton
+    <StyledFavoriteButton theme={theme}
       type="button"
       onClick={(event) => onToggleFavorite(id, event)}
     >
-      {isFavorite ? <HeartFilled size={size} /> : <HeartEmpty size={size} />}
+      {isFavorite ? <HeartFilled theme={theme} size={size} /> : <HeartEmpty theme={theme} size={size} />}
     </StyledFavoriteButton>
   );
 }

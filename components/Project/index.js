@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import ArticleCardList from "../ArticleCardList";
+import TrashIcon from "../Card/TrashIcon";
+import PencilIcon from "../Card/PencilIcon";
 
 const ProjectHeader = styled.div`
   display: flex;
@@ -24,29 +26,16 @@ const DeleteButton = styled.button`
   border: none;
   padding: 10px;
   border-radius: 10px;
-  background-color: salmon;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  background-color: #FF1A1A;
   margin-right: auto;
-  font-family: inherit;
-
-  &:hover {
-    background-color: red;
-  }
 `;
 const StyledLink = styled(Link)`
   border: none;
   padding: 10px;
   border-radius: 10px;
-  background-color: orange;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  background-color: #ff8c00;
   margin-left: auto;
   text-decoration: none;
-
-  &:hover {
-    background-color: darkorange;
-  }
 `;
 
 const StyledInstructionStep = styled.li`
@@ -98,6 +87,7 @@ export default function Project({
   favorites,
   onToggleFavorite,
   articles,
+  theme,
 }) {
   const router = useRouter();
   const { data: session } = useSession();
@@ -122,14 +112,14 @@ export default function Project({
       />
       <ProjectHeader>
         <h1>{project.title}</h1>
-        <FavoriteButton
+        <FavoriteButton theme = {theme}
           favorites={favorites}
           onToggleFavorite={onToggleFavorite}
           id={project._id}
           size={40}
         ></FavoriteButton>
       </ProjectHeader>
-      <ShortFactsBox color="#C4B8AA" project={project}></ShortFactsBox>
+      <ShortFactsBox theme={theme} color="secondary" project={project}></ShortFactsBox>
       <ProjectInfoBox title="Tools">
         <ToolList>
           {project.tools.map((tool) => (
@@ -157,11 +147,11 @@ export default function Project({
       </InstructionInfoBox>
       <h2>Related Articles:</h2>
       <ArticleCardList articles={articles} />
-      <ButtonSection>
+      <ButtonSection theme={theme}>
         {session && session.user.email === project.author && (
           <>
-            <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-            <StyledLink href={`${project._id}/edit`}>Edit</StyledLink>
+            <DeleteButton onClick={handleDelete}><TrashIcon theme={theme} /></DeleteButton>
+            <StyledLink href={`${project._id}/edit`}><PencilIcon theme={theme} /></StyledLink>
           </>
         )}
       </ButtonSection>

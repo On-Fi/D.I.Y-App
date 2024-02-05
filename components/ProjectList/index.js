@@ -15,11 +15,12 @@ export default function ProjectList({
   projectsToDisplay,
   favorites,
   onToggleFavorite,
+  theme,
 }) {
   return (
-    <StyledProjectList>
+    <StyledProjectList theme={theme}>
       {projectsToDisplay.map((project) => (
-        <Card
+        <Card theme={theme}
           key={project._id}
           project={project}
           favorites={favorites}

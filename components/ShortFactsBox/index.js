@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import themes from "@/components/Themes";
 
 const FactBox = styled.div`
   display: flex;
@@ -10,20 +11,21 @@ const FactBox = styled.div`
   justify-content: center;
 `;
 const ShortFact = styled.span`
-  background-color: ${props => props.color };
+  background-color: ${(props) => themes[props.theme].primaryButtonColor};
+  color: ${(props) => props.color === "primary" ? themes[props.theme].primaryButtonTextColor : themes[props.theme].secondaryButtonTextColor};
   border-radius: 20px;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
 `;
 
-export default function ShortFactsBox({ project, color="#FFFF" }) {
+export default function ShortFactsBox({ project, theme }) {
   return (
     <FactBox>
-      <ShortFact color= {color}>{project.time} hours</ShortFact>
-      <ShortFact color= {color}>{project.priceCategory}</ShortFact>
-      <ShortFact color= {color}>{project.category}</ShortFact>
-      <ShortFact color= {color}>{project.difficulty}</ShortFact>
+      <ShortFact theme= {theme} color = "primary">{project.time} hours</ShortFact>
+      <ShortFact theme= {theme} color = "primary">{project.priceCategory}</ShortFact>
+      <ShortFact theme= {theme} color = "primary">{project.category}</ShortFact>
+      <ShortFact theme= {theme} color = "primary">{project.difficulty}</ShortFact>
     </FactBox>
   );
 }

@@ -9,7 +9,7 @@ const NewProjectTitle = styled.h2`
   padding-top: 20px;
 `;
 
-export default function NewProjectPage() {
+export default function NewProjectPage({theme, color}) {
   const router = useRouter();
 
   async function handleAddProject(projectData) {
@@ -31,6 +31,6 @@ export default function NewProjectPage() {
 
   return <>
   <NewProjectTitle>Add a new project</NewProjectTitle>
-  <Form onSubmit={handleAddProject} onCancel={handleCancel} />;
+  <Form theme={theme} color={color} onSubmit={handleAddProject} onCancel={handleCancel} />;
   </>
 }

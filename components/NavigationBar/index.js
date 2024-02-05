@@ -5,32 +5,36 @@ import HomeIcon from "./HomeIcon";
 import PlusIcon from "./PlusIcon";
 import UserIcon from "./UserIcon";
 import LightBulbIcon from "./LightbulbIcon";
+import themes from "../Themes";
 
 const Navbar = styled.nav`
   display: flex;
-  background-color: #626964;
+  background-color: ${(props) => themes[props.theme].navbarBackgroundColor};
   padding: 3px;
   position: absolute;
   width: 100%;
   bottom: 0;
   justify-content: space-between;
   align-items: center;
+  z-index: 2; 
 `;
 
 const NavLink = styled(Link)`
   color: #000;
   padding: 10px 20px;
+  background-color: ${(props) => themes[props.theme].navbarBackgroundColor};
   border-radius: 5px;
   transition: all 0.3s ease;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    background-color: #505451;
+    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
   }
 
   &:active {
     transform: scale(0.95);
+    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
   }
 `;
 
@@ -44,39 +48,36 @@ const NavButton = styled.button`
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
-    background-color: #505451;
-  }
-
   &:active {
     transform: scale(0.95);
+    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
   }
 `;
 
-export default function NavigationBar() {
+export default function NavigationBar({ theme }) {
   const { data: session } = useSession();
 
   return (
-    <Navbar>
-      <NavLink href="/">
-        <HomeIcon />
+    <Navbar theme={theme}>
+      <NavLink theme={theme} href="/">
+        <HomeIcon theme={theme} />
       </NavLink>
       {session ? (
-        <NavLink href="/new-project">
-          <PlusIcon />
+        <NavLink theme={theme} href="/new-project">
+          <PlusIcon theme={theme} />
         </NavLink>
       ) : (
-        <NavButton onClick={() => signIn()}>
-          <PlusIcon />
+        <NavButton theme={theme} onClick={() => signIn()}>
+          <PlusIcon theme={theme} />
         </NavButton>
       )}
 
-      <NavLink href="/articles">
-        <LightBulbIcon />
+      <NavLink  theme={theme} href="/articles">
+        <LightBulbIcon theme={theme} />
       </NavLink>
 
-      <NavLink href="/profile">
-        <UserIcon />
+      <NavLink  theme={theme} href="/profile">
+        <UserIcon theme={theme} />
       </NavLink>
     </Navbar>
   );

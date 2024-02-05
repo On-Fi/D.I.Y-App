@@ -3,6 +3,8 @@ import FilterCategory from "../FilterCategory";
 import { useState } from "react";
 import FilterIcon from "./FilterIcon";
 import Button from "../Button";
+import themes from "../Themes";
+
 
 const StyledForm = styled.form`
   display: flex;
@@ -43,10 +45,28 @@ const StyledRangeInput = styled.div`
   margin-bottom: 10px;
 `;
 
+const StyledInput = styled.input`
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 7px;  
+  background: ${(props) => props.color === "primary" ? themes[props.theme].secondaryButtonColor:  themes[props.theme].primaryButtonColor};
+
+  &::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%; 
+  background: ${(props) => props.color === "primary" ? themes[props.theme].primaryButtonColor : themes[props.theme].secondaryButtonColor};
+}
+`;
+
 export default function FilterSection({
   onResetFilter,
   filters,
   handleFilter,
+  theme,
 }) {
   function onFilter(event) {
     handleFilter(event.target.value, event.target.name);
@@ -57,14 +77,14 @@ export default function FilterSection({
     setIsCollapsed(!isCollapsed);
   }
   return (
-    <>
+    <div theme={theme}>
     <FilterButton onClick={handleExpandFilter}>
         <FilterIcon />
       </FilterButton>
       { !isCollapsed && <StyledForm> 
       <StyledFilterCategorySection>
         <StyledFilterCategory>
-          <FilterCategory
+          <FilterCategory theme={theme}
             category={"priceCategory"}
             names={["€", "€€", "€€€"]}
             onChange={onFilter}
@@ -73,7 +93,7 @@ export default function FilterSection({
         </StyledFilterCategory>
 
         <StyledFilterCategory>
-          <FilterCategory
+          <FilterCategory theme={theme}
             category={"difficulty"}
             names={["beginner", "advanced", "expert"]}
             onChange={onFilter}
@@ -82,7 +102,7 @@ export default function FilterSection({
         </StyledFilterCategory>
 
         <StyledFilterCategory>
-          <FilterCategory
+          <FilterCategory theme={theme}
             category={"category"}
             names={["home", "garden", "fashion", "kitchen", "bathroom"]}
             onChange={onFilter}
@@ -91,7 +111,7 @@ export default function FilterSection({
         </StyledFilterCategory>
       </StyledFilterCategorySection>
       <label htmlFor="time">Duration: {filters.time} hours</label>
-      <input
+      <StyledInput theme={theme} color="primary"
         type="range"
         id="time"
         name="time"
@@ -105,10 +125,10 @@ export default function FilterSection({
         <span>24 hours</span>
         <span>48 hours</span>
       </StyledRangeInput>
-      <Button type="button" onClick={onResetFilter}>
+      <Button theme={theme} color = "primary" type="button" onClick={onResetFilter}>
         Reset filter
       </Button>
     </StyledForm> }
-    </>
+    </div>
   );
 }
