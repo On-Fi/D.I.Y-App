@@ -232,10 +232,10 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                     theme={theme}
                     type="radio"
                     value={entry}
-                    name="difficulty"
+                    name="category"
                     id={entry}
                     required
-                    defaultChecked={project.difficulty === entry}
+                    defaultChecked={project.category === entry}
                   />
                   {entry}
                 </label>
