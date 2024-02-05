@@ -3,10 +3,7 @@ import { useState } from "react";
 import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
-import { Comfortaa } from "next/font/google";
 import themes from "@/components/Themes";
-
-const comfortaa = Comfortaa({ subsets: ["latin"] });
 
 const StyledForm = styled.form`
   display: flex;
@@ -26,26 +23,10 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledSelect = styled.select`
-  padding: 10px;
-  font-family: ${comfortaa.style.fontFamily};
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  &:focus {
-    outline: 2px solid ${(props) => themes[props.theme].primaryButtonColor};
-  }
-`;
-
-const UploadPreview = styled(Image)`
-  width: 100px;
-`;
-
 const UploadSection = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 `;
 
 const StyledStep = styled.div`
@@ -59,6 +40,7 @@ const MaterialInput = styled.div`
 `;
 
 const UploadButtonSection = styled.div`
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -93,7 +75,7 @@ const CategoryContainer = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 export default function Form({ onSubmit, onCancel, theme, project = {} }) {
@@ -224,28 +206,21 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
           />
         </CategoryContainer>
 
-        <CategoryContainer>
-          <label htmlFor="image">Image:</label>
-          <UploadSection>
-            <UploadPreview
-              src={imageId}
-              width="300"
-              crop="scale"
-              alt="beispiel image"
+        <label htmlFor="image">Image:</label>
+        <UploadSection>
+          <Image src={imageId} width="100" crop="scale" alt="beispiel image" />
+          <UploadButtonSection>
+            <input
+              type="file"
+              name="image"
+              title="image"
+              onChange={(event) => setImageSelected(event.target.files[0])}
             />
-            <UploadButtonSection>
-              <input
-                type="file"
-                name="image"
-                title="image"
-                onChange={(event) => setImageSelected(event.target.files[0])}
-              />
-              <button type="button" onClick={uploadImage}>
-                Upload an Image
-              </button>
-            </UploadButtonSection>
-          </UploadSection>
-        </CategoryContainer>
+            <button type="button" onClick={uploadImage}>
+              Upload an Image
+            </button>
+          </UploadButtonSection>
+        </UploadSection>
 
         <CategoryContainer>
           <label htmlFor="category">Category:* </label>
@@ -441,7 +416,6 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
             add step
           </Button>
         </CategoryContainer>
-
         <Button theme={theme} type="submit">
           Save
         </Button>
