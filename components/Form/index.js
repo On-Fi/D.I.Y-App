@@ -79,8 +79,9 @@ const RadioInput = styled.input`
 
 const RadioInputContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 `;
 
 const CategoryContainer = styled.div`
@@ -95,13 +96,7 @@ const InputContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default function Form({
-  onSubmit,
-  onCancel,
-  theme,
-  color = "primary",
-  project = {},
-}) {
+export default function Form({ onSubmit, onCancel, theme, project = {} }) {
   const [imageSelected, setImageSelected] = useState("");
   const [imageId, setImageId] = useState(project.image || "/sample-image.png");
   const [steps, setSteps] = useState(
@@ -254,22 +249,24 @@ export default function Form({
 
         <CategoryContainer>
           <label htmlFor="category">Category:* </label>
-          <StyledSelect
-            theme={theme}
-            defaultValue={project.category || ""}
-            name="category"
-            id="category"
-            required
-          >
-            <option value="" disabled selected>
-              choose here
-            </option>
-            <option value="home">home</option>
-            <option value="garden">garden</option>
-            <option value="fashion">fashion</option>
-            <option value="kitchen">kitchen</option>
-            <option value="bathroom">bathroom</option>
-          </StyledSelect>
+          <RadioInputContainer>
+            {["garden", "fashion", "home", "kitchen", "bathroom"].map(
+              (entry) => (
+                <label htmlFor={entry} key={entry}>
+                  <RadioInput
+                    theme={theme}
+                    type="radio"
+                    value={entry}
+                    name="difficulty"
+                    id={entry}
+                    required
+                    defaultChecked={project.difficulty === entry}
+                  />
+                  {entry}
+                </label>
+              )
+            )}
+          </RadioInputContainer>
         </CategoryContainer>
 
         <CategoryContainer>
