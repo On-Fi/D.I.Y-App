@@ -11,7 +11,7 @@ const EditProjectTitle = styled.h2`
   padding-top: 20px;
 `;
 
-export default function EditPage({theme, color}) {
+export default function EditPage({ theme, color }) {
   const router = useRouter();
 
   const { id } = router.query;
@@ -30,11 +30,12 @@ export default function EditPage({theme, color}) {
   }
 
   function handleCancel() {
+    alert("Are you sure you want to cancel? All your changes will be lost.");
     router.push(`/projects/${id}`);
   }
 
   if (isLoading) {
-    return <LoadingSpinner theme={theme}/>;
+    return <LoadingSpinner theme={theme} />;
   }
 
   if (!project) {

@@ -121,7 +121,8 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     setTime(event.target.value);
   }
 
-  function handleAddStep() {
+  function handleAddStep(event) {
+    event.preventDefault();
     const lastStep = steps[steps.length - 1];
     if (!lastStep || lastStep.text.trim() !== "") {
       setSteps([...steps, { id: uuidv4(), text: "" }]);
@@ -131,7 +132,6 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
   }
 
   function handleStepRemoval(id) {
-    console.log(id);
     setSteps(steps.filter((step) => step.id !== id));
   }
 
@@ -145,7 +145,8 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     }
   }
 
-  function handleAddTool() {
+  function handleAddTool(event) {
+    event.preventDefault();
     const lastTool = tools[tools.length - 1];
     if (!lastTool || lastTool.name.trim() !== "") {
       setTools([...tools, { id: uuidv4(), name: "" }]);
@@ -164,7 +165,8 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     setTools(tools.filter((tool) => tool.id !== id));
   }
 
-  function handleAddMaterial() {
+  function handleAddMaterial(event) {
+    event.preventDefault();
     const lastMaterial = material[material.length - 1];
     if (!lastMaterial || lastMaterial.name.trim() !== "") {
       setMaterial([...material, { id: uuidv4(), name: "" }]);
