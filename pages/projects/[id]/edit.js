@@ -11,7 +11,7 @@ const EditProjectTitle = styled.h2`
   padding-top: 20px;
 `;
 
-export default function EditPage({theme, color}) {
+export default function EditPage({ theme, color }) {
   const router = useRouter();
 
   const { id } = router.query;
@@ -29,12 +29,19 @@ export default function EditPage({theme, color}) {
     }
   }
 
-  function handleCancel() {
-    router.push(`/projects/${id}`);
+  function handleCancel(event) {
+    event.preventDefault();
+    const userConfirmed = confirm(
+      "Are you sure you want to cancel? All your changes will be lost."
+    );
+
+    if (userConfirmed) {
+      router.push("/");
+    }
   }
 
   if (isLoading) {
-    return <LoadingSpinner theme={theme}/>;
+    return <LoadingSpinner theme={theme} />;
   }
 
   if (!project) {

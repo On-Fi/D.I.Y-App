@@ -4,7 +4,7 @@ import themes from "../Themes";
 
 const StyledHeader = styled.header`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   font-weight: 200;
   justify-content: center;
@@ -20,12 +20,12 @@ const StyledAppName = styled.h1`
   margin: 0;
   font-size: 1.5rem;
   font-weight: 200;
-`;  
+`;
 
 const Header = ({ theme }) => (
   <StyledHeader theme={theme}>
     <AppLogo theme={theme} />
-    <StyledAppName >woodworm</StyledAppName >
+    <StyledAppName>woodworm</StyledAppName>
   </StyledHeader>
 );
 

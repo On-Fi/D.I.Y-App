@@ -6,7 +6,6 @@ import Image from "next/image";
 import themes from "@/components/Themes";
 
 const StyledCard = styled.div`
-  border: 1px solid none;
   background-color: ${(props) => themes[props.theme].cardColor};
   border-radius: 12px;
   cursor: pointer;
@@ -60,7 +59,8 @@ export default function Card({
           <StyledTitleSection>
             <ProjectTitle theme={theme}>{project.title}</ProjectTitle>
             {favorites ? (
-              <FavoriteButton theme={theme}
+              <FavoriteButton
+                theme={theme}
                 id={project._id}
                 favorites={favorites}
                 onToggleFavorite={onToggleFavorite}

@@ -5,11 +5,10 @@ import FilterIcon from "./FilterIcon";
 import Button from "../Button";
 import themes from "../Themes";
 
-
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color:  #f5f5f5;
+  background-color: #f5f5f5;
   width: 85%;
   margin: auto;
   padding: 20px;
@@ -49,17 +48,23 @@ const StyledInput = styled.input`
   -webkit-appearance: none;
   width: 100%;
   height: 15px;
-  border-radius: 7px;  
-  background: ${(props) => props.color === "primary" ? themes[props.theme].secondaryButtonColor:  themes[props.theme].primaryButtonColor};
+  border-radius: 7px;
+  background: ${(props) =>
+    props.color === "primary"
+      ? themes[props.theme].secondaryButtonColor
+      : themes[props.theme].primaryButtonColor};
 
   &::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 23px;
-  height: 23px;
-  border-radius: 50%; 
-  background: ${(props) => props.color === "primary" ? themes[props.theme].primaryButtonColor : themes[props.theme].secondaryButtonColor};
-}
+    -webkit-appearance: none;
+    appearance: none;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: ${(props) =>
+      props.color === "primary"
+        ? themes[props.theme].primaryButtonColor
+        : themes[props.theme].secondaryButtonColor};
+  }
 `;
 
 export default function FilterSection({
@@ -78,57 +83,69 @@ export default function FilterSection({
   }
   return (
     <div theme={theme}>
-    <FilterButton onClick={handleExpandFilter}>
+      <FilterButton onClick={handleExpandFilter}>
         <FilterIcon />
       </FilterButton>
-      { !isCollapsed && <StyledForm> 
-      <StyledFilterCategorySection>
-        <StyledFilterCategory>
-          <FilterCategory theme={theme}
-            category={"priceCategory"}
-            names={["€", "€€", "€€€"]}
-            onChange={onFilter}
-            selectedValue={filters.priceCategory}
-          ></FilterCategory>
-        </StyledFilterCategory>
+      {!isCollapsed && (
+        <StyledForm>
+          <StyledFilterCategorySection>
+            <StyledFilterCategory>
+              <FilterCategory
+                theme={theme}
+                category={"priceCategory"}
+                names={["€", "€€", "€€€"]}
+                onChange={onFilter}
+                selectedValue={filters.priceCategory}
+              ></FilterCategory>
+            </StyledFilterCategory>
 
-        <StyledFilterCategory>
-          <FilterCategory theme={theme}
-            category={"difficulty"}
-            names={["beginner", "advanced", "expert"]}
-            onChange={onFilter}
-            selectedValue={filters.difficulty}
-          ></FilterCategory>
-        </StyledFilterCategory>
+            <StyledFilterCategory>
+              <FilterCategory
+                theme={theme}
+                category={"difficulty"}
+                names={["beginner", "advanced", "expert"]}
+                onChange={onFilter}
+                selectedValue={filters.difficulty}
+              ></FilterCategory>
+            </StyledFilterCategory>
 
-        <StyledFilterCategory>
-          <FilterCategory theme={theme}
-            category={"category"}
-            names={["home", "garden", "fashion", "kitchen", "bathroom"]}
+            <StyledFilterCategory>
+              <FilterCategory
+                theme={theme}
+                category={"category"}
+                names={["home", "garden", "fashion", "kitchen", "bathroom"]}
+                onChange={onFilter}
+                selectedValue={filters.category}
+              ></FilterCategory>
+            </StyledFilterCategory>
+          </StyledFilterCategorySection>
+          <label htmlFor="time">Duration: {filters.time} hours</label>
+          <StyledInput
+            theme={theme}
+            color="primary"
+            type="range"
+            id="time"
+            name="time"
+            min="1"
+            max="48"
+            value={filters.time || 24}
             onChange={onFilter}
-            selectedValue={filters.category}
-          ></FilterCategory>
-        </StyledFilterCategory>
-      </StyledFilterCategorySection>
-      <label htmlFor="time">Duration: {filters.time} hours</label>
-      <StyledInput theme={theme} color="primary"
-        type="range"
-        id="time"
-        name="time"
-        min="1"
-        max="48"
-        value={filters.time || 24}
-        onChange={onFilter}
-      />
-      <StyledRangeInput>
-        <span>1 hour</span>
-        <span>24 hours</span>
-        <span>48 hours</span>
-      </StyledRangeInput>
-      <Button theme={theme} color = "primary" type="button" onClick={onResetFilter}>
-        Reset filter
-      </Button>
-    </StyledForm> }
+          />
+          <StyledRangeInput>
+            <span>1 hour</span>
+            <span>24 hours</span>
+            <span>48 hours</span>
+          </StyledRangeInput>
+          <Button
+            theme={theme}
+            color="primary"
+            type="button"
+            onClick={onResetFilter}
+          >
+            Reset filter
+          </Button>
+        </StyledForm>
+      )}
     </div>
   );
 }
