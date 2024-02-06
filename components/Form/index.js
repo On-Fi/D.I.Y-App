@@ -4,6 +4,8 @@ import { Image } from "cloudinary-react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
 import themes from "@/components/Themes";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const StyledForm = styled.form`
   display: flex;
@@ -91,6 +93,10 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     project.material || [{ id: uuidv4(), amount: "", name: "" }]
   );
   const [time, setTime] = useState("24");
+  const lastToolInputRef = useRef(null);
+  const lastMaterialInputRef = useRef(null);
+  const lastInstructionInputRef = useRef(null);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const uploadImage = async () => {
     const formData = new FormData();
@@ -155,14 +161,38 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     }
   }
 
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+    } else if (lastToolInputRef.current) {
+      lastToolInputRef.current.focus();
+    }
+  }, [tools]);
+
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+    } else if (lastInstructionInputRef.current) {
+      lastInstructionInputRef.current.focus();
+    }
+  }, [steps]);
+
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+    } else if (lastMaterialInputRef.current) {
+      lastMaterialInputRef.current.focus();
+    }
+  }, [material]);
+
+  function handleToolRemoval(id) {
+    setTools(tools.filter((tool) => tool.id !== id));
+  }
+
   function handleToolInput(name, id) {
     setTools(
       tools.map((tool) => (tool.id === id ? { ...tool, name: name } : tool))
     );
-  }
-
-  function handleToolRemoval(id) {
-    setTools(tools.filter((tool) => tool.id !== id));
   }
 
   function handleAddMaterial(event) {
@@ -302,9 +332,10 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
 
         <CategoryContainer>
           <label htmlFor="tools">Tools:*</label>
-          {tools.map((tool) => (
+          {tools.map((tool, index) => (
             <InputContainer key={tool.id}>
               <StyledInput
+                ref={index === tools.length - 1 ? lastToolInputRef : null}
                 theme={theme}
                 id="tool"
                 name="tool"
@@ -337,9 +368,12 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
 
         <CategoryContainer>
           <label htmlFor="material">Material:*</label>
-          {material.map((item) => (
+          {material.map((item, index) => (
             <MaterialInput key={item.id}>
               <StyledInput
+                ref={
+                  index === material.length - 1 ? lastMaterialInputRef : null
+                }
                 theme={theme}
                 type="number"
                 min="1"
@@ -353,6 +387,9 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                 required
               />
               <StyledInput
+                ref={
+                  index === material.length - 1 ? lastMaterialInputRef : null
+                }
                 theme={theme}
                 key={item.id}
                 id="material"
@@ -398,6 +435,9 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                   handleInstructionInput(event.target.value, step.id)
                 }
                 required
+                ref={
+                  index === steps.length - 1 ? lastInstructionInputRef : null
+                }
               ></StyledInput>
               <Button
                 type="button"

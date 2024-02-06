@@ -25,9 +25,15 @@ export default function NewProjectPage({ theme, color }) {
       router.push("/");
     }
   }
-  function handleCancel() {
-    alert("Are you sure you want to cancel? All your changes will be lost.");
-    router.push("/");
+  function handleCancel(event) {
+    event.preventDefault();
+    const userConfirmed = confirm(
+      "Are you sure you want to cancel? All your changes will be lost."
+    );
+
+    if (userConfirmed) {
+      router.push("/");
+    }
   }
 
   return (
