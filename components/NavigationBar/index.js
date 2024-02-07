@@ -16,7 +16,7 @@ const Navbar = styled.nav`
   bottom: 0;
   justify-content: space-between;
   align-items: center;
-  z-index: 2; 
+  z-index: 2;
 `;
 
 const NavLink = styled(Link)`
@@ -29,12 +29,14 @@ const NavLink = styled(Link)`
   text-decoration: none;
 
   &:hover {
-    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
+    background-color: ${(props) =>
+      themes[props.theme].navbarButtonClickedColor};
   }
 
   &:active {
     transform: scale(0.95);
-    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
+    background-color: ${(props) =>
+      themes[props.theme].navbarButtonClickedColor};
   }
 `;
 
@@ -42,7 +44,7 @@ const NavButton = styled.button`
   color: #000;
   border: none;
   padding: 15px 20px;
-  background-color: #f9c858;
+  background-color: transparent;
   border-radius: 50%;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -50,7 +52,8 @@ const NavButton = styled.button`
 
   &:active {
     transform: scale(0.95);
-    background-color: ${(props) => themes[props.theme].navbarButtonClickedColor};
+    background-color: ${(props) =>
+      themes[props.theme].navbarButtonClickedColor};
   }
 `;
 
@@ -72,11 +75,11 @@ export default function NavigationBar({ theme }) {
         </NavButton>
       )}
 
-      <NavLink  theme={theme} href="/articles">
+      <NavLink theme={theme} href="/articles">
         <LightBulbIcon theme={theme} />
       </NavLink>
 
-      <NavLink  theme={theme} href="/profile">
+      <NavLink theme={theme} href="/profile">
         <UserIcon theme={theme} />
       </NavLink>
     </Navbar>
