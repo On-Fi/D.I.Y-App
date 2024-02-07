@@ -1,4 +1,4 @@
-export default { //Fashion: #F9C858 Garden: #858F87 Home: #C4B8AA Bathroom: ##C8D7EE Kitchen: #F4A698
+export default {
   'Theme 01': {
     headerBackgroundColor: '#FFFFFF',
     navbarBackgroundColor: '#858F87',
