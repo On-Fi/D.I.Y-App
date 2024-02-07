@@ -4,6 +4,7 @@ import { useState } from "react";
 import FilterIcon from "./FilterIcon";
 import Button from "../Button";
 import themes from "../Themes";
+import ResetIcon from "./ResetIcon";
 
 const StyledForm = styled.form`
   display: flex;
@@ -83,7 +84,7 @@ export default function FilterSection({
     setIsCollapsed(!isCollapsed);
   }
   return (
-    <div theme={theme}>
+    <>
       <FilterButton
         onClick={handleExpandFilter}
         aria-label="Button to open and close the filter area"
@@ -91,10 +92,11 @@ export default function FilterSection({
         <FilterIcon />
       </FilterButton>
       {!isCollapsed && (
-        <StyledForm>
+        <StyledForm title="Filter area to search for projects">
           <StyledFilterCategorySection>
             <StyledFilterCategory>
               <FilterCategory
+                aria-label="choose price category: € for cheap, €€ for medium, €€€ for expensive"
                 theme={theme}
                 category={"priceCategory"}
                 names={["€", "€€", "€€€"]}
@@ -146,10 +148,11 @@ export default function FilterSection({
             type="button"
             onClick={onResetFilter}
           >
+            <ResetIcon theme={theme} />
             Reset filter
           </Button>
         </StyledForm>
       )}
-    </div>
+    </>
   );
 }

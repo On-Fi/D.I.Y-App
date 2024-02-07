@@ -225,7 +225,10 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm
+        onSubmit={handleSubmit}
+        aria-label="Form to enter new projects"
+      >
         <CategoryContainer>
           <label htmlFor="title">Title:*</label>
           <StyledInput
@@ -240,7 +243,12 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
 
         <label htmlFor="image">Image:</label>
         <UploadSection>
-          <Image src={imageId} width="100" crop="scale" alt="beispiel image" />
+          <Image
+            src={imageId}
+            width="100"
+            crop="scale"
+            alt="Preview Image for the project"
+          />
           <UploadButtonSection>
             <input
               type="file"
@@ -352,6 +360,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                 type="button"
                 color="secondary"
                 onClick={() => handleToolRemoval(tool.id)}
+                aria-label="Button to remove the tool"
               >
                 x
               </Button>
@@ -409,6 +418,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                 theme={theme}
                 color="secondary"
                 onClick={() => handleMaterialRemoval(item.id)}
+                aria-label="Button to remove the material"
               >
                 x
               </Button>
@@ -447,6 +457,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                 theme={theme}
                 color="secondary"
                 onClick={() => handleStepRemoval(step.id)}
+                aria-label="Button to remove the instruction step"
               >
                 x
               </Button>
