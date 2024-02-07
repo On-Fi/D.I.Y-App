@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [theme, setTheme] = useState('Theme 01');
+  const [theme, setTheme] = useState("Theme 01");
   const [clickedButton, setClickedButton] = useState(null);
 
   const changeTheme = (newTheme) => {
@@ -21,14 +21,14 @@ export default function App({ Component, pageProps }) {
 
   const handleThemeChange = (newTheme) => {
     if (clickedButton === newTheme) {
-      changeTheme('Theme 01');
+      changeTheme("Theme 01");
       setClickedButton(null);
     } else {
       changeTheme(newTheme);
       setClickedButton(newTheme);
     }
   };
-  
+
   function handleToggleFavorite(id, event) {
     event.preventDefault();
     if (favorites.includes(id)) {
@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }) {
         {error.info} - {error.status}
       </div>
     );
-  if (isLoading) return <LoadingSpinner theme={theme} />;
+  if (isLoading) return <LoadingSpinner />;
 
   if (!projects) return <p>no data</p>;
 

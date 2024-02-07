@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import AppLogo from "./AppLogo";
 import themes from "../Themes";
+import Link from "next/link";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -22,11 +23,18 @@ const StyledAppName = styled.h1`
   font-weight: 200;
 `;
 
+const HeadLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
+
 const Header = ({ theme }) => (
-  <StyledHeader theme={theme}>
-    <AppLogo theme={theme} />
-    <StyledAppName>woodworm</StyledAppName>
-  </StyledHeader>
+  <HeadLink theme={theme} href="/">
+    <StyledHeader theme={theme}>
+      <AppLogo theme={theme} />
+      <StyledAppName>woodworm</StyledAppName>
+    </StyledHeader>
+  </HeadLink>
 );
 
 export default Header;
