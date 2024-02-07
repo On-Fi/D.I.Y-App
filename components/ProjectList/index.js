@@ -25,6 +25,7 @@ export default function ProjectList({
           project={project}
           favorites={favorites}
           onToggleFavorite={onToggleFavorite}
+          isWhite={true}
         />
       ))}
     </StyledProjectList>

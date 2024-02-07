@@ -6,7 +6,7 @@ import Image from "next/image";
 import themes from "@/components/Themes";
 
 const StyledCard = styled.div`
-  background-color: ${(props) => themes[props.theme].cardColor};
+  background-color: ${(props) => themes[props.theme][`${props.category}CardColor`]};
   border-radius: 12px;
   cursor: pointer;
   margin: auto;
@@ -47,7 +47,7 @@ export default function Card({
 }) {
   return (
     <StyledLink key={project._id} href={`/projects/${project._id}`}>
-      <StyledCard theme={theme}>
+      <StyledCard theme={theme} category={project.category}>
         <ProjectImage
           src={project.image}
           width={0}
@@ -67,7 +67,7 @@ export default function Card({
               />
             ) : null}
           </StyledTitleSection>
-          <ShortFactsBox theme={theme} project={project} />
+          <ShortFactsBox theme={theme} project={project} isWhite={true} />
         </StyledCardContent>
         {children}
       </StyledCard>

@@ -11,7 +11,7 @@ const initialFilter = {
   searchTerm: null,
 };
 
-export default function HomePage({ projects, favorites, onToggleFavorite, theme }) {
+export default function HomePage({ projects, favorites, onToggleFavorite, theme, }) {
   const [filters, setFilters] = useState(initialFilter);
   const projectsToDisplay = updateProjectsToDisplay(filters);
 
@@ -71,6 +71,7 @@ export default function HomePage({ projects, favorites, onToggleFavorite, theme 
         projectsToDisplay={projectsToDisplay}
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
+        isWhite={true} 
       />
     </>
   );
