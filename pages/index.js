@@ -2,6 +2,7 @@ import ProjectList from "@/components/ProjectList";
 import FilterSection from "@/components/FilterSection";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
+import styled from "styled-components";
 
 const initialFilter = {
   time: 24,
@@ -11,7 +12,18 @@ const initialFilter = {
   searchTerm: null,
 };
 
-export default function HomePage({ projects, favorites, onToggleFavorite, theme, }) {
+const Headline = styled.h2`
+  text-align: center;
+  font-size: 0rem;
+  color: #fffff;
+`;
+
+export default function HomePage({
+  projects,
+  favorites,
+  onToggleFavorite,
+  theme,
+}) {
   const [filters, setFilters] = useState(initialFilter);
   const projectsToDisplay = updateProjectsToDisplay(filters);
 
@@ -62,16 +74,19 @@ export default function HomePage({ projects, favorites, onToggleFavorite, theme,
   return (
     <>
       <SearchBar theme={theme} onSearch={handleSearch} filters={filters} />
-      <FilterSection theme={theme} 
+      <FilterSection
+        theme={theme}
         onResetFilter={handleResetFilter}
         filters={filters}
         handleFilter={handleFilter}
       />
-      <ProjectList theme={theme}
+      <Headline>{projects.length} All projects</Headline>
+      <ProjectList
+        theme={theme}
         projectsToDisplay={projectsToDisplay}
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
-        isWhite={true} 
+        isWhite={true}
       />
     </>
   );

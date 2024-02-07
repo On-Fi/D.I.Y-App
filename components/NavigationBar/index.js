@@ -62,11 +62,15 @@ export default function NavigationBar({ theme }) {
 
   return (
     <Navbar theme={theme}>
-      <NavLink theme={theme} href="/">
+      <NavLink theme={theme} href="/ " aria-label="Go to homepage">
         <HomeIcon theme={theme} />
       </NavLink>
       {session ? (
-        <NavLink theme={theme} href="/new-project">
+        <NavLink
+          theme={theme}
+          href="/new-project"
+          aria-label="Create new project"
+        >
           <PlusIcon theme={theme} />
         </NavLink>
       ) : (
@@ -75,11 +79,15 @@ export default function NavigationBar({ theme }) {
         </NavButton>
       )}
 
-      <NavLink theme={theme} href="/articles">
+      <NavLink
+        theme={theme}
+        href="/articles"
+        aria-label="Go to knowledge section"
+      >
         <LightBulbIcon theme={theme} />
       </NavLink>
 
-      <NavLink theme={theme} href="/profile">
+      <NavLink theme={theme} href="/profile" aria-label="Go to profile">
         <UserIcon theme={theme} />
       </NavLink>
     </Navbar>

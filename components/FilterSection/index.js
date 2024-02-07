@@ -84,7 +84,10 @@ export default function FilterSection({
   }
   return (
     <div theme={theme}>
-      <FilterButton onClick={handleExpandFilter}>
+      <FilterButton
+        onClick={handleExpandFilter}
+        aria-label="Button to open and close the filter area"
+      >
         <FilterIcon />
       </FilterButton>
       {!isCollapsed && (

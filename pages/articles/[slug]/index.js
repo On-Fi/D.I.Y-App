@@ -54,8 +54,8 @@ export default function ArticlePage({ projects, theme }) {
 
   return (
     <div>
-      <BackToArticleLink href="/articles">
-        <BackArrowIcon />
+      <BackToArticleLink href="/articles" aria-label="Go back to all articles">
+        <BackArrowIcon title="icon showing an arrow" />
         <span>All articles</span>
       </BackToArticleLink>
       <ArticleImage
@@ -72,9 +72,10 @@ export default function ArticlePage({ projects, theme }) {
       <StyledSubheading>Related Projects:</StyledSubheading>
       <ProjectList theme={theme} projectsToDisplay={projectsOfSameCategory} />
 
-      <Link href="/articles">
-        <BackArrowIcon />
-      </Link>
+      <BackToArticleLink href="/articles" aria-label="Go back to all articles">
+        <BackArrowIcon title="icon showing an arrow" />
+        <span>All articles</span>
+      </BackToArticleLink>
     </div>
   );
 }

@@ -345,6 +345,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                   handleToolInput(event.target.value, tool.id)
                 }
                 required
+                aria-label="input for tools"
               />
               <Button
                 theme={theme}
@@ -377,7 +378,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                 theme={theme}
                 type="number"
                 min="1"
-                id="material"
+                id="material-amount"
                 name="material"
                 placeholder="e.g. 5"
                 defaultValue={item.amount}
@@ -385,6 +386,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                   handleMaterialAmountInput(event.target.value, item.id)
                 }
                 required
+                aria-label="Input for material list"
               />
               <StyledInput
                 ref={
@@ -400,6 +402,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
                   handleMaterialNameInput(event.target.value, item.id)
                 }
                 required
+                aria-label="Input for material names"
               />
               <Button
                 type="button"

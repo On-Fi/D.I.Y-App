@@ -16,11 +16,17 @@ export default function FavoriteButton({
 }) {
   const isFavorite = favorites.includes(id);
   return (
-    <StyledFavoriteButton theme={theme}
+    <StyledFavoriteButton
+      theme={theme}
       type="button"
       onClick={(event) => onToggleFavorite(id, event)}
+      aria-label="Button to add a project to favorite list"
     >
-      {isFavorite ? <HeartFilled theme={theme} size={size} /> : <HeartEmpty theme={theme} size={size} />}
+      {isFavorite ? (
+        <HeartFilled theme={theme} size={size} />
+      ) : (
+        <HeartEmpty theme={theme} size={size} />
+      )}
     </StyledFavoriteButton>
   );
 }

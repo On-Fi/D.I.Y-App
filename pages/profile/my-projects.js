@@ -8,6 +8,7 @@ import { mutate } from "swr";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import themes from "@/components/Themes";
+import BackArrowIcon from "@/components/ArticleCard/BackArrowIcon";
 
 const Container = styled.div`
   width: 90%;
@@ -28,7 +29,15 @@ const StyledLink = styled(Link)`
   background-color: ${(props) => themes[props.theme].primaryButtonColor};
 `;
 
-export default function MyProjects({ projects, theme,}) {
+const BackToProfileLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export default function MyProjects({ projects, theme }) {
   const { data: session } = useSession();
   const router = useRouter();
   if (!session) {
@@ -50,6 +59,10 @@ export default function MyProjects({ projects, theme,}) {
 
   return (
     <Container>
+      <BackToProfileLink href="/profile" aria-label="Go back to profile">
+        <BackArrowIcon title="icon showing an arrow" />
+        <span>Back to profile</span>
+      </BackToProfileLink>
       <h2>My projects</h2>
       {myProjects.map((project) => (
         <>
@@ -58,7 +71,8 @@ export default function MyProjects({ projects, theme,}) {
               <StyledLink theme={theme} href={`/projects/${project._id}/edit`}>
                 <PencilIcon theme={theme} />
               </StyledLink>
-              <Button theme={theme}
+              <Button
+                theme={theme}
                 type="button"
                 onClick={(event) => handleDelete(project._id, event)}
               >
