@@ -3,7 +3,12 @@ import useSWR from "swr";
 import Project from "@/components/Project";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-export default function DetailPage({ favorites, onToggleFavorite, articles, theme }) {
+export default function DetailPage({
+  favorites,
+  onToggleFavorite,
+  articles,
+  theme,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -13,7 +18,7 @@ export default function DetailPage({ favorites, onToggleFavorite, articles, them
     error,
   } = useSWR(`/api/projects/${id}`, { fallbackData: [] });
 
-  if (isLoading) return <LoadingSpinner theme={theme} />;
+  if (isLoading) return <LoadingSpinner />;
 
   if (error || !project) {
     router.push("/404");

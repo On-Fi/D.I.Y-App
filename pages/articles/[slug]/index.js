@@ -41,7 +41,7 @@ export default function ArticlePage({ projects, theme }) {
     error,
   } = useSWR(`/api/articles/${slug}`, { fallbackData: [] });
 
-  if (isLoading) return <LoadingSpinner theme={theme} />;
+  if (isLoading) return <LoadingSpinner />;
 
   if (error || !article) {
     router.push("/404");

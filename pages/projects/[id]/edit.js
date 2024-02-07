@@ -41,7 +41,7 @@ export default function EditPage({ theme, color }) {
   }
 
   if (isLoading) {
-    return <LoadingSpinner theme={theme} />;
+    return <LoadingSpinner />;
   }
 
   if (!project) {
