@@ -3,12 +3,13 @@ import themes from "@/components/Themes";
 
 const RadioInput = styled.input`
   appearance: none;
+
   width: 18px;
   height: 18px;
   border: 2px solid ${(props) => themes[props.theme].primaryButtonColor};
   border-radius: 50%;
   margin-right: 5px;
-  outline: none; 
+  outline: none;
   &:checked {
     background-color: ${(props) => themes[props.theme].primaryButtonColor};
   }
@@ -18,13 +19,14 @@ export default function FilterCategory({
   names,
   onChange,
   selectedValue,
-  theme
+  theme,
 }) {
   return (
     <>
       {names.map((name) => (
         <label key={name} htmlFor={name}>
-          <RadioInput theme={theme}
+          <RadioInput
+            theme={theme}
             type="radio"
             id={name}
             name={category}

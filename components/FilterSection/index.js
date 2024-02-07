@@ -11,7 +11,7 @@ const StyledForm = styled.form`
   background-color: #f5f5f5;
   width: 85%;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
   border-radius: 10px;
 `;
@@ -28,6 +28,7 @@ const FilterButton = styled.button`
 `;
 
 const StyledFilterCategorySection = styled.div`
+  font-size: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -132,9 +133,9 @@ export default function FilterSection({
             onChange={onFilter}
           />
           <StyledRangeInput>
-            <span>1 hour</span>
-            <span>24 hours</span>
-            <span>48 hours</span>
+            <span>1</span>
+            <span>24</span>
+            <span>48</span>
           </StyledRangeInput>
           <Button
             theme={theme}
