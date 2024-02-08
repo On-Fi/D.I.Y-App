@@ -10,7 +10,7 @@ const ProfileData = styled.div`
   width: 80%;
   margin: auto;
   margin-top: 30px;
-  align-items: center;
+  justify-content: center;
 `;
 
 const ProfileImage = styled(Image)`
@@ -69,6 +69,7 @@ const ThemeButtonContainer = styled.div`
   align-items: center;
   width: 90%;
   margin: auto;
+  justify-content: center;
 `;
 
 const ThemeButton = styled.button`
@@ -85,6 +86,14 @@ const ThemeButton = styled.button`
     props.isClicked ? "0 0 20px 10px rgba(0, 0, 0, 0.2)" : "none"};
 `;
 
+const Frame = styled.div`
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export default function Profile({ theme, clickedButton, handleThemeChange }) {
   const { data: session } = useSession();
 
@@ -94,7 +103,7 @@ export default function Profile({ theme, clickedButton, handleThemeChange }) {
 
   if (!session) {
     return (
-      <>
+      <Frame>
         <LoginText>
           Hey there, if you want to use all features of woodworm please login
           using your GitHub Account:
@@ -105,11 +114,11 @@ export default function Profile({ theme, clickedButton, handleThemeChange }) {
             Show my Favorites
           </StyledLink>
         </ProfileNavigation>
-      </>
+      </Frame>
     );
   }
   return (
-    <>
+    <Frame>
       <ProfileData theme={theme}>
         <ProfileImage
           width="100"
@@ -161,6 +170,6 @@ export default function Profile({ theme, clickedButton, handleThemeChange }) {
         </ThemeButtonContainer>
         <p>Click on our faces and see the magic happen</p>
       </ThemeContainer>
-    </>
+    </Frame>
   );
 }

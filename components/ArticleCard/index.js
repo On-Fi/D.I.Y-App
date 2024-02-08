@@ -2,17 +2,19 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const StyledArticleCard = styled.li`
-padding: 10px;
+  padding: 10px;
   background-color: #858f87;
   color: white;
   border-radius: 10px;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${(
-    props
-  ) => props.image});
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(${(props) => props.image});
   background-size: cover;
-}
+
+  @media (min-width: 1200px) {
+    height: 200px;
+  }
 `;
 
 const ArticleLink = styled(Link)`
