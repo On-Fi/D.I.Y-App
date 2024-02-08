@@ -4,7 +4,6 @@ import ShortFactsBox from "../ShortFactsBox";
 import FavoriteButton from "../FavoriteButton";
 import Image from "next/image";
 import themes from "@/components/Themes";
-import { mutate } from "swr";
 
 const StyledCard = styled.div`
   background-color: ${(props) =>
@@ -36,8 +35,9 @@ const StyledTitleSection = styled.div`
 `;
 
 const ProjectImage = styled(Image)`
+  height: 300px;
   width: 100%;
-  height: auto;
+  object-fit: cover;
 `;
 
 export default function Card({
@@ -47,25 +47,8 @@ export default function Card({
   children,
   theme,
 }) {
-  async function countCardClick() {
-    const newCount = project.count + 1;
-    const projectData = { ...project, count: newCount };
-    const response = await fetch(`/api/projects/${project._id}`, {
-      method: "PATCH",
-      body: JSON.stringify(projectData),
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      mutate("/api/projects", response);
-    }
-  }
-
   return (
-    <StyledLink
-      key={project._id}
-      href={`/projects/${project._id}`}
-      onClick={() => countCardClick(project._id)}
-    >
+    <StyledLink key={project._id} href={`/projects/${project._id}`}>
       <StyledCard theme={theme} category={project.category}>
         <ProjectImage
           src={project.image}
