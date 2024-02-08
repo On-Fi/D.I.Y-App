@@ -119,6 +119,7 @@ export default function Form({ onSubmit, onCancel, theme, project = {} }) {
     projectData.instructions = steps;
     projectData.tools = tools;
     projectData.material = material;
+    projectData.count = project.count || 0;
 
     onSubmit(projectData);
   }

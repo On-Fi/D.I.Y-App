@@ -28,7 +28,7 @@ const ShortFact = styled.span`
 export default function ShortFactsBox({ project, theme, isWhite }) {
   return (
     <FactBox>
-      <ShortFact theme={theme} isWhite={isWhite}>
+      <ShortFact theme={theme} isWhite={isWhite} color="primary">
         {project.time} hours
       </ShortFact>
       <ShortFact theme={theme} isWhite={isWhite} color="primary">
