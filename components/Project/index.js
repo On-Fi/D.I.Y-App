@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import ArticleCardList from "../ArticleCardList";
 import TrashIcon from "../Card/TrashIcon";
 import PencilIcon from "../Card/PencilIcon";
-
+import themes from "@/components/Themes";
 const ProjectHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@ const DeleteButton = styled.button`
   border: none;
   padding: 10px;
   border-radius: 10px;
-  background-color: #FF1A1A;
+  background-color: #ff1a1a;
   margin-right: auto;
 `;
 const StyledLink = styled(Link)`
@@ -82,6 +82,16 @@ const AmountSpan = styled.span`
   text-align: center;
 `;
 
+const PopularityInfo = styled.p`
+  width: 90%;
+  margin: auto;
+  background-color: ${(props) => themes[props.theme].primaryButtonColor};
+  color: ${(props) => themes[props.theme].primaryButtonTextColor};
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+`;
+
 export default function Project({
   project,
   favorites,
@@ -112,14 +122,19 @@ export default function Project({
       />
       <ProjectHeader>
         <h1>{project.title}</h1>
-        <FavoriteButton theme = {theme}
+        <FavoriteButton
+          theme={theme}
           favorites={favorites}
           onToggleFavorite={onToggleFavorite}
           id={project._id}
           size={40}
         ></FavoriteButton>
       </ProjectHeader>
-      <ShortFactsBox theme={theme} color="secondary" project={project}></ShortFactsBox>
+      <ShortFactsBox
+        theme={theme}
+        color="secondary"
+        project={project}
+      ></ShortFactsBox>
       <ProjectInfoBox title="Tools">
         <ToolList>
           {project.tools.map((tool) => (
@@ -145,13 +160,34 @@ export default function Project({
           </StyledInstructionStep>
         ))}
       </InstructionInfoBox>
+      {project.count > 20 ? (
+        <PopularityInfo theme={theme}>
+          This project is very popular. 🤩
+          <br />
+          {project.count} users have visited this page so far.
+        </PopularityInfo>
+      ) : project.count === 1 ? (
+        <PopularityInfo theme={theme}>
+          <br /> You are the first user visiting this page!!!
+        </PopularityInfo>
+      ) : (
+        <PopularityInfo theme={theme}>
+          This project is very new to woodworm.
+          <br />
+          {project.count} users have clicked it so far.
+        </PopularityInfo>
+      )}
       <h2>Related Articles:</h2>
       <ArticleCardList articles={articles} />
       <ButtonSection theme={theme}>
         {session && session.user.email === project.author && (
           <>
-            <DeleteButton onClick={handleDelete}><TrashIcon theme={theme} /></DeleteButton>
-            <StyledLink href={`${project._id}/edit`}><PencilIcon theme={theme} /></StyledLink>
+            <DeleteButton onClick={handleDelete}>
+              <TrashIcon theme={theme} />
+            </DeleteButton>
+            <StyledLink href={`${project._id}/edit`}>
+              <PencilIcon theme={theme} />
+            </StyledLink>
           </>
         )}
       </ButtonSection>

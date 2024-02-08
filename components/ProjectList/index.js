@@ -20,7 +20,8 @@ export default function ProjectList({
   return (
     <StyledProjectList theme={theme}>
       {projectsToDisplay.map((project) => (
-        <Card theme={theme}
+        <Card
+          theme={theme}
           key={project._id}
           project={project}
           favorites={favorites}

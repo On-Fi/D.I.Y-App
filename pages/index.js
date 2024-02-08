@@ -23,6 +23,7 @@ export default function HomePage({
   favorites,
   onToggleFavorite,
   theme,
+  countCardClick,
 }) {
   const [filters, setFilters] = useState(initialFilter);
   const projectsToDisplay = updateProjectsToDisplay(filters);
@@ -87,6 +88,7 @@ export default function HomePage({
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
         isWhite={true}
+        countCardClick={countCardClick}
       />
     </>
   );
