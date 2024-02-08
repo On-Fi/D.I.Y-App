@@ -23,7 +23,7 @@ const StyledSubheading = styled.h3`
   margin-top: 40px;
 `;
 
-const BackToArticleLink = styled(Link)`
+const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   display: flex;
@@ -54,10 +54,10 @@ export default function ArticlePage({ projects, theme }) {
 
   return (
     <div>
-      <BackToArticleLink href="/articles">
-        <BackArrowIcon />
+      <StyledLink href="/articles" aria-label="Go back to all articles">
+        <BackArrowIcon title="icon showing an arrow" />
         <span>All articles</span>
-      </BackToArticleLink>
+      </StyledLink>
       <ArticleImage
         src={article.image}
         alt={article.title}
@@ -72,9 +72,10 @@ export default function ArticlePage({ projects, theme }) {
       <StyledSubheading>Related Projects:</StyledSubheading>
       <ProjectList theme={theme} projectsToDisplay={projectsOfSameCategory} />
 
-      <Link href="/articles">
-        <BackArrowIcon />
-      </Link>
+      <StyledLink href="/articles" aria-label="Go back to all articles">
+        <BackArrowIcon title="icon showing an arrow" />
+        <span>All articles</span>
+      </StyledLink>
     </div>
   );
 }

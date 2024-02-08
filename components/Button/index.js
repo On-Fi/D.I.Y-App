@@ -5,6 +5,10 @@ import themes from "@/components/Themes";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 
 const StyledButton = styled.button`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
   border: none;
   padding: 10px;
   background-color: ${(props) =>

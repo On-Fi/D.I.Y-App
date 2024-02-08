@@ -25,7 +25,7 @@ const SearchButton = styled.button`
   padding: 10px 20px;
   border: none;
   background-color: ${(props) => themes[props.theme].primaryButtonColor};
-  color: #FFF;
+  color: #fff;
   border-radius: 20px;
   cursor: pointer;
   &:active {
@@ -46,14 +46,28 @@ export default function SearchBar({ onSearch, filters, theme }) {
   }, [filters]);
 
   return (
-    <SearchBarContainer theme={theme}  id="form" onSubmit={handleSubmit} key={rerenderKey}>
-      <SearchInput theme={theme} 
+    <SearchBarContainer
+      theme={theme}
+      id="form"
+      onSubmit={handleSubmit}
+      key={rerenderKey}
+    >
+      <SearchInput
+        theme={theme}
         type="text"
         name="searchTerm"
         placeholder="..."
         defaultValue={filters.searchTerm || ""}
+        aria-label="searchbar"
       />
-      <SearchButton theme={theme} type="submit"><MagnifyingGlassIcon theme={theme} /></SearchButton>
+      <SearchButton
+        theme={theme}
+        type="submit"
+        name="search-button"
+        aria-label="Button to trigger search"
+      >
+        <MagnifyingGlassIcon theme={theme} />
+      </SearchButton>
     </SearchBarContainer>
   );
 }

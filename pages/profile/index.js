@@ -40,10 +40,13 @@ const ProfileNavigation = styled.div`
 const StyledLink = styled(Link)`
   border: none;
   padding: 10px;
-  background-color: ${(props) => themes[props.theme].primaryButtonColor};;
+  background-color: ${(props) => themes[props.theme].primaryButtonColor};
   border-radius: 20px;
   text-decoration: none;
-  color: ${(props) => props.color === "primary" ? themes[props.theme].primaryButtonTextColor : themes[props.theme].secondaryButtonTextColor};
+  color: ${(props) =>
+    props.color === "primary"
+      ? themes[props.theme].primaryButtonTextColor
+      : themes[props.theme].secondaryButtonTextColor};
   text-align: center;
   font-size: 0.85rem;
 `;
@@ -74,14 +77,15 @@ const ThemeButton = styled.button`
   padding: 40px;
   border-radius: 50%;
   border: none;
-  filter: ${(props) => (props.isClicked ? 'none' : 'grayscale(80%)')};
-  transform: ${(props) => (props.isClicked ? 'scale(1.07)' : 'none')};
+  filter: ${(props) => (props.isClicked ? "none" : "grayscale(80%)")};
+  transform: ${(props) => (props.isClicked ? "scale(1.07)" : "none")};
   transition: transform 0.3s ease-in-out;
   position: relative;
-  box-shadow: ${(props) => (props.isClicked ? '0 0 20px 10px rgba(0, 0, 0, 0.2)' : 'none')};
+  box-shadow: ${(props) =>
+    props.isClicked ? "0 0 20px 10px rgba(0, 0, 0, 0.2)" : "none"};
 `;
 
-export default function Profile({theme, clickedButton, handleThemeChange}) {
+export default function Profile({ theme, clickedButton, handleThemeChange }) {
   const { data: session } = useSession();
 
   const handleButtonClick = (newTheme) => {
@@ -96,8 +100,10 @@ export default function Profile({theme, clickedButton, handleThemeChange}) {
           using your GitHub Account:
         </LoginText>
         <ProfileNavigation>
-          <LoginButton theme={theme} color = "primary" />
-          <StyledLink theme={theme} color = "primary" href="../favorites">Show my Favorites</StyledLink>
+          <LoginButton theme={theme} color="primary" />
+          <StyledLink theme={theme} color="primary" href="../favorites">
+            Show my Favorites
+          </StyledLink>
         </ProfileNavigation>
       </>
     );
@@ -117,36 +123,44 @@ export default function Profile({theme, clickedButton, handleThemeChange}) {
         </PersonalData>
       </ProfileData>
       <ProfileNavigation>
-        <StyledLink theme={theme} color = "primary" href="profile/my-projects">Show my Projects</StyledLink>
-        <StyledLink theme={theme} color = "primary" href="../favorites">Show my Favorites</StyledLink>
-        <LoginButton theme={theme} color = "secondary"/>
+        <StyledLink theme={theme} color="primary" href="profile/my-projects">
+          Show my Projects
+        </StyledLink>
+        <StyledLink theme={theme} color="primary" href="../favorites">
+          Show my Favorites
+        </StyledLink>
+        <LoginButton theme={theme} color="secondary" />
       </ProfileNavigation>
       <ThemeContainer>
-      <p>These are the four creators of this app: </p>
-      <ThemeButtonContainer>
-      <ThemeButton 
-        image="/andreas.png"         
-        isClicked={clickedButton === 'Theme 02'}
-        onClick={() => handleButtonClick('Theme 02')}
-      />
-      <ThemeButton 
-        image="/bjoern.png"         
-        isClicked={clickedButton === 'Theme 03'}
-        onClick={() => handleButtonClick('Theme 03')}
-      />
-      <ThemeButton 
-        image="/kristin.png"        
-        isClicked={clickedButton === 'Theme 04'}
-        onClick={() => handleButtonClick('Theme 04')}
-      />
-      <ThemeButton 
-        image="/onua.jpeg"         
-        isClicked={clickedButton === 'Theme 05'}
-        onClick={() => handleButtonClick('Theme 05')}
-      />
-   </ThemeButtonContainer>
-   <p>Click on our faces and see the magic happen</p>
-   </ThemeContainer>
-   </>
+        <p>These are the four creators of this app: </p>
+        <ThemeButtonContainer>
+          <ThemeButton
+            image="/andreas.png"
+            isClicked={clickedButton === "Theme 02"}
+            onClick={() => handleButtonClick("Theme 02")}
+            aria-label="Change theme to Andreas' style"
+          />
+          <ThemeButton
+            image="/bjoern.png"
+            isClicked={clickedButton === "Theme 03"}
+            onClick={() => handleButtonClick("Theme 03")}
+            aria-label="Change theme to Bjoerns style"
+          />
+          <ThemeButton
+            image="/kristin.png"
+            isClicked={clickedButton === "Theme 04"}
+            onClick={() => handleButtonClick("Theme 04")}
+            aria-label="Change theme to Kristins style"
+          />
+          <ThemeButton
+            image="/onua.jpeg"
+            isClicked={clickedButton === "Theme 05"}
+            onClick={() => handleButtonClick("Theme 05")}
+            aria-label="Change theme to Onurs style"
+          />
+        </ThemeButtonContainer>
+        <p>Click on our faces and see the magic happen</p>
+      </ThemeContainer>
+    </>
   );
 }

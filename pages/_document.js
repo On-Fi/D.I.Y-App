@@ -26,7 +26,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <title>woodworm - DIY App</title>
+        </Head>
         <body>
           <Main />
           <NextScript />
