@@ -13,6 +13,7 @@ const projectSchema = new Schema({
   tools: { type: Array, required: true },
   material: { type: Array, required: true },
   instructions: { type: Array, required: true },
+  count: { type: Number, required: true },
 });
 
 const Project =
