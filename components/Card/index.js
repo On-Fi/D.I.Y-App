@@ -57,7 +57,7 @@ export default function Card({
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      mutate("/api/projects", response);
+      mutate("/api/projects");
     }
   }
 
