@@ -192,23 +192,6 @@ export default function Project({
           ))}
         </InstructionInfoBox>
       </StylingContainer>
-      {project.count > 20 ? (
-        <PopularityInfo theme={theme}>
-          This project is very popular. 🤩
-          <br />
-          {project.count} users have visited this page so far.
-        </PopularityInfo>
-      ) : project.count === 1 ? (
-        <PopularityInfo theme={theme}>
-          <br /> You are the first user visiting this page!!!
-        </PopularityInfo>
-      ) : (
-        <PopularityInfo theme={theme}>
-          This project is very new to woodworm.
-          <br />
-          {project.count} users have clicked it so far.
-        </PopularityInfo>
-      )}
       <Subheading>Related Articles:</Subheading>
       <ArticleCardList articles={articles} />
       <ButtonSection theme={theme}>
