@@ -13,6 +13,12 @@ const StyledForm = styled.form`
   gap: 10px;
   width: 80%;
   margin: auto;
+
+  @media (min-width: 1200px) {
+    width: 50%;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -73,6 +79,15 @@ const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+    gap: 20px;
+
+    & label {
+      min-width: 20%;
+    }
+  }
 `;
 
 const InputContainer = styled.div`

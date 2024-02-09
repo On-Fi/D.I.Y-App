@@ -9,6 +9,18 @@ const StyledProjectList = styled.ul`
   padding: 0;
   margin: 0;
   margin-top: 20px;
+
+  @media (min-width: 1200px) {
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: start;
+    grid-column-gap: 0px;
+    grid-row-gap: 50px;
+  }
 `;
 
 export default function ProjectList({

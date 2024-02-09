@@ -11,11 +11,20 @@ import ProjectList from "@/components/ProjectList";
 const ArticleImage = styled(Image)`
   width: 100%;
   height: auto;
+
+  @media (min-width: 1200px) {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
 `;
 
 const ArticleTextContent = styled.div`
   width: 90%;
   margin: auto;
+  @media (min-width: 1200px) {
+    width: 60%;
+  }
 `;
 
 const StyledSubheading = styled.h3`

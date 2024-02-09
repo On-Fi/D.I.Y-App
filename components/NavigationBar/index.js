@@ -16,7 +16,7 @@ const Navbar = styled.nav`
   bottom: 0;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  box-shadow: -10px 10px 20px 10px rgba(0, 0, 0, 0.4);
 `;
 
 const NavLink = styled(Link)`

@@ -8,6 +8,18 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media (min-width: 1200px) {
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: start;
+    grid-column-gap: 50px;
+    grid-row-gap: 50px;
+  }
 `;
 
 export default function ArticleCardList({ articles }) {

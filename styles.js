@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { Comfortaa} from "next/font/google";
+import { Comfortaa } from "next/font/google";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 
@@ -14,14 +14,17 @@ export default createGlobalStyle`
     height: 100%;
    padding-bottom:30px;
 
+
     width: 100%;
     overflow: auto;
     overscroll-behavior: none;
-    background-color: var(--color-${props => props.theme});
+    background-color: var(--color-${(props) => props.theme});
   }
   body {
     margin: 0;
     font-family: ${comfortaa.style.fontFamily}; 
-    
+    line-height: 1.3
   }
+
+
 `;

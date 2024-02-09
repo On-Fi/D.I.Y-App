@@ -13,8 +13,10 @@ import PencilIcon from "../Card/PencilIcon";
 import themes from "@/components/Themes";
 const ProjectHeader = styled.div`
   display: flex;
+  width: 90%;
+  margin: auto;
   justify-content: space-between;
-  margin: 10px;
+  margin-top: 10px;
 `;
 
 const ButtonSection = styled.div`
@@ -92,6 +94,32 @@ const PopularityInfo = styled.p`
   text-align: center;
 `;
 
+const HeaderImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  @media (min-width: 1200px) {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
+
+const StylingContainer = styled.div`
+  @media (min-width: 1200px) {
+    width: 90%;
+    margin: auto;
+    display: flex;
+
+    & aside {
+      min-width: 30%;
+    }
+  }
+`;
+
+const Subheading = styled.h2`
+  text-align: center;
+`;
+
 export default function Project({
   project,
   favorites,
@@ -112,12 +140,11 @@ export default function Project({
 
   return (
     <>
-      <Image
+      <HeaderImage
         src={project.image}
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
         alt="image of the diy project"
       />
       <ProjectHeader>
@@ -135,31 +162,36 @@ export default function Project({
         color="secondary"
         project={project}
       ></ShortFactsBox>
-      <ProjectInfoBox title="Tools">
-        <ToolList>
-          {project.tools.map((tool) => (
-            <ToolListItem key={tool.id}>{tool.name}</ToolListItem>
+      <StylingContainer>
+        <aside>
+          <ProjectInfoBox title="Tools">
+            <ToolList>
+              {project.tools.map((tool) => (
+                <ToolListItem key={tool.id}>{tool.name}</ToolListItem>
+              ))}
+            </ToolList>
+          </ProjectInfoBox>
+          <ProjectInfoBox title="Material">
+            <MaterialList>
+              {project.material.map((item) => (
+                <MaterialListItem key={item.id}>
+                  <AmountSpan> {item.amount} </AmountSpan>{" "}
+                  <span>{item.name} </span>
+                </MaterialListItem>
+              ))}
+            </MaterialList>
+          </ProjectInfoBox>
+        </aside>
+        <InstructionInfoBox>
+          <h2>Instructions :</h2>
+          {project.instructions.map((step, index) => (
+            <StyledInstructionStep key={step.id}>
+              <p>{index + 1}.</p>
+              <p>{step.text}</p>
+            </StyledInstructionStep>
           ))}
-        </ToolList>
-      </ProjectInfoBox>
-      <ProjectInfoBox title="Material">
-        <MaterialList>
-          {project.material.map((item) => (
-            <MaterialListItem key={item.id}>
-              <AmountSpan> {item.amount} </AmountSpan> <span>{item.name} </span>
-            </MaterialListItem>
-          ))}
-        </MaterialList>
-      </ProjectInfoBox>
-      <InstructionInfoBox>
-        <h2>Instructions :</h2>
-        {project.instructions.map((step, index) => (
-          <StyledInstructionStep key={step.id}>
-            <p>{index + 1}.</p>
-            <p>{step.text}</p>
-          </StyledInstructionStep>
-        ))}
-      </InstructionInfoBox>
+        </InstructionInfoBox>
+      </StylingContainer>
       {project.count > 20 ? (
         <PopularityInfo theme={theme}>
           This project is very popular. 🤩
@@ -177,7 +209,7 @@ export default function Project({
           {project.count} users have clicked it so far.
         </PopularityInfo>
       )}
-      <h2>Related Articles:</h2>
+      <Subheading>Related Articles:</Subheading>
       <ArticleCardList articles={articles} />
       <ButtonSection theme={theme}>
         {session && session.user.email === project.author && (
