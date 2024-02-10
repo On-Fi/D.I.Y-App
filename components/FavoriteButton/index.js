@@ -19,7 +19,10 @@ export default function FavoriteButton({
     <StyledFavoriteButton
       theme={theme}
       type="button"
-      onClick={(event) => onToggleFavorite(id, event)}
+      onClick={(event) => {
+        onToggleFavorite(id, event);
+        event.stopPropagation();
+      }}
       aria-label="Button to add a project to favorite list"
     >
       {isFavorite ? (
